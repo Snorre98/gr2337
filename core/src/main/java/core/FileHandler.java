@@ -4,13 +4,7 @@ import java.io.PrintWriter;
 
 public class FileHandler {
 
-    AlbumReviewList ar;
-
-    public FileHandler(AlbumReviewList ar) {
-        this.ar = ar;
-    }
-
-    public void writeToFile() {
+    public static void writeToFile(AlbumReviewList ar) {
         try {
             PrintWriter pr = new PrintWriter("albumReviews.txt");
             for (int i = 0; i < ar.getAlbumReviews().size(); i++) {
@@ -21,4 +15,5 @@ public class FileHandler {
             System.err.println("Saving Error");
         }
     }
+    
 }
