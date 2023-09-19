@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AlbumReviewApp",
+            "request": "launch",
+            "mainClass": "albumreview.ui/ui.AlbumReviewApp",
+            "projectName": "albumreview-ui"
+        },
+        {
+            "type": "java",
             "name": "FileHandler",
             "request": "launch",
             "mainClass": "albumreview.core/core.FileHandler",
