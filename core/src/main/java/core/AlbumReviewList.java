@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AlbumReviewList {
@@ -26,6 +27,14 @@ public class AlbumReviewList {
 
   public List<AlbumReview> getAlbumReviews() {
     return new ArrayList<>(albumReviews);
+  }
+
+  public void sortName(){
+    Collections.sort(albumReviews, new AlbumNameComparator());
+  }
+
+  public void sortRating(){
+    Collections.sort(albumReviews, new AlbumRatingComparator());
   }
 
 }
