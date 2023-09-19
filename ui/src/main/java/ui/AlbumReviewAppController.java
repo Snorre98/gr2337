@@ -23,14 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class AlbumReviewAppController implements Initializable {
-    @FXML
-    private AnchorPane background;
 
     @FXML
-    private TextField firstNumber;
+    private TextField albumName, albumRating;
 
     @FXML
-    private TextField secondNumber;
+    private Button sortByNameButton, sortByRatingButton, addButton, removeButton;
 
     //TODO create Album object in core
     @FXML
