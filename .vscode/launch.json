@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "FileHandler",
+            "request": "launch",
+            "mainClass": "albumreview.core/core.FileHandler",
+            "projectName": "albumreview-core"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
@@ -16,8 +23,12 @@
             "request": "launch",
             "mainClass": "albumreview.ui/ui.App",
             "projectName": "albumreview-ui",
-            "vmArgs": ["--add-opens", "albumreview.ui/ui=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
-
+            "vmArgs": [
+                "--add-opens",
+                "albumreview.ui/ui=ALL-UNNAMED",
+                "--add-exports",
+                "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
+            ]
         }
     ]
 }
