@@ -16,8 +16,10 @@ public class AlbumReviewList {
     albumReviews.add(ar);
   }
 
-  public void removeDish(int i){
+  public void removeAlbumReview(int i){
     albumReviews.remove(i);
   }
+
+  
   
 }
