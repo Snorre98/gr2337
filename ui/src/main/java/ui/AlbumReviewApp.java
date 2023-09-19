@@ -2,7 +2,6 @@ package ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -16,18 +15,8 @@ public class AlbumReviewApp extends Application {
         Application.launch(args);
     }
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Album-Review");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("AlbumReviewApp.fxml"))));
 
-
-       /* FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("AlbumReviewApp.fxml"));
-        Parent parent = fxmlLoader.load();
-        stage.setScene(new Scene(parent));
-        stage.show();*/
-    }
-
-    /*public static void main(String[] args) {
-        launch();
-    }*/
 }
