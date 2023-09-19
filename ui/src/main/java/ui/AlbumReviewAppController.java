@@ -23,14 +23,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class AlbumReviewAppController implements Initializable {
-    @FXML
-    private AnchorPane background;
 
     @FXML
-    private TextField firstNumber;
+    private TextField albumName, albumRating;
 
     @FXML
-    private TextField secondNumber;
+    private Button sortByNameButton, sortByRatingButton, addButton, removeButton;
 
     //TODO create Album object in core
     @FXML
@@ -54,7 +52,7 @@ public class AlbumReviewAppController implements Initializable {
      */
     @FXML
     void addRating(ActionEvent event){
-        if(firstNumber.getText().isEmpty() || secondNumber.getText().isEmpty()){
+        if(albumName.getText().isEmpty() || albumRating.getText().isEmpty()){
             Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
             alertInfo.setTitle("Warning");
             alertInfo.setContentText("You must enter an album and a rating");
@@ -63,10 +61,10 @@ public class AlbumReviewAppController implements Initializable {
         else{
             try{
                 //TODO create addAlbum methode
-                albumList.addAlbumReview(firstNumber.getText(), Integer.parseInt(secondNumber.getText()));
+                albumList.addAlbumReview(albumName.getText(), Integer.parseInt(albumRating.getText()));
                 albumListView.getItems().setAll(albumList.getAlbumReviews());
-                firstNumber.setText("");
-                secondNumber.setText("");
+                albumName.setText("");
+                albumRating.setText("");
 
         } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
