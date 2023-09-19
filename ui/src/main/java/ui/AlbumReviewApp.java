@@ -18,6 +18,6 @@ public class AlbumReviewApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Album-Review");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("AlbumReviewApp.fxml"))));
-
+        primaryStage.show();
     }
 }
