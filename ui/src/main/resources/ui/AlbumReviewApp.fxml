@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AlbumReviewAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AlbumReviewAppController">
    <children>
-      <ListView fx:id="listView" layoutX="65.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="albumListView" layoutX="65.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="addButton" layoutX="428.0" layoutY="174.0" mnemonicParsing="false" onAction="#addRating" text="Add" />
       <Button fx:id="removeButton" layoutX="135.0" layoutY="322.0" mnemonicParsing="false" onAction="#removeSelectedAlbum" text="Remove" />
       <TextField fx:id="albumName" layoutX="372.0" layoutY="103.0" />
