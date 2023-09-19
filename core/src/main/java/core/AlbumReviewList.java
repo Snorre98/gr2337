@@ -11,6 +11,9 @@ public class AlbumReviewList {
     AlbumReviews = new ArrayList<>();
   }
   
-  
+  public void addAlbumReview(String name, int rating){
+    AlbumReview ar = new AlbumReview(name, rating);
+    AlbumReviews.add(ar);
+  }
   
 }
