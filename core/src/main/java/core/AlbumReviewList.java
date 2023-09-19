@@ -5,15 +5,19 @@ import java.util.List;
 
 public class AlbumReviewList {
 
-  List<AlbumReview> AlbumReviews;
+  List<AlbumReview> albumReviews;
 
   public AlbumReviewList(List<AlbumReview> albumReviews) {
-    AlbumReviews = new ArrayList<>();
+    albumReviews = new ArrayList<>();
   }
   
   public void addAlbumReview(String name, int rating){
     AlbumReview ar = new AlbumReview(name, rating);
-    AlbumReviews.add(ar);
+    albumReviews.add(ar);
+  }
+
+  public void removeDish(int i){
+    albumReviews.remove(i);
   }
   
 }
