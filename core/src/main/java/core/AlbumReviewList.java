@@ -20,6 +20,14 @@ public class AlbumReviewList {
     albumReviews.remove(i);
   }
 
+  public String getAlbumReview(int i){
+    return albumReviews.get(i).toString();
+  }
+
+  public List<AlbumReview> getAlbumReviews(){
+    return new ArrayList<>(albumReviews);
+  }
+
   
   
 }
