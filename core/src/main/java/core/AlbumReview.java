@@ -20,7 +20,7 @@ public class AlbumReview {
 
   @Override
   public String toString() {
-    return name + ", " + rating;
+    return name + "%%% " + rating;
   }
 
   
