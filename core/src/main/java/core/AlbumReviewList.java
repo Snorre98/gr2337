@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AlbumReviewList {
 
-  List<AlbumReview> albumReviews;
+  private List<AlbumReview> albumReviews;
 
   public AlbumReviewList() {
     albumReviews = new ArrayList<>();

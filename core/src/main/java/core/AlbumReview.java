@@ -2,19 +2,19 @@ package core;
 
 public class AlbumReview {
 
-  String name;
-  int rating;
+  private String name;
+  private int rating;
 
   public AlbumReview(String name, int rating) {
     this.name = name;
     this.rating = rating;
   }
 
-  public String getName(){
+  public String getName() {
     return this.name;
   }
 
-  public int getRating(){
+  public int getRating() {
     return this.rating;
   }
 
@@ -22,9 +22,5 @@ public class AlbumReview {
   public String toString() {
     return name + "%%% " + rating;
   }
-
-  
-
-  
 
 }
