@@ -19,4 +19,5 @@ public class AlbumReviewApp extends Application {
         primaryStage.setTitle("Album-Review");
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("AlbumReviewApp.fxml"))));
 
+    }
 }

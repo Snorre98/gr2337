@@ -9,6 +9,9 @@ import java.util.ResourceBundle;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
 
+import core.AlbumReview;
+import core.AlbumReviewList;
+import core.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,25 +34,26 @@ public class AlbumReviewAppController implements Initializable {
 
     //TODO create Album object in core
     @FXML
-    private ListView<Album> albumListView;
+    private ListView<AlbumReview> albumListView;
 
     //TODO create AlbumList object in core
-    private AlbumList albumList;
+    private AlbumReviewList albumList;
 
     private int selected;
 
     public void initAlbumListView(){
-        albumList = new AlbumList();
+        albumList = new AlbumReviewList();
         //TODO create getAlbum methode
-        ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
+        ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
         albumListView.getItems().setAll(observableAlbums);
+        handleLoad();
     }
 
     /**
      * adds album to list view in ui
      */
     @FXML
-    void addAlbumToListView(ActionEvent event){
+    void addRating(ActionEvent event){
         if(firstNumber.getText().isEmpty() || secondNumber.getText().isEmpty()){
             Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
             alertInfo.setTitle("Warning");
@@ -59,8 +63,8 @@ public class AlbumReviewAppController implements Initializable {
         else{
             try{
                 //TODO create addAlbum methode
-                albumList.addAlbum(firstNumber.getText(), Integer.parseInt(secondNumber.getText()));
-                albumListView.getItems().setAll(albumList.getAlbums());
+                albumList.addAlbumReview(firstNumber.getText(), Integer.parseInt(secondNumber.getText()));
+                albumListView.getItems().setAll(albumList.getAlbumReviews());
                 firstNumber.setText("");
                 secondNumber.setText("");
 
@@ -77,10 +81,10 @@ public class AlbumReviewAppController implements Initializable {
      * remove album from ListView in ui
      */
     @FXML
-    void removeAlbumFromListView(ActionEvent event){
+    void removeSelectedAlbum(ActionEvent event){
         //TODO create removeAlbum
-        albumList.removeAlbum(selected);
-        albumListView.getItems().setAll(albumList.getAlbums());
+        albumList.removeAlbumReview(selected);
+        albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
 
     /**
@@ -90,7 +94,7 @@ public class AlbumReviewAppController implements Initializable {
     void sortByName(ActionEvent event){
         //TODO create sortName() methode in core
         albumList.sortName();
-        albumListView.getItems().setAll(albumList.getAlbums());
+        albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
 
     /**
@@ -100,26 +104,26 @@ public class AlbumReviewAppController implements Initializable {
     void sortByRating(ActionEvent event){
         //TODO create sortRating() methode in core
         albumList.sortRating();
-        albumListView.getItems().setAll(albumList.getAlbums());
+        albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
 
     /**
      * Writes albumList to file
      */
-    @FXML
+    
     void handleSave() throws IOException{
         //TODO create writeToFile methode in core
-        albumList.writeToFile();
+        FileHandler.writeToFile(albumList);
     }
 
     /**
      * Loads albumList from file and sets it to ListView ui
      */
-    @FXML
+    
     void handleLoad(){
         //TODO create loadFile methode in core
-        albumList.loadFile();
-        albumListView.getItems().setAll(albumList.getAlbums());
+        FileHandler.loadFile(albumList);
+        albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
 
     /**
