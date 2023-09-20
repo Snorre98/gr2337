@@ -52,14 +52,4 @@ public class FileHandler {
             System.err.println("Could not clear file");
         }
     }
-
-
-    public static void main(String args[]){
-        AlbumReviewList ar = new AlbumReviewList();
-        System.out.println(ar.albumReviews.size());
-        loadFile(ar);
-        System.out.println(ar.albumReviews.size());
-        
-
-    }
 }

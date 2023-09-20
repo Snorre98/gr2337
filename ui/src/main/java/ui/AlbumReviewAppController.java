@@ -2,13 +2,9 @@ package ui;
 
 //TODO import needed custom classes
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.function.BinaryOperator;
-import java.util.function.UnaryOperator;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import core.AlbumReview;
 import core.AlbumReviewList;
 import core.FileHandler;
@@ -20,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
 public class AlbumReviewAppController implements Initializable {
 
