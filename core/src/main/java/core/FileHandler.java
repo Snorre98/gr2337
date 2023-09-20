@@ -9,9 +9,13 @@ public class FileHandler {
 
     public static void writeToFile(AlbumReviewList ar) {
         try {
-            PrintWriter pr = new PrintWriter("albumReviews.txt");
+            clearFile();
+            PrintWriter pr = new PrintWriter("core/src/main/resources/persistant-data.txt");
             for (int i = 0; i < ar.getAlbumReviews().size(); i++) {
-                pr.println(ar.getAlbumReview(i));
+                AlbumReview review = ar.getAlbumReview(i);
+                StringBuilder reviewString = new StringBuilder();
+                reviewString.append(review.getName() + "%%%" + review.getRating());
+                pr.println(reviewString);
             }
             pr.close();
         } catch (Exception e) {
@@ -21,10 +25,10 @@ public class FileHandler {
 
     public static void loadFile(AlbumReviewList ar){
         try {
-            File f = new File("albumReviews.txt");
+            File f = new File("core/src/main/resources/persistant-data.txt");
             Scanner scanner = new Scanner(f);
             while(scanner.hasNextLine()){
-                String[] s = scanner.nextLine().split("%%% ");
+                String[] s = scanner.nextLine().split("%%%");
                 String album = s[0];
                 int review = Integer.parseInt((s[1]));
                 ar.addAlbumReview(album, review);
@@ -37,12 +41,15 @@ public class FileHandler {
         }
     }
 
-    public static void main(String args[]){
-        AlbumReviewList ar = new AlbumReviewList();
-        System.out.println(ar.albumReviews.size());
-        loadFile(ar);
-        System.out.println(ar.albumReviews.size());
-        
-
+    public static void clearFile() {
+        try {
+            PrintWriter pr = new PrintWriter("core/src/main/resources/persistant-data.txt");
+            pr.write("");
+            pr.flush();
+            pr.close();
+            
+        } catch (Exception e) {
+            System.err.println("Could not clear file");
+        }
     }
 }
