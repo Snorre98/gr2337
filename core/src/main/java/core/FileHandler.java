@@ -9,7 +9,7 @@ public class FileHandler {
 
     public static void writeToFile(AlbumReviewList ar) {
         try {
-            PrintWriter pr = new PrintWriter("albumReviews.txt");
+            PrintWriter pr = new PrintWriter("core/src/main/resources/persistant-data.txt");
             for (int i = 0; i < ar.getAlbumReviews().size(); i++) {
                 AlbumReview review = ar.getAlbumReview(i);
                 StringBuilder reviewString = new StringBuilder();
@@ -24,7 +24,7 @@ public class FileHandler {
 
     public static void loadFile(AlbumReviewList ar){
         try {
-            File f = new File("albumReviews.txt");
+            File f = new File("core/src/main/resources/persistant-data.txt");
             Scanner scanner = new Scanner(f);
             while(scanner.hasNextLine()){
                 String[] s = scanner.nextLine().split("%%%");
