@@ -21,8 +21,8 @@ public class AlbumReviewList {
     albumReviews.remove(i);
   }
 
-  public String getAlbumReview(int i) {
-    return albumReviews.get(i).toString();
+  public AlbumReview getAlbumReview(int i) {
+    return albumReviews.get(i);
   }
 
   public List<AlbumReview> getAlbumReviews() {

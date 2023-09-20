@@ -11,7 +11,10 @@ public class FileHandler {
         try {
             PrintWriter pr = new PrintWriter("albumReviews.txt");
             for (int i = 0; i < ar.getAlbumReviews().size(); i++) {
-                pr.println(ar.getAlbumReview(i));
+                AlbumReview review = ar.getAlbumReview(i);
+                StringBuilder reviewString = new StringBuilder();
+                reviewString.append(review.getName() + "%%%" + review.getRating());
+                pr.println(reviewString);
             }
             pr.close();
         } catch (Exception e) {
@@ -24,7 +27,7 @@ public class FileHandler {
             File f = new File("albumReviews.txt");
             Scanner scanner = new Scanner(f);
             while(scanner.hasNextLine()){
-                String[] s = scanner.nextLine().split("%%% ");
+                String[] s = scanner.nextLine().split("%%%");
                 String album = s[0];
                 int review = Integer.parseInt((s[1]));
                 ar.addAlbumReview(album, review);
