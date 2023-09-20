@@ -65,7 +65,7 @@ public class AlbumReviewAppController implements Initializable {
                 albumListView.getItems().setAll(albumList.getAlbumReviews());
                 albumName.setText("");
                 albumRating.setText("");
-                FileHandler.writeToFile(albumList);
+                handleSave();
 
         } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -83,6 +83,7 @@ public class AlbumReviewAppController implements Initializable {
     void removeSelectedAlbum(ActionEvent event){
         //TODO create removeAlbum
         albumList.removeAlbumReview(selected);
+        handleSave();
         albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
 
@@ -110,7 +111,7 @@ public class AlbumReviewAppController implements Initializable {
      * Writes albumList to file
      */
     
-    void handleSave() throws IOException{
+    void handleSave(){
         //TODO create writeToFile methode in core
         FileHandler.writeToFile(albumList);
     }

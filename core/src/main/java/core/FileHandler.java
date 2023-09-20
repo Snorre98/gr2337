@@ -9,6 +9,7 @@ public class FileHandler {
 
     public static void writeToFile(AlbumReviewList ar) {
         try {
+            clearFile();
             PrintWriter pr = new PrintWriter("core/src/main/resources/persistant-data.txt");
             for (int i = 0; i < ar.getAlbumReviews().size(); i++) {
                 AlbumReview review = ar.getAlbumReview(i);
@@ -39,6 +40,19 @@ public class FileHandler {
       e.printStackTrace();
         }
     }
+
+    public static void clearFile() {
+        try {
+            PrintWriter pr = new PrintWriter("core/src/main/resources/persistant-data.txt");
+            pr.write("");
+            pr.flush();
+            pr.close();
+            
+        } catch (Exception e) {
+            System.err.println("Could not clear file");
+        }
+    }
+
 
     public static void main(String args[]){
         AlbumReviewList ar = new AlbumReviewList();
