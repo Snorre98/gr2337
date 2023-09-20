@@ -8,7 +8,7 @@ public class AlbumRatingComparator implements Comparator<AlbumReview> {
         if(album1.getRating() == album2.getRating()){
             return 0;
         }
-        else if (album1.getRating()>album2.getRating()){
+        else if (album1.getRating()<album2.getRating()){
             return 1;
         }else{
             return -1;
