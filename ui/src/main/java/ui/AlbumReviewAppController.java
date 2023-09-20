@@ -65,6 +65,7 @@ public class AlbumReviewAppController implements Initializable {
                 albumListView.getItems().setAll(albumList.getAlbumReviews());
                 albumName.setText("");
                 albumRating.setText("");
+                FileHandler.writeToFile(albumList);
 
         } catch (NumberFormatException e) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
