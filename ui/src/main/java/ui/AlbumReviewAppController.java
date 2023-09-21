@@ -1,6 +1,5 @@
 package ui;
 
-//TODO import needed custom classes
 
 
 import java.net.URL;
@@ -25,18 +24,17 @@ public class AlbumReviewAppController implements Initializable {
     @FXML
     private Button sortByNameButton, sortByRatingButton, addButton, removeButton;
 
-    //TODO create Album object in core
+  
     @FXML
     private ListView<AlbumReview> albumListView;
 
-    //TODO create AlbumList object in core
+  
     private AlbumReviewList albumList;
 
     private int selected;
 
     public void initAlbumListView(){
         albumList = new AlbumReviewList();
-        //TODO create getAlbum methode
         ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
         albumListView.getItems().setAll(observableAlbums);
         handleLoad();
@@ -55,7 +53,6 @@ public class AlbumReviewAppController implements Initializable {
         }
         else{
             try{
-                //TODO create addAlbum methode
                 albumList.addAlbumReview(albumName.getText(), Integer.parseInt(albumRating.getText()));
                 albumListView.getItems().setAll(albumList.getAlbumReviews());
                 albumName.setText("");
@@ -76,7 +73,6 @@ public class AlbumReviewAppController implements Initializable {
      */
     @FXML
     void removeSelectedAlbum(ActionEvent event){
-        //TODO create removeAlbum
         albumList.removeAlbumReview(selected);
         handleSave();
         albumListView.getItems().setAll(albumList.getAlbumReviews());
@@ -87,7 +83,6 @@ public class AlbumReviewAppController implements Initializable {
      */
     @FXML
     void sortByName(ActionEvent event){
-        //TODO create sortName() methode in core
         albumList.sortName();
         albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
@@ -97,7 +92,6 @@ public class AlbumReviewAppController implements Initializable {
      */
     @FXML
     void sortByRating(ActionEvent event){
-        //TODO create sortRating() methode in core
         albumList.sortRating();
         albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
@@ -107,7 +101,6 @@ public class AlbumReviewAppController implements Initializable {
      */
     
     void handleSave(){
-        //TODO create writeToFile methode in core
         FileHandler.writeToFile(albumList);
     }
 
@@ -116,7 +109,6 @@ public class AlbumReviewAppController implements Initializable {
      */
     
     void handleLoad(){
-        //TODO create loadFile methode in core
         FileHandler.loadFile(albumList);
         albumListView.getItems().setAll(albumList.getAlbumReviews());
     }
