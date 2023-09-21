@@ -1,5 +1,1 @@
-# Group gr2337 repository 
- 
-Welcome to IT1901 Fall 2023 course 
- 
-Good luck! 
+# What our Java App 'Album-Review' does
