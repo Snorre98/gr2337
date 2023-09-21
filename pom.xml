@@ -33,6 +33,14 @@
                 <version>5.10.0</version>
                 <scope>test</scope>
             </dependency>
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.agent</artifactId>
+                <classifier>runtime</classifier>
+                <version>0.8.10</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -42,6 +50,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
+                    <!--TODO: Change this???-->
                     <version>3.11.0</version>
                     <configuration>
                     </configuration>
@@ -52,8 +61,37 @@
                     <version>3.1.2</version>
                     <configuration>
                         <skipTests>${skipTests}</skipTests>
+                        <argLine>
+                            @{jaCoCoArgLine}
+                        </argLine>
                     </configuration>
                 </plugin>
+                <!-- Jacoco code coverage-->
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.10</version>
+                    <executions>
+                        <execution>
+                            <id>jacoco-prepare-agent</id>
+                            <phase>process-test-classes</phase>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>jacoco-report</id>
+                            <!-- Jacoc runs on 'mvn test'-->
+                            <phase>test</phase>
+                            <goals>
+                                <goal>
+                                    report
+                                </goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

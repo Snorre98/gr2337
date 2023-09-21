@@ -1,22 +1,19 @@
-package ui;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package core;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import core.AlbumReviewList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+public class DomainLogicTest {
+    private AlbumReviewList albumList;
 
-public class AlbumReviewAppControllerTest {
-  private AlbumReviewList albumList;
-  
 
     @BeforeEach
     public void setUp() {
         albumList = new AlbumReviewList();
-      
-        
+
+
     }
 
     @Test
@@ -62,5 +59,4 @@ public class AlbumReviewAppControllerTest {
         assertEquals(4, albumList.getAlbumReview(1).getRating());
         assertEquals(3, albumList.getAlbumReview(2).getRating());
     }
-  
 }
