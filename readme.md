@@ -11,6 +11,8 @@ The versions we are using:
 1. Java version: 17.0.8
 2. Maven version: 3.9.4.
 3. Junit Jupiter version: 5.10.0
+4. Jacoco version: 0.8.10
+    - For checking test coverage 
 
 ## Core Folder
 Inside the core folder we have core\main\java\core. Within the last core folder is where our domain logic code is writen. Here we have our main object class, a list of the objects class, a filehandler class and the comparator classes.
@@ -38,3 +40,8 @@ Folder Structure for fxml:
             - resources 
                 - ui
                     - (fxml)
+
+## Docs
+In the Docs folder we have all the release notes and documentation for the different releases. 
+- docs
+    - (Different releas notes)
