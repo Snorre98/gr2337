@@ -6,17 +6,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AlbumReviewAppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AlbumReviewAppController">
    <children>
       <ListView fx:id="albumListView" layoutX="65.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" />
       <Button fx:id="addButton" layoutX="428.0" layoutY="174.0" mnemonicParsing="false" onAction="#addRating" text="Add" />
-      <Button fx:id="removeButton" layoutX="135.0" layoutY="322.0" mnemonicParsing="false" onAction="#removeSelectedAlbum" text="Remove" />
+      <Button fx:id="removeButton" layoutX="170.0" layoutY="312.0" mnemonicParsing="false" onAction="#removeSelectedAlbum" text="Remove" />
       <TextField fx:id="albumName" layoutX="372.0" layoutY="103.0" />
       <TextField fx:id="albumRating" layoutX="372.0" layoutY="140.0" />
       <Label layoutX="277.0" layoutY="107.0" text="Album Name:" />
       <Label layoutX="286.0" layoutY="144.0" text="Rating:" />
       <Button fx:id="sortByNameButton" layoutX="65.0" layoutY="64.0" mnemonicParsing="false" onAction="#sortByName" text="Sort by name" />
       <Button fx:id="sortByRatingButton" layoutX="170.0" layoutY="64.0" mnemonicParsing="false" onAction="#sortByRating" text="Sort by Rating" />
+      <Button fx:id="openButton" layoutX="106.0" layoutY="312.0" mnemonicParsing="false" onAction="#removeSelectedAlbum" text="Open" />
    </children>
 </AnchorPane>
