@@ -2,6 +2,7 @@ package ui;
 
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import core.AlbumReview;
@@ -12,9 +13,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class AlbumReviewAppController implements Initializable {
 
@@ -22,7 +27,7 @@ public class AlbumReviewAppController implements Initializable {
     private TextField albumName, albumRating;
 
     @FXML
-    private Button sortByNameButton, sortByRatingButton, addButton, removeButton;
+    private Button sortByNameButton, sortByRatingButton, addButton, removeButton, openAlbum;
 
   
     @FXML
@@ -76,6 +81,21 @@ public class AlbumReviewAppController implements Initializable {
         albumList.removeAlbumReview(selected);
         handleSave();
         albumListView.getItems().setAll(albumList.getAlbumReviews());
+    }
+
+    @FXML
+    void openButton(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("OpenAlbumReviewApp.fxml"));
+            Parent root = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("The Album");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch (Exception e){
+            System.out.println("Cant open album");
+        }
     }
 
     /**
