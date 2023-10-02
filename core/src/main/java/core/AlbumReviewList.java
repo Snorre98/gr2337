@@ -12,9 +12,8 @@ public class AlbumReviewList {
     albumReviews = new ArrayList<>();
   }
 
-  public void addAlbumReview(String name, int rating) {
-    AlbumReview ar = new AlbumReview(name, rating);
-    albumReviews.add(ar);
+  public void addAlbumReview(AlbumReview album) {
+    albumReviews.add(album);
   }
 
   public void removeAlbumReview(int i) {

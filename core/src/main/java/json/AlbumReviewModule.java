@@ -15,6 +15,7 @@ public class AlbumReviewModule extends SimpleModule {
     super(NAME, VERSION_UTIL.version());
     addSerializer(AlbumReview.class, new AlbumReviewSerializer());
     addSerializer(AlbumReviewList.class, new AlbumReviewListSerializer());
+    addDeserializer(AlbumReview.class, new AlbumReviewDeserializer());
+    addDeserializer(AlbumReviewList.class, new AlbumReviewListDeserializer());
   }
-  
 }

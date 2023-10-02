@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AlbumReviewModule",
+            "request": "launch",
+            "mainClass": "albumreview.core/json.AlbumReviewModule",
+            "projectName": "albumreview-core"
+        },
+        {
+            "type": "java",
             "name": "AlbumReviewApp",
             "request": "launch",
             "mainClass": "albumreview.ui/ui.AlbumReviewApp",
