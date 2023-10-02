@@ -53,7 +53,8 @@ public class AlbumReviewAppController implements Initializable {
         }
         else{
             try{
-                albumList.addAlbumReview(albumName.getText(), Integer.parseInt(albumRating.getText()));
+                AlbumReview album = new AlbumReview(albumName.getText(), Integer.parseInt(albumRating.getText()));
+                albumList.addAlbumReview(album);
                 albumListView.getItems().setAll(albumList.getAlbumReviews());
                 albumName.setText("");
                 albumRating.setText("");
