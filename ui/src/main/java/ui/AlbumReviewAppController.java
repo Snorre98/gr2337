@@ -2,12 +2,9 @@ package ui;
 
 
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 
 import core.AlbumReview;
 import core.AlbumReviewList;
@@ -44,19 +41,8 @@ public class AlbumReviewAppController implements Initializable {
 
     private int selected;
 
-    public void initAlbumListView(){
-        try {
-            albumList = LoadFromFile.loadFromFile();
-        } catch (StreamReadException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (DatabindException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void initAlbumListView() {
+        albumList = LoadFromFile.loadFromFile();
         ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
         albumListView.getItems().setAll(observableAlbums);
     }

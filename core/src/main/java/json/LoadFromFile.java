@@ -12,20 +12,23 @@ import json.internal.AlbumReviewModule;
 
 public class LoadFromFile {
 
-  public static AlbumReviewList loadFromFile() throws StreamReadException, DatabindException, IOException{
+  public static AlbumReviewList loadFromFile(){
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new AlbumReviewModule());
-    File file = new File("core/src/main/resources/albumreviews.json");
-    AlbumReviewList ar = mapper.readValue(file, AlbumReviewList.class);
-    return ar;
-  }
-
-  public static void main(String[] args) {
+    File file = new File("core/src/main/resources/core/albumreviews.json");
     try {
-      AlbumReviewList albumReviews = loadFromFile();
-      System.out.println(albumReviews.getAlbumReviews());
+      AlbumReviewList ar = mapper.readValue(file, AlbumReviewList.class);
+      return ar;
+    } catch (StreamReadException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (DatabindException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
     } catch (IOException e) {
+      // TODO Auto-generated catch block
       e.printStackTrace();
     }
+    return new AlbumReviewList();
   }
 }

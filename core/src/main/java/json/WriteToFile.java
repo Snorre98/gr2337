@@ -15,7 +15,7 @@ public class WriteToFile {
   public static void writeToFile(AlbumReviewList albums){
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new AlbumReviewModule());
-    File file = new File("core/src/main/resources/albumreviews.json");
+    File file = new File("core/src/main/resources/core/albumreviews.json");
     try {
       mapper.writeValue(file, albums);
     } catch (StreamWriteException e) {
