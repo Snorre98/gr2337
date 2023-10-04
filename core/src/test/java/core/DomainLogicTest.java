@@ -18,7 +18,8 @@ public class DomainLogicTest {
 
     @Test
     public void testAddAlbumReview() {
-        albumList.addAlbumReview("Album1", 5);
+        AlbumReview album1 = new AlbumReview("Album1", 5);
+        albumList.addAlbumReview(album1);
         assertEquals(1, albumList.getAlbumReviews().size());
         assertEquals("Album1", albumList.getAlbumReview(0).getName());
         assertEquals(5, albumList.getAlbumReview(0).getRating());
@@ -26,8 +27,10 @@ public class DomainLogicTest {
 
     @Test
     public void testRemoveAlbumReview() {
-        albumList.addAlbumReview("Album1", 5);
-        albumList.addAlbumReview("Album2", 4);
+        AlbumReview album1 = new AlbumReview("Album1", 5);
+        AlbumReview album2 = new AlbumReview("Album2", 4);
+        albumList.addAlbumReview(album1);
+        albumList.addAlbumReview(album2);
 
         albumList.removeAlbumReview(0);
         assertEquals(1, albumList.getAlbumReviews().size());
@@ -36,9 +39,13 @@ public class DomainLogicTest {
 
     @Test
     public void testSortByName() {
-        albumList.addAlbumReview("C", 5);
-        albumList.addAlbumReview("A", 4);
-        albumList.addAlbumReview("B", 3);
+        AlbumReview a1 = new AlbumReview("C", 5);
+        AlbumReview a2 = new AlbumReview("A", 4);
+        AlbumReview a3 = new AlbumReview("B", 3);
+
+        albumList.addAlbumReview(a1);
+        albumList.addAlbumReview(a2);
+        albumList.addAlbumReview(a3);
 
         albumList.sortName();
 
@@ -49,9 +56,13 @@ public class DomainLogicTest {
 
     @Test
     public void testSortByRating() {
-        albumList.addAlbumReview("Album1", 3);
-        albumList.addAlbumReview("Album2", 4);
-        albumList.addAlbumReview("Album3", 5);
+        AlbumReview a1 = new AlbumReview("C", 3);
+        AlbumReview a2 = new AlbumReview("A", 4);
+        AlbumReview a3 = new AlbumReview("B", 5);
+
+        albumList.addAlbumReview(a1);
+        albumList.addAlbumReview(a2);
+        albumList.addAlbumReview(a3);
 
         albumList.sortRating();
 
