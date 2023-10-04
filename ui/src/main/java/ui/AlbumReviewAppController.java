@@ -2,11 +2,15 @@ package ui;
 
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+
 import core.AlbumReview;
 import core.AlbumReviewList;
-import core.FileHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import json.LoadFromFile;
+import json.WriteToFile;
+
 
 public class AlbumReviewAppController implements Initializable {
 
@@ -34,10 +41,20 @@ public class AlbumReviewAppController implements Initializable {
     private int selected;
 
     public void initAlbumListView(){
-        albumList = new AlbumReviewList();
+        try {
+            albumList = LoadFromFile.loadFromFile();
+        } catch (StreamReadException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (DatabindException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
         albumListView.getItems().setAll(observableAlbums);
-        handleLoad();
     }
 
     /**
@@ -102,16 +119,7 @@ public class AlbumReviewAppController implements Initializable {
      */
     
     void handleSave(){
-        FileHandler.writeToFile(albumList);
-    }
-
-    /**
-     * Loads albumList from file and sets it to ListView ui
-     */
-    
-    void handleLoad(){
-        FileHandler.loadFile(albumList);
-        albumListView.getItems().setAll(albumList.getAlbumReviews());
+        WriteToFile.writeToFile(albumList);
     }
 
     /**

@@ -1,4 +1,4 @@
-package json;
+package json.internal;
 
 import java.io.IOException;
 

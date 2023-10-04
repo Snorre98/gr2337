@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SaveToFile",
+            "request": "launch",
+            "mainClass": "albumreview.core/json.SaveToFile",
+            "projectName": "albumreview-core"
+        },
+        {
+            "type": "java",
             "name": "AlbumReviewModule",
             "request": "launch",
             "mainClass": "albumreview.core/json.AlbumReviewModule",
