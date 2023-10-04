@@ -1,19 +1,26 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "[java]": {
-        "editor.tabSize": 2
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.test.config": [
+    {
+      "name": "coreTesting",
+      "vmArgs": []
     },
-    "java.test.config": [
-        {
-            "name": "coreTesting",
-            "vmArgs": []
-        },
-        {
-            "name": "ALBUM-REVIEW testing",
-            "vmArgs": ["--add-opens", "albumreview.ui/ui=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
-        }
-    ],
-    "java.test.defaultConfig": "ALBUM-REVIEW testing",
-    "java.compile.nullAnalysis.mode": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true
+    {
+      "name": "ALBUM-REVIEW testing",
+      "vmArgs": [
+        "--add-opens",
+        "albumreview.ui/ui=ALL-UNNAMED",
+        "--add-exports",
+        "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
+      ]
+    }
+  ],
+  "editor.tabSize": 2, // Sets the tab size to 2 spaces.
+  "editor.insertSpaces": true, // Use spaces instead of tab characters.
+  "editor.detectIndentation": false, // Prevents auto-detection of tab size based on file content.
+  "java.test.defaultConfig": "ALBUM-REVIEW testing",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.checkstyle.configuration": "${workspaceFolder}\\config\\chesckstyle\\google_checks.xml",
+  "java.format.settings.url": ".vscode/java-formatter.xml"
 }
