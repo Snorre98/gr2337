@@ -15,6 +15,7 @@ import json.internal.AlbumReviewModule;
 public class WriteToFile {
   private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
   static Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
   public static void writeToFile(AlbumReviewList albums){
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new AlbumReviewModule());
