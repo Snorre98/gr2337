@@ -1,8 +1,6 @@
 package ui;
 
-
-
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -41,7 +39,7 @@ public class AlbumReviewAppController implements Initializable {
 
     private int selected;
 
-    public void initAlbumListView() {
+  public void initAlbumListView() throws IOException {
         albumList = LoadFromFile.loadFromFile();
         ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
         albumListView.getItems().setAll(observableAlbums);
@@ -132,7 +130,11 @@ public class AlbumReviewAppController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initAlbumListView();
+    try {
+      initAlbumListView();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
         albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
