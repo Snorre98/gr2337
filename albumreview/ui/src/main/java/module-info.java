@@ -1,7 +1,6 @@
 module albumreview.ui {
 
   //det gir mening at ui trenger controller
-
   requires albumreview.controller;
   requires albumreview.core;
 
