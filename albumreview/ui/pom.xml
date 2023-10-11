@@ -66,13 +66,14 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-
+        <!-- Might add later
         <dependency>
             <groupId>gr2337</groupId>
             <artifactId>albumreview-controller</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
+
         <!--this is new-->
         <dependency>
             <groupId>gr2337</groupId>
@@ -107,7 +108,9 @@
                 <configuration>
                     <argLine>
                         @{jaCoCoArgLine}
-                        --add-opens albumreview.ui/ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+
+
+                        --add-opens albumreview.ui/viewutil=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
                 </configuration>
             </plugin>
@@ -120,8 +123,9 @@
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
-                    <!-- <mainClass>albumreview.controller/ui.uicontrol.AlbumReviewApp</mainClass>-->
-                    <mainClass>albumreview.controller/ui.uicontrol.AlbumReviewApp</mainClass>
+
+                    <!--<mainClass>albumreview.controller/ui.uicontrol.AlbumReviewApp</mainClass>-->
+                    <mainClass>albumreview.ui/viewutil.AlbumReviewApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>
