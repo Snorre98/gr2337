@@ -15,15 +15,15 @@ import statepersistence.serializer.AlbumReviewModule;
  * Loads data from Json file stored at user.home.
  * */
 public class LoadFromFile {
-  private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
-  static Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+  //private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  //static Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 
   /**
    *   If the file-structure does not exist, this will create it
    *   at user.home (e.g "C:\Users\<UserName>\IT1901gr2337\AlbumReviewApp\albumreviews.json" for
    *   Windows).
    * */
-  public static AlbumReviewList loadFromFile() throws IOException {
+  public static AlbumReviewList loadFromFile(Path saveFilePath) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new AlbumReviewModule());
 

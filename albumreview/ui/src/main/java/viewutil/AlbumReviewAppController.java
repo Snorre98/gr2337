@@ -22,6 +22,8 @@ import statepersistence.WriteToFile;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 /**
@@ -47,11 +49,15 @@ public class AlbumReviewAppController implements Initializable {
 
   private int selected;
 
+  private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+
+  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
   /**
    * Initializes app.
    * */
   public void initAlbumListView() throws IOException {
-    albumList = LoadFromFile.loadFromFile();
+    albumList = LoadFromFile.loadFromFile(saveFilePath);
     //System.out.println(albumList);
     ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
     albumListView.getItems().setAll(observableAlbums);
@@ -134,7 +140,7 @@ public class AlbumReviewAppController implements Initializable {
    */
 
   void handleSave() {
-    WriteToFile.writeToFile(albumList);
+    WriteToFile.writeToFile(albumList, saveFilePath);
   }
 
   /**
