@@ -1,3 +1,4 @@
+[Our Eclipse Che workspace](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2337/gr2337?new)
 # How to Navigate and Run our App
 Our app 'Album-Review lets useres, rate and save music. This Readme shows our folder structure, and where to finde the different classes. How to run the app. And what versions and dependecys we use.
 
