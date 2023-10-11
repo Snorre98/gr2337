@@ -36,19 +36,16 @@ public class LoadFromFile {
 
     File file = saveFilePath.toFile();
 
+
     try {
       AlbumReviewList ar = mapper.readValue(file, AlbumReviewList.class);
-      if (ar != null) {
-        return ar;
-      }
+      return ar;
 
     } catch (StreamReadException e) {
 
       e.printStackTrace();
 
     }
-    /* Because StreamReader is a subclass of these
-       it will catch at StreamReader if these fail
       catch (DatabindException e) {
 
       e.printStackTrace();
@@ -56,7 +53,7 @@ public class LoadFromFile {
     } catch (IOException e) {
 
       e.printStackTrace();
-    }*/
+    }
     return new AlbumReviewList();
   }
 }

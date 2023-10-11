@@ -52,6 +52,7 @@ public class AlbumReviewAppController implements Initializable {
    * */
   public void initAlbumListView() throws IOException {
     albumList = LoadFromFile.loadFromFile();
+    //System.out.println(albumList);
     ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
     albumListView.getItems().setAll(observableAlbums);
   }
@@ -142,9 +143,11 @@ public class AlbumReviewAppController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
+      //System.out.println("Jacob er rar");
       initAlbumListView();
     } catch (IOException e) {
       throw new RuntimeException(e);
+
     }
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
