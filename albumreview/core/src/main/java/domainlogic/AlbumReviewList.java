@@ -3,6 +3,7 @@ package domainlogic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manages a list of AlbumReviews.
@@ -37,5 +38,26 @@ public class AlbumReviewList {
 
   public void sortRating() {
     Collections.sort(albumReviews, new AlbumRatingComparator());
+  }
+
+  /**
+   * Used to compare objects directly.
+   * If fields are added, this must be updated.
+   * */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AlbumReviewList that = (AlbumReviewList) o;
+    return Objects.equals(this.getAlbumReviews(), that.getAlbumReviews()); // assuming reviews is a List
+  }
+
+  /**
+   * Used to compare objects directly.
+   * If fields are added, this must be updated.
+   * */
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.getAlbumReviews());
   }
 }
