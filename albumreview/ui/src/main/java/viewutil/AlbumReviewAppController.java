@@ -57,7 +57,7 @@ public class AlbumReviewAppController implements Initializable {
    * Initializes app.
    * */
   public void initAlbumListView() throws IOException {
-    albumList = LoadFromFile.loadFromFile(saveFilePath);
+    albumList = LoadFromFile.loadFromFile(saveFilePath, true);
     //System.out.println(albumList);
     ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
     albumListView.getItems().setAll(observableAlbums);
