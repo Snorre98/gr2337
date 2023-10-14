@@ -57,6 +57,7 @@ The versions we are using:
 The root folder is 'gr2337'. The maven project is found in `albumreview`.  
 
 Here you will find this structure:
+
 gr2337
 - .devcontainer `#containe setup for virtual enviroment (e.g. Eclipse Che, Docker)`
 - .idea
