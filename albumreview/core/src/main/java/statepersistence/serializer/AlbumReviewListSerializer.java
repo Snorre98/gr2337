@@ -9,18 +9,17 @@ import java.io.IOException;
 
 /**
  * Serializes AlbumReviewList object.
- * */
+ */
 public class AlbumReviewListSerializer extends JsonSerializer<AlbumReviewList> {
   @Override
-  public void serialize(AlbumReviewList albumList,
-                        JsonGenerator jGen,
-                        SerializerProvider serializerProvider) throws IOException {
-    jGen.writeStartObject();
-    jGen.writeArrayFieldStart("albums");
+  public void serialize(AlbumReviewList albumList, JsonGenerator jgn,
+      SerializerProvider serializerProvider) throws IOException {
+    jgn.writeStartObject();
+    jgn.writeArrayFieldStart("albums");
     for (AlbumReview album : albumList.getAlbumReviews()) {
-      jGen.writeObject(album);
+      jgn.writeObject(album);
     }
-    jGen.writeEndArray();
-    jGen.writeEndObject();
+    jgn.writeEndArray();
+    jgn.writeEndObject();
   }
 }

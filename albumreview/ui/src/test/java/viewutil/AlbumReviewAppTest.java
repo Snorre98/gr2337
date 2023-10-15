@@ -1,23 +1,27 @@
 package viewutil;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
+/**
+ * Testing app launch.
+ */
 public class AlbumReviewAppTest extends ApplicationTest {
-  
-  
+
+
   @Override
   public void start(Stage stage) throws Exception {
     new AlbumReviewApp().start(stage);
   }
 
   @Test
-  public void testUIElementsExist() {
+  public void testUiElementsExist() {
     // Check if UI elements exist
     assertNotNull(lookup("#albumListView").queryAs(ListView.class));
     assertNotNull(lookup("#addButton").queryAs(Button.class));
@@ -29,7 +33,6 @@ public class AlbumReviewAppTest extends ApplicationTest {
     assertNotNull(lookup("#openButton").queryAs(Button.class));
   }
 
-  
 
 
 }

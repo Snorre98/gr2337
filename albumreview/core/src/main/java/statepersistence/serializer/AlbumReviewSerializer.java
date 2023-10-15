@@ -8,15 +8,14 @@ import java.io.IOException;
 
 /**
  * AlbumReview serializer.
- * */
+ */
 public class AlbumReviewSerializer extends JsonSerializer<AlbumReview> {
   @Override
-  public void serialize(AlbumReview album,
-                        JsonGenerator jGen,
-                        SerializerProvider serializerProvider) throws IOException {
-    jGen.writeStartObject();
-    jGen.writeStringField("name", album.getName());
-    jGen.writeNumberField("rating", album.getRating());
-    jGen.writeEndObject();
+  public void serialize(AlbumReview album, JsonGenerator jgn, SerializerProvider serializerProvider)
+      throws IOException {
+    jgn.writeStartObject();
+    jgn.writeStringField("name", album.getName());
+    jgn.writeNumberField("rating", album.getRating());
+    jgn.writeEndObject();
   }
 }

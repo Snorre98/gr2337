@@ -21,6 +21,6 @@
   "java.test.defaultConfig": "ALBUM-REVIEW testing",
   "java.compile.nullAnalysis.mode": "automatic",
   "java.debug.settings.onBuildFailureProceed": true,
-  "java.checkstyle.configuration": "${workspaceFolder}\\albumreview\\config\\chesckstyle\\google_checks.xml",
+  "java.checkstyle.configuration": "${workspaceFolder}\\albumreview\\config\\checkstyle\\google_checks.xml",
   "java.format.settings.url": ".vscode/java-formatter.xml"
 }
