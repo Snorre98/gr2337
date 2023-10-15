@@ -1,0 +1,36 @@
+@startuml Sequence Diagram
+
+actor Person
+
+Person -> UI : Press Add
+UI -> Controller : Album input
+Controller --> Album : Album input
+Album -> Controller : Album
+Controller -> AlbumReviewList : Add album to list
+AlbumReviewList --> Controller : Updated List
+Controller --> UI : ListView
+UI --> Person : Result
+
+Person -> UI : Select album, press remove
+UI -> Controller : Remove selected album
+Controller -> AlbumReviewList : Remove selected album
+AlbumReviewList -> AlbumReviewList : Remove album
+AlbumReviewList --> Controller : Updated list
+Controller --> UI : ListView
+UI --> Person : Result
+
+Person -> UI : Press Sort
+UI -> Controller : Sort
+Controller -> AlbumReviewList : Sort
+AlbumReviewList --> Controller : Sort list
+Controller --> UI :Sorted ListView
+UI --> Person : Result
+
+Person -> UI : Press Open
+UI -> Controller : Open
+Controller -> NewFxml : Open a new fxml file
+NewFxml -> NewUI : New scene
+NewUI --> Person : Result
+
+
+@enduml
