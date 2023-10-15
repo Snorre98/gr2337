@@ -2,6 +2,11 @@ package viewutil;
 
 import domainlogic.AlbumReview;
 import domainlogic.AlbumReviewList;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,22 +25,17 @@ import javafx.stage.Stage;
 import statepersistence.LoadFromFile;
 import statepersistence.WriteToFile;
 
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ResourceBundle;
 
 /**
  * App controller for all UI.
- * */
+ */
 public class AlbumReviewAppController implements Initializable {
 
 
   @SuppressWarnings("checkstyle:MultipleVariableDeclarations")
   @FXML
   private TextField albumName, albumRating;
-  //Checkstyle wants these to be defined on separate lines. I don't want that.
+  // Checkstyle wants these to be defined on separate lines. I don't want that.
   @SuppressWarnings("checkstyle:MultipleVariableDeclarations")
   @FXML
   private Button sortByNameButton, sortByRatingButton, addButton, removeButton, openAlbum;
@@ -55,11 +55,12 @@ public class AlbumReviewAppController implements Initializable {
 
   /**
    * Initializes app.
-   * */
+   */
   public void initAlbumListView() throws IOException {
     albumList = LoadFromFile.loadFromFile(saveFilePath, true);
-    //System.out.println(albumList);
-    ObservableList<AlbumReview> observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
+    // System.out.println(albumList);
+    ObservableList<AlbumReview> observableAlbums;
+    observableAlbums = FXCollections.observableArrayList(albumList.getAlbumReviews());
     albumListView.getItems().setAll(observableAlbums);
   }
 
@@ -149,7 +150,7 @@ public class AlbumReviewAppController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     try {
-      //System.out.println("Jacob er rar");
+      // System.out.println("Jacob er rar");
       initAlbumListView();
     } catch (IOException e) {
       throw new RuntimeException(e);

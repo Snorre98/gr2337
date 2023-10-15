@@ -7,16 +7,16 @@ import domainlogic.AlbumReviewList;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import statepersistence.serializer.AlbumReviewModule;
 
 /**
  * Writes to JSON file at user.home location.
- * */
+ */
 public class WriteToFile {
-  //private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
-  //static Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 
+  /**
+   * Writes to fil at saveFilePath.
+   */
   public static void writeToFile(AlbumReviewList albums, Path saveFilePath) {
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new AlbumReviewModule());

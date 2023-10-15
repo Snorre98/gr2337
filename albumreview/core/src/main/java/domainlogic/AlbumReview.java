@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * Core AlbumReview object class.
- * */
+ */
 public class AlbumReview {
 
   private String name;
@@ -30,21 +30,23 @@ public class AlbumReview {
 
 
   /**
-   * Used to compare objects directly.
-   * If fields are added, this must be updated.
-   * */
+   * Used to compare objects directly. If fields are added, this must be updated.
+   */
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     AlbumReview that = (AlbumReview) o;
-    return Objects.equals(this.getName(), that.getName()) &&
-        rating == that.rating; // rating is int
+    return Objects.equals(this.getName(), that.getName()) && rating == that.rating; // rating is int
   }
+
   /**
-   * Used to compare objects directly.
-   * If fields are added, this must be updated.
-   * */
+   * Used to compare objects directly. If fields are added, this must be updated.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(this.getName(), rating);
