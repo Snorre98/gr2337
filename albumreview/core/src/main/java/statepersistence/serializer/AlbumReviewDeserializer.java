@@ -1,6 +1,6 @@
 package statepersistence.serializer;
 
-import java.io.IOException;
+
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
@@ -11,21 +11,23 @@ import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import domainlogic.AlbumReview;
+import java.io.IOException;
 
 /**
  * deserializes AlbumReview.
- * */
+ */
 public class AlbumReviewDeserializer extends JsonDeserializer<AlbumReview> {
 
   @Override
-  public AlbumReview deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JacksonException {
+  public AlbumReview deserialize(JsonParser parser, DeserializationContext ctxt)
+      throws IOException, JacksonException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     return deserialize((JsonNode) treeNode);
   }
 
   /**
-  * deserializes name and rating.
-  * */
+   * Deserializes name and rating.
+   */
   public AlbumReview deserialize(JsonNode jsonNode) {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;

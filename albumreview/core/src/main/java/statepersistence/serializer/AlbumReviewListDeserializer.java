@@ -12,12 +12,16 @@ import domainlogic.AlbumReview;
 import domainlogic.AlbumReviewList;
 import java.io.IOException;
 
+/**
+ * AlbumReviewList deserializer.
+ */
 public class AlbumReviewListDeserializer extends JsonDeserializer<AlbumReviewList> {
 
   private AlbumReviewDeserializer albumReviewDeserializer = new AlbumReviewDeserializer();
 
   @Override
-  public AlbumReviewList deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JacksonException {
+  public AlbumReviewList deserialize(JsonParser parser, DeserializationContext ctxt)
+      throws IOException, JacksonException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
     if (treeNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) treeNode;

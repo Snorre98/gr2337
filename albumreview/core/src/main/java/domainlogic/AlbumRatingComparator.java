@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 /**
  * Compares album by rating. Used for sorting.
- * */
+ */
 public class AlbumRatingComparator implements Comparator<AlbumReview> {
 
   @Override
