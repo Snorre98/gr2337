@@ -8,7 +8,7 @@ How to run the app with maven:
 1. clone the GitLab rep root from master branch
 2. cd to the folder 'albumreview' 
 3. run `mvn install`
-4. run `mvn clean install`
+4. run `mvn clean compile`
 5. To open the app run: `mvn javafx:run -f ui/pom.xml`
 
 
