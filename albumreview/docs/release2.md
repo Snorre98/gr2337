@@ -59,12 +59,13 @@ To ensure that our code is at a certain quality, we have used several tools.
 Spotbugs and checkstyle are two of these and will be discussed further in the Spotbug and Checkstyle section. 
 Testing is of course a crucial part of ensuring a high quality code without loopholes and other problems. 
 We used Jacoco to report to what degree of test coverage and have made sure to write tests that cover every module of the project architecture. 
-This includes the user interface (with user interaction simulation), domain logic and state persistence. This ensures high quality code where we have made sure all aspects of the project work as envisioned.
+This includes the user interface (with user interaction simulation), domain logic and state persistence. 
+This ensures high quality code where we have made sure all aspects of the project work as envisioned.
 
 ### Spotbugs and Checkstyle
 SpotBugs is a code checker (linter) that analyzes Java code for possible bugs, inefficient code, 
 and in general code that does not follow best practices. Using such a tool helps in writing better code. 
-SpotBugs is also configured in the same way as Checkstyle, with a separate configuration file.
+SpotBugs is also configured in the same way as Checkstyle, with a separate configuration file. We have not been using Spotbugs to its fullest extent, although to some extent, but will be doing so because it is an extremely useful tool.
 
 In the project, we are use 'Checkstyle,' which checks code format. It checks whether the code follows a certain style.
 The style is configured in an XML configuration file, and there are ready-made configurations available for such code formatters
