@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Album {
 
-  private List<Review> albumReviews;
+  private List<Review> reviews;
   private String artist;
   private String name;
 
@@ -19,34 +19,64 @@ public class Album {
    * @param name name connected to the Album.
    */
   public Album(String artist, String name) {
-    albumReviews = new ArrayList<>();
+    reviews = new ArrayList<>();
     this.artist = artist;
     this.name = name;
   }
 
   /**
-   * adds Review object to albumReviews list.
+   * adds Review object to reviews list.
    * 
    * @param review Review that gets added to list.
    */
-  public void addAlbumReview(Review review) {
-    albumReviews.add(review);
+  public void addReview(Review review) {
+    reviews.add(review);
   }
 
   /**
-   * Removes specific album from albumReviews.
+   * Removes specific review from reviews list.
    * 
-   * @param i int of Album's position.
+   * @param i int position of the review.
    */
-  public void removeAlbumReview(int i) {
-    albumReviews.remove(i);
+  public void removeReview(int i) {
+    reviews.remove(i);
   }
 
-  public Review getAlbumReview(int i) {
-    return albumReviews.get(i);
+  /**
+   * Gets specific album from reviews list.
+   * 
+   * @param i int position of the Review object.
+   * @return Review at specified position i.
+   */
+  public Review getReview(int i) {
+    return reviews.get(i);
   }
 
-  public List<Review> getAlbumReviews() {
-    return new ArrayList<>(albumReviews);
+  /**
+   * Gets list of reviews.
+   * 
+   * @return ArrayList of Album object's Reviews list.
+   */
+  public List<Review> getReviews() {
+    return new ArrayList<>(reviews);
   }
+
+  /**
+   * Gets artist in Album object.
+   * 
+   * @return artist.
+   */
+  public String getArtist() {
+    return artist;
+  }
+
+  /**
+   * Gets name in Album object.
+   * 
+   * @return album name.
+   */
+  public String getName() {
+    return name;
+  }
+
 }
