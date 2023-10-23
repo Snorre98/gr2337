@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.IntNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import domainlogic.Album;
@@ -22,9 +21,21 @@ public class AlbumDeserializer extends JsonDeserializer<Album> {
   private ReviewDeserializer reviewDeserializer = new ReviewDeserializer();
 
   @Override
-  public Review deserialize(JsonParser parser, DeserializationContext ctxt)
+  public Album deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JacksonException {
-    JsonNode jsonNode = parser.getCodec().readTree(parser);
+    TreeNode treeNode = parser.getCodec().readTree(parser);
+    return deserialize((JsonNode) treeNode);
+  }
+
+  /**
+   * Deserializes Album JsonNode.
+   * 
+   * @param jsonNode
+   * @return
+   * @throws IOException
+   * @throws JacksonException
+   */
+  public Album deserialize(JsonNode jsonNode) throws IOException, JacksonException {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
 
@@ -44,9 +55,9 @@ public class AlbumDeserializer extends JsonDeserializer<Album> {
       JsonNode reviewsNode = objectNode.get("reviews");
       if (reviewsNode instanceof ArrayNode) {
         for (JsonNode elementNode : ((ArrayNode) reviewsNode)) {
-          Review review = ReviewDeserializer.deserialize(elementNode);
+          Review review = reviewDeserializer.deserialize(elementNode);
           if (review != null) {
-            albums.addAlbumReview(album);
+            album.addReview(review);
           }
         }
       }

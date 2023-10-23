@@ -16,7 +16,7 @@ public class AlbumListSerializer extends JsonSerializer<AlbumList> {
       SerializerProvider serializerProvider) throws IOException {
     jgn.writeStartObject();
     jgn.writeArrayFieldStart("albums");
-    for (Album album : albumList.getReviews()) {
+    for (Album album : albumList.getAlbums()) {
       jgn.writeObject(album);
     }
     jgn.writeEndArray();
