@@ -19,7 +19,7 @@ public class AlbumList {
    * 
    * @param album Album that gets added to list.
    */
-  public void addReview(Album album) {
+  public void addAlbum(Album album) {
     albums.add(album);
   }
 
@@ -28,7 +28,7 @@ public class AlbumList {
    * 
    * @param i int position of Album object.
    */
-  public void removeReview(int i) {
+  public void removeAlbum(int i) {
     albums.remove(i);
   }
 
@@ -38,7 +38,7 @@ public class AlbumList {
    * @param i int position of the Album object.
    * @return Album at specified position i.
    */
-  public Album getReview(int i) {
+  public Album getAlbum(int i) {
     return albums.get(i);
   }
 
@@ -47,7 +47,7 @@ public class AlbumList {
    * 
    * @return ArrayList of Albums.
    */
-  public List<Album> getReviews() {
+  public List<Album> getAlbums() {
     return new ArrayList<>(albums);
   }
 
