@@ -19,7 +19,7 @@ public class Review {
     this.rating = rating;
   }
 
-  public String getName() {
+  public String getUserName() {
     return this.user;
   }
 
