@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 public class PageHandler{
 
-  AlbumListController albumListController;
   AlbumController albumController;
   
-public void loadAlbumList(String username){
-  albumListController.setUser(username);
+  public void loadAlbumList(String username){
+    AlbumListController albumListController = new AlbumListController();
+    albumListController.setUsername(username);
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/AlbumList.fxml"));

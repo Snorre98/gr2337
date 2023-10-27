@@ -15,7 +15,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <PasswordField layoutX="208.0" layoutY="235.0" promptText="Password" />
+            <PasswordField fx:id="password" layoutX="208.0" layoutY="235.0" promptText="Password" />
             <Label layoutX="62.0" layoutY="163.0" text="Username">
                <font>
                   <Font name="System Bold" size="20.0" />
@@ -27,7 +27,7 @@
                </font>
             </Label>
             <TextField fx:id="username" layoutX="208.0" layoutY="166.0" promptText="Username" />
-            <Button layoutX="161.0" layoutY="296.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="78.0" text="Log in" />
+            <Button fx:id="button" layoutX="161.0" layoutY="296.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="38.0" prefWidth="78.0" text="Log in" />
          </children>
       </AnchorPane>
    </center>
