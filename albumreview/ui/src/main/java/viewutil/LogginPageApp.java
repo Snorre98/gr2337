@@ -24,8 +24,6 @@ public class LogginPageApp extends Application{
 
     URL resourceUrl = getClass().getResource("/fxml/LogginPage.fxml");
 
-    System.out.println("Resource URL: " + resourceUrl);
-    primaryStage.setScene(new Scene(FXMLLoader.load(resourceUrl)));
 
     Parent root = FXMLLoader.load(Objects.requireNonNull(resourceUrl));
     primaryStage.setScene(new Scene(root));

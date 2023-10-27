@@ -13,8 +13,6 @@ import javafx.scene.control.TextField;
 
 public class LogginPageController {
 
-  PageHandler pageHandler;
-
   @FXML
   private Button button;
 
@@ -26,6 +24,7 @@ public class LogginPageController {
 
   @FXML
   void userLogin(ActionEvent event) throws IOException {
+    PageHandler pageHandler = new PageHandler();
     pageHandler.loadAlbumList(username.getText());
   }
 }
