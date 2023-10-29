@@ -10,23 +10,23 @@ public class PageHandler{
   AlbumController albumController;
   
   public void loadAlbumList(String username){
-    AlbumListController albumListController = new AlbumListController();
-    albumListController.setUsername(username);
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/AlbumList.fxml"));
       Parent root = (Parent) loader.load();
+      AlbumListController albumListController = loader.getController();
+      albumListController.setUsername(username);
       Stage stage = new Stage();
       stage.setTitle("The Albums");
       stage.setScene(new Scene(root));
       stage.show();
+      albumListController.setUsername(username);
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
 }
 
-public void loadAlbum(String username){
-  albumController.setUser(username);
+public void loadAlbum(String username, int selected){
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -35,6 +35,9 @@ public void loadAlbum(String username){
       stage.setTitle("The Album");
       stage.setScene(new Scene(root));
       stage.show();
+      AlbumController albumController = loader.getController();
+      albumController.setUsername(username);
+      albumController.setSelected(selected);
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
