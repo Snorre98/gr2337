@@ -45,12 +45,20 @@ public class AlbumListController implements Initializable {
     this.username.setText(realusername);
   }
 
+  void setPageHandler(PageHandler pageHandler){
+    this.pageHandler = pageHandler;
+  }
+
   void initAlbumListView() throws IOException {
     albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
     // System.out.println(albumList);
     ObservableList<Album> observableAlbums;
     observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
     albumListView.getItems().setAll(observableAlbums);
+  }
+
+  public AlbumList getAlbumList(){
+    return albumList;
   }
   
   @FXML
@@ -64,6 +72,7 @@ public class AlbumListController implements Initializable {
 
   @FXML
     void openAlbum(ActionEvent event) {
+
       pageHandler.loadAlbum(realusername, selected);
     }
 
