@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="459.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="459.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewutil.AlbumController">
  <children>
-  <ListView fx:id="reviews" layoutX="35.0" layoutY="69.0" prefHeight="200.0" prefWidth="200.0" />
-  <Button fx:id="openReview" layoutX="92.0" layoutY="301.0" mnemonicParsing="false" text="Open Review" />
-  <Label fx:id="username" layoutX="363.0" layoutY="98.0" text="Username" />
-  <Label fx:id="rating" layoutX="363.0" layoutY="135.0" text="Rating" />
-  <Label layoutX="363.0" layoutY="177.0" text="Label" />
+  <ListView fx:id="reviews" layoutX="78.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
+  <Button fx:id="openReview" layoutX="135.0" layoutY="342.0" mnemonicParsing="false" text="Open Review" />
+  <Label fx:id="usernameLabel" layoutX="108.0" layoutY="38.0" text="Username" />
+  <Label fx:id="albumLabel" layoutX="272.0" layoutY="38.0" text="Album" />
+  <Label fx:id="artistLabel" layoutX="426.0" layoutY="38.0" text="Artist" />
   </children>
 </AnchorPane>

@@ -79,4 +79,9 @@ public class Album {
     return name;
   }
 
+  @Override
+  public String toString(){
+    return "Album: " + name + ", Artist: " + artist;
+  }
+
 }
