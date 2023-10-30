@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * login page.
  */
 
-public class LogginPageApp extends Application{
+public class LogginPageApp extends Application {
   public static void main(String[] args) {
     Application.launch(args);
   }

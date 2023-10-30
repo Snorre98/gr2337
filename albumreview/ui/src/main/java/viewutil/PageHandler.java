@@ -5,12 +5,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class PageHandler{
+/**
+ * A class to open new javafx scenes and keep track of the controllers.
+ */
+public class PageHandler {
 
   AlbumController albumController;
   AlbumListController albumListController;
   
-  public void loadAlbumList(String username){
+  /**
+   * Load the AlbumList.fxml and the controller
+   * 
+   * @param username the username that is signed in with.
+   * 
+   */
+  public void loadAlbumList(String username) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/AlbumList.fxml"));
@@ -25,9 +34,16 @@ public class PageHandler{
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
-}
+  }
+  /**
+   * Loads the Album.fxml file and controller.
+   * 
+   * @param username the username that is used to login with.
+   * @param selected where in the AlbumList the selected album is
+   * 
+   */
 
-public void loadAlbum(String username, int selected){
+  public void loadAlbum(String username, int selected) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -43,7 +59,7 @@ public void loadAlbum(String username, int selected){
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
-}
+  }
 
 
 

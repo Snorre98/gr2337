@@ -2,11 +2,15 @@ package viewutil;
 
 import domainlogic.AlbumList;
 import domainlogic.AlbumReview;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+/**
+ * Controller for the Album.fxml and Album classes.
+ */
 public class AlbumController {
 
   private String username;
@@ -40,6 +44,16 @@ public class AlbumController {
     this.selected = selected;
   }
 
+  @FXML
+  void openReview(ActionEvent event){
+    //Here we must make functions that update the labels
+  }
+
+  /**
+   * This sets the Album name and Artist at the top of the scene.
+   * 
+   * @param albumListController The albumlistController, need this to get the album info.
+   */
   public void setAlbumAndArtist(AlbumListController albumListController){
     albumList = albumListController.getAlbumList();
     this.album = albumList.getAlbum(selected).getName();
