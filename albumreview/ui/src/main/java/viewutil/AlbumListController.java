@@ -1,13 +1,12 @@
 package viewutil;
 
+import domainlogic.Album;
+import domainlogic.AlbumList;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import domainlogic.Album;
-import domainlogic.AlbumList;
-import domainlogic.AlbumReview;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +17,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import statepersistence.LoadFromFile;
 import statepersistence.NewLoadFromFile;
 
 /**
  * Controller for AlbumList.
  */
 public class AlbumListController implements Initializable {
+
+  @FXML
+  private ListView<Album> albumListView;
+    
+  @FXML
+  private Button openAlbum;
+
+  @FXML
+  private Label username;
 
   Album album;
 
@@ -45,8 +52,12 @@ public class AlbumListController implements Initializable {
     this.username.setText(realusername);
   }
 
-  void setPageHandler(PageHandler pageHandler){
+  void setPageHandler(PageHandler pageHandler) {
     this.pageHandler = pageHandler;
+  }
+
+  public AlbumList getAlbumList() {
+    return albumList;
   }
 
   void initAlbumListView() throws IOException {
@@ -57,24 +68,10 @@ public class AlbumListController implements Initializable {
     albumListView.getItems().setAll(observableAlbums);
   }
 
-  public AlbumList getAlbumList(){
-    return albumList;
-  }
-  
-  @FXML
-  private ListView<Album> albumListView;
-    
-  @FXML
-  private Button openAlbum;
-
-  @FXML
-  private Label username;
-
   @FXML
     void openAlbum(ActionEvent event) {
-
-      pageHandler.loadAlbum(realusername, selected);
-    }
+    pageHandler.loadAlbum(realusername, selected);
+  }
 
 
   @Override
@@ -92,6 +89,5 @@ public class AlbumListController implements Initializable {
         selected = albumListView.getSelectionModel().getSelectedIndex();
       }
     });
-
   }
 }
