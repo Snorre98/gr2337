@@ -80,7 +80,7 @@ public class Album {
   }
 
   @Override
-  public String toString(){
+  public String toString() {
     return "Album: " + name + ", Artist: " + artist;
   }
 

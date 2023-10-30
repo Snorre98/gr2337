@@ -1,6 +1,7 @@
 package domainlogic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -51,7 +52,13 @@ public class AlbumList {
     return new ArrayList<>(albums);
   }
 
-  
+  public void sortAlbum() {
+    Collections.sort(albums, new NewAlbumComperator());
+  }
+
+  public void sortArtist() {
+    Collections.sort(albums, new NewArtistComperator());
+  }
 
 
 }
