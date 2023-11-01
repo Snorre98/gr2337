@@ -16,8 +16,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+
 import javafx.scene.input.MouseEvent;
 import statepersistence.NewLoadFromFile;
+import statepersistence.NewWriteToFile;
+import statepersistence.WriteToFile;
 
 /**
  * Controller for AlbumList.
@@ -32,6 +36,9 @@ public class AlbumListController implements Initializable {
 
   @FXML
   private Label username;
+
+  @FXML
+  private TextField albumInput;
 
   Album album;
 
@@ -83,6 +90,23 @@ public class AlbumListController implements Initializable {
   void sortArtist(ActionEvent event) {
     albumList.sortArtist();
     albumListView.getItems().setAll(albumList.getAlbums());
+  }
+
+  @FXML
+  void newAlbum(ActionEvent event) {
+    album = new Album(albumInput.getText(), realusername);
+    albumList.addAlbum(album);
+    albumListView.getItems().setAll(albumList.getAlbums());
+    albumInput.setText("");
+    handleSave();
+  }
+
+  /**
+   * Writes albumList to file.
+   */
+
+  void handleSave() {
+    NewWriteToFile.writeToFile(albumList, saveFilePath);
   }
 
 

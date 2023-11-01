@@ -1,17 +1,30 @@
 package viewutil;
 
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ResourceBundle;
+import domainlogic.Album;
 import domainlogic.AlbumList;
 import domainlogic.AlbumReview;
+import domainlogic.Review;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import statepersistence.NewLoadFromFile;
+import statepersistence.NewWriteToFile;
 
 /**
  * Controller for the Album.fxml and Album classes.
  */
-public class AlbumController {
+public class AlbumController implements Initializable{
 
   private String username;
   private int selected;
@@ -19,6 +32,9 @@ public class AlbumController {
   private String artist;
 
   private AlbumList albumList;
+
+  private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 
   @FXML
   private Button openReview;
@@ -30,7 +46,10 @@ public class AlbumController {
   private Label artistLabel;
 
   @FXML
-  private ListView<AlbumReview> reviewList;
+  private TextField rating;
+
+  @FXML
+  private ListView<Review> reviewList;
 
   @FXML
   private Label usernameLabel;
@@ -45,8 +64,24 @@ public class AlbumController {
   }
 
   @FXML
-  void openReview(ActionEvent event){
-    //Here we must make functions that update the labels
+  void newReview(ActionEvent event) {
+    Review review = new Review(username, Integer.parseInt(rating.getText()));
+    albumList.getAlbum(selected).addReview(review);
+    rating.setText("");
+    handleSave();
+  }
+
+  void handleSave() {
+    NewWriteToFile.writeToFile(albumList, saveFilePath);
+  }
+
+  void initReviewListView() throws IOException {
+    albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
+    // System.out.println(albumList);
+    ObservableList<Review> observableReviews;
+    observableReviews = FXCollections.observableArrayList(albumList.getAlbum(selected).getReviews());
+    reviewList.getItems().setAll(observableReviews);
+
   }
 
   /**
@@ -59,8 +94,19 @@ public class AlbumController {
     this.album = albumList.getAlbum(selected).getName();
     System.out.println(album + "album");
     this.artist = albumList.getAlbum(selected).getArtist();
-    artistLabel.setText(album);
+    artistLabel.setText(artist);
     albumLabel.setText(album);
     
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    //System.out.println("Jacob er rar");
+    try {
+      initReviewListView();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 }
