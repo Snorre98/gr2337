@@ -54,7 +54,7 @@ public class AlbumController {
    * 
    * @param albumListController The albumlistController, need this to get the album info.
    */
-  public void setAlbumAndArtist(AlbumListController albumListController){
+  public void setAlbumAndArtist(AlbumListController albumListController) {
     albumList = albumListController.getAlbumList();
     this.album = albumList.getAlbum(selected).getName();
     System.out.println(album + "album");
