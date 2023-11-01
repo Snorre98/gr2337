@@ -1,19 +1,13 @@
 package viewutil;
 
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ResourceBundle;
 import domainlogic.Album;
 import domainlogic.AlbumList;
-import domainlogic.AlbumReview;
 import domainlogic.Review;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -79,12 +73,6 @@ public class AlbumController {
   void initReviewListView() throws IOException {
     albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
     Album album = albumList.getAlbum(selected);
-    // System.out.println(albumList);
-    // ObservableList<Review> observableReviews;
-    // observableReviews = FXCollections
-    //   .observableArrayList(albumList.getAlbum(selected).getReviews());
-    // System.out.println(observableReviews);
-    // reviews.getItems().setAll(observableReviews);
     reviews.getItems().setAll(album.getReviews());
   }
 
@@ -102,15 +90,4 @@ public class AlbumController {
     albumLabel.setText(album);
     
   }
-
-  // @Override
-  // public void initialize(URL url, ResourceBundle resourceBundle) {
-  //   System.out.println("Jacob er rar");
-  //   try {
-  //     initReviewListView();
-  //   } catch (IOException e) {
-  //     // TODO Auto-generated catch block
-  //     e.printStackTrace();
-  //   }
-  // }
 }
