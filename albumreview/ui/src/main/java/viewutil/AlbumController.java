@@ -24,7 +24,7 @@ import statepersistence.NewWriteToFile;
 /**
  * Controller for the Album.fxml and Album classes.
  */
-public class AlbumController implements Initializable{
+public class AlbumController {
 
   private String username;
   private int selected;
@@ -49,7 +49,7 @@ public class AlbumController implements Initializable{
   private TextField rating;
 
   @FXML
-  private ListView<Review> reviewList;
+  private ListView<Review> reviews;
 
   @FXML
   private Label usernameLabel;
@@ -67,6 +67,7 @@ public class AlbumController implements Initializable{
   void newReview(ActionEvent event) {
     Review review = new Review(username, Integer.parseInt(rating.getText()));
     albumList.getAlbum(selected).addReview(review);
+    reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
     rating.setText("");
     handleSave();
   }
@@ -77,11 +78,14 @@ public class AlbumController implements Initializable{
 
   void initReviewListView() throws IOException {
     albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
+    Album album = albumList.getAlbum(selected);
     // System.out.println(albumList);
-    ObservableList<Review> observableReviews;
-    observableReviews = FXCollections.observableArrayList(albumList.getAlbum(selected).getReviews());
-    reviewList.getItems().setAll(observableReviews);
-
+    // ObservableList<Review> observableReviews;
+    // observableReviews = FXCollections
+    //   .observableArrayList(albumList.getAlbum(selected).getReviews());
+    // System.out.println(observableReviews);
+    // reviews.getItems().setAll(observableReviews);
+    reviews.getItems().setAll(album.getReviews());
   }
 
   /**
@@ -99,14 +103,14 @@ public class AlbumController implements Initializable{
     
   }
 
-  @Override
-  public void initialize(URL url, ResourceBundle resourceBundle) {
-    //System.out.println("Jacob er rar");
-    try {
-      initReviewListView();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+  // @Override
+  // public void initialize(URL url, ResourceBundle resourceBundle) {
+  //   System.out.println("Jacob er rar");
+  //   try {
+  //     initReviewListView();
+  //   } catch (IOException e) {
+  //     // TODO Auto-generated catch block
+  //     e.printStackTrace();
+  //   }
+  // }
 }

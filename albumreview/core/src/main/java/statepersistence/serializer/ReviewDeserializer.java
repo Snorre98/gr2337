@@ -35,7 +35,7 @@ public class ReviewDeserializer extends JsonDeserializer<Review> {
   public Review deserialize(JsonNode jsonNode) throws IOException, JacksonException {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
-      JsonNode userNode = objectNode.get("user");
+      JsonNode userNode = objectNode.get("userName");
       String user = null;
       if (userNode instanceof TextNode) {
         user = ((TextNode) userNode).asText();

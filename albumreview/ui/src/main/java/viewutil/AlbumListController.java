@@ -40,6 +40,9 @@ public class AlbumListController implements Initializable {
   @FXML
   private TextField albumInput;
 
+  @FXML
+  private TextField artistInput;
+
   Album album;
 
   AlbumList albumList;
@@ -78,26 +81,30 @@ public class AlbumListController implements Initializable {
   @FXML
     void openAlbum(ActionEvent event) {
     pageHandler.loadAlbum(realusername, selected);
+    System.out.println(selected);
   }
 
   @FXML
   void sortAlbum(ActionEvent event) {
     albumList.sortAlbum();
     albumListView.getItems().setAll(albumList.getAlbums());
+    handleSave();
   }
 
   @FXML
   void sortArtist(ActionEvent event) {
     albumList.sortArtist();
     albumListView.getItems().setAll(albumList.getAlbums());
+    handleSave();
   }
 
   @FXML
   void newAlbum(ActionEvent event) {
-    album = new Album(albumInput.getText(), realusername);
+    album = new Album(artistInput.getText(), albumInput.getText());
     albumList.addAlbum(album);
     albumListView.getItems().setAll(albumList.getAlbums());
     albumInput.setText("");
+    artistInput.setText("");
     handleSave();
   }
 
@@ -123,6 +130,7 @@ public class AlbumListController implements Initializable {
       @Override
       public void handle(MouseEvent mouseEvent) {
         selected = albumListView.getSelectionModel().getSelectedIndex();
+        System.out.println(selected);
       }
     });
   }

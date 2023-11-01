@@ -13,7 +13,10 @@
     <Label fx:id="username" layoutX="211.0" layoutY="30.0" text="username" />
       <Button fx:id="sortAlbum" layoutX="111.0" layoutY="272.0" mnemonicParsing="false" onAction="#sortAlbum" text="Sort by album name" />
       <Button fx:id="sortArtist" layoutX="235.0" layoutY="272.0" mnemonicParsing="false" onAction="#sortArtist" text="Sort by artist" />
-      <Button fx:id="newAlbum" layoutX="236.0" layoutY="367.0" mnemonicParsing="false" onAction="#newAlbum" text="Add new album" />
-      <TextField fx:id="albumInput" layoutX="84.0" layoutY="367.0" />
+      <Button fx:id="newAlbum" layoutX="329.0" layoutY="367.0" mnemonicParsing="false" onAction="#newAlbum" text="Add new album" />
+      <TextField fx:id="albumInput" layoutX="191.0" layoutY="379.0" prefHeight="25.0" prefWidth="92.0" />
+      <TextField fx:id="artistInput" layoutX="190.0" layoutY="354.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="119.0" layoutY="358.0" text="Artist name" />
+      <Label layoutX="116.0" layoutY="383.0" text="Album name" />
   </children>
 </AnchorPane>
