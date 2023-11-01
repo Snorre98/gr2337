@@ -73,6 +73,18 @@ public class AlbumListController implements Initializable {
     pageHandler.loadAlbum(realusername, selected);
   }
 
+  @FXML
+  void sortAlbum(ActionEvent event) {
+    albumList.sortAlbum();
+    albumListView.getItems().setAll(albumList.getAlbums());
+  }
+
+  @FXML
+  void sortArtist(ActionEvent event) {
+    albumList.sortArtist();
+    albumListView.getItems().setAll(albumList.getAlbums());
+  }
+
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
