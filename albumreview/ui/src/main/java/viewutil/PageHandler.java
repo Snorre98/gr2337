@@ -56,6 +56,7 @@ public class PageHandler {
       albumController.setUsername(username);
       albumController.setSelected(selected);
       albumController.setAlbumAndArtist(albumListController);
+      albumController.initReviewListView();
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }

@@ -1,12 +1,19 @@
 package viewutil;
 
+import domainlogic.Album;
 import domainlogic.AlbumList;
-import domainlogic.AlbumReview;
+import domainlogic.Review;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import statepersistence.NewLoadFromFile;
+import statepersistence.NewWriteToFile;
 
 /**
  * Controller for the Album.fxml and Album classes.
@@ -20,6 +27,9 @@ public class AlbumController {
 
   private AlbumList albumList;
 
+  private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
   @FXML
   private Button openReview;
 
@@ -30,7 +40,10 @@ public class AlbumController {
   private Label artistLabel;
 
   @FXML
-  private ListView<AlbumReview> reviewList;
+  private TextField rating;
+
+  @FXML
+  private ListView<Review> reviews;
 
   @FXML
   private Label usernameLabel;
@@ -45,8 +58,22 @@ public class AlbumController {
   }
 
   @FXML
-  void openReview(ActionEvent event){
-    //Here we must make functions that update the labels
+  void newReview(ActionEvent event) {
+    Review review = new Review(username, Integer.parseInt(rating.getText()));
+    albumList.getAlbum(selected).addReview(review);
+    reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
+    rating.setText("");
+    handleSave();
+  }
+
+  void handleSave() {
+    NewWriteToFile.writeToFile(albumList, saveFilePath);
+  }
+
+  void initReviewListView() throws IOException {
+    albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
+    Album album = albumList.getAlbum(selected);
+    reviews.getItems().setAll(album.getReviews());
   }
 
   /**
@@ -59,7 +86,7 @@ public class AlbumController {
     this.album = albumList.getAlbum(selected).getName();
     System.out.println(album + "album");
     this.artist = albumList.getAlbum(selected).getArtist();
-    artistLabel.setText(album);
+    artistLabel.setText(artist);
     albumLabel.setText(album);
     
   }
