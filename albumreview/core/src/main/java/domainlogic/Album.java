@@ -7,7 +7,6 @@ import java.util.List;
  * Core Album object class.
  */
 public class Album {
-
   private List<Review> reviews;
   private String artist;
   private String name;
@@ -38,8 +37,12 @@ public class Album {
    * 
    * @param i int position of the review.
    */
-  public void removeReview(int i) {
-    reviews.remove(i);
+  public void removeReview(int i, String username)  {
+    if (username.equals(getReview(i).getUserName())) {
+      reviews.remove(i);
+    } else {
+      throw new IllegalStateException();
+    }
   }
 
   /**
