@@ -1,4 +1,4 @@
-module albumreview.springboot.rest {
+module albumreview.springboot {
   requires albumreview.core;
   requires com.fasterxml.jackson.databind;
 
@@ -8,6 +8,6 @@ module albumreview.springboot.rest {
   requires spring.context;
   requires spring.boot.autoconfigure;
 
+  opens RESTserver to spring.beans, spring.context, spring.web;
 
-  opens albumreview.springboot.restserver to spring.beans, spring.context, spring.web;
 }

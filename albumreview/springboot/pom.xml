@@ -1,33 +1,37 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>gr2337</groupId>
         <artifactId>ALBUM-REVIEW</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../..</relativePath>
     </parent>
 
-    <artifactId>springboot.restserver</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>albumreview-springboot</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
-         <dependency>
+        <dependency>
             <groupId>gr2337</groupId>
             <artifactId>albumreview-core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+ -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+ -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -41,12 +45,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-            
-
+        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core
+ -->
         <!-- Her kommer web-server-avhengighetene -->
 
-<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
+         -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -93,7 +97,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                    @{jaCoCoArgLine} --add-opens albumreview.springboot.rest/albumreview.springboot.restserver=ALL-UNNAMED
+                        @{jaCoCoArgLine} --add-opens albumreview.springboot.rest/albumreview.springboot.restserver=ALL-UNNAMED
+
                     </argLine>
                 </configuration>
             </plugin>
@@ -102,13 +107,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
-            
+
             <!-- Run the spotbugs code quality tool -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
             </plugin>
-            
+
             <!-- Configure jacoco code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -116,8 +121,8 @@
                 <configuration>
                     <propertyName>jaCoCoArgLine</propertyName>
                 </configuration>
-           </plugin>
-            
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
@@ -125,4 +130,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>
