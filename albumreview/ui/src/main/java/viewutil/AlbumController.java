@@ -4,24 +4,31 @@ import domainlogic.Album;
 import domainlogic.AlbumList;
 import domainlogic.Review;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import statepersistence.NewLoadFromFile;
 import statepersistence.NewWriteToFile;
 
 /**
  * Controller for the Album.fxml and Album classes.
  */
-public class AlbumController {
+public class AlbumController implements Initializable {
 
   private String username;
   private int selected;
+  private int selectedReview;
   private String album;
   private String artist;
 
@@ -32,6 +39,9 @@ public class AlbumController {
 
   @FXML
   private Button openReview;
+
+  @FXML
+  private Button removeReview;
 
   @FXML
   private Label albumLabel;
@@ -66,6 +76,19 @@ public class AlbumController {
     handleSave();
   }
 
+  @FXML
+  void removeReview(ActionEvent event) {
+    try {
+      albumList.getAlbum(selected).removeReview(selectedReview, username);
+      reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
+    } catch (IllegalStateException e) {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Warning");
+      alert.setContentText("You can not reomove a review you did not make");
+      alert.showAndWait();
+    }
+  }
+
   void handleSave() {
     NewWriteToFile.writeToFile(albumList, saveFilePath);
   }
@@ -89,5 +112,19 @@ public class AlbumController {
     artistLabel.setText(artist);
     albumLabel.setText(album);
     
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    reviews.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      @Override
+      public void handle(MouseEvent mouseEvent) {
+        selectedReview = reviews.getSelectionModel().getSelectedIndex();
+        System.out.println(selected);
+        System.out.println(selectedReview);
+      
+      }
+    });
+
   }
 }
