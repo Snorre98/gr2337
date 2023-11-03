@@ -164,6 +164,7 @@
     <modules>
         <module>core</module>
         <module>ui</module>
-        <module>springboot/restserver</module>
+        <module>springboot</module>
+        <module>rest</module>
     </modules>
 </project>
