@@ -16,6 +16,9 @@ public class Review {
    */
   public Review(String user, int rating) {
     this.user = user;
+    if (rating < 1 || rating > 10) {
+      throw new IllegalArgumentException("Rating has to be a number between 1 and 10");
+    }
     this.rating = rating;
   }
 

@@ -69,8 +69,16 @@ public class AlbumController implements Initializable {
 
   @FXML
   void newReview(ActionEvent event) {
-    Review review = new Review(username, Integer.parseInt(rating.getText()));
-    albumList.getAlbum(selected).addReview(review);
+    try {
+      Review review = new Review(username, Integer.parseInt(rating.getText()));
+      albumList.getAlbum(selected).addReview(review);
+    } catch (IllegalArgumentException e) {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Warning");
+      alert.setContentText("Rating has to be a number between 1 and 10");
+      alert.showAndWait();
+    }
+
     reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
     rating.setText("");
     handleSave();
@@ -111,7 +119,7 @@ public class AlbumController implements Initializable {
     this.artist = albumList.getAlbum(selected).getArtist();
     artistLabel.setText(artist);
     albumLabel.setText(album);
-    
+
   }
 
   @Override
@@ -122,7 +130,7 @@ public class AlbumController implements Initializable {
         selectedReview = reviews.getSelectionModel().getSelectedIndex();
         System.out.println(selected);
         System.out.println(selectedReview);
-      
+
       }
     });
 
