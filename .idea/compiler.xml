@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="albumreview-core" />
         <module name="albumreview-ui" />
+        <module name="albumreview-springboot" />
       </profile>
     </annotationProcessing>
   </component>
