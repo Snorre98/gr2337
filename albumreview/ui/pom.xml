@@ -125,7 +125,7 @@
                     <!-- syntax: module-name/full-app-class-name -->
 
                     <!--<mainClass>albumreview.controller/ui.uicontrol.AlbumReviewApp</mainClass>-->
-                    <mainClass>albumreview.ui/viewutil.AlbumReviewApp</mainClass>
+                    <mainClass>albumreview.ui/viewutil.LoginPage</mainClass>
                 </configuration>
             </plugin>
             <plugin>

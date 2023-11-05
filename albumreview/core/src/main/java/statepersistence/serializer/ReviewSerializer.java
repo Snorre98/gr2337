@@ -14,7 +14,7 @@ public class ReviewSerializer extends JsonSerializer<Review> {
   public void serialize(Review review, JsonGenerator jgn, SerializerProvider serializerProvider)
       throws IOException {
     jgn.writeStartObject();
-    jgn.writeStringField("user", review.getUserName());
+    jgn.writeStringField("userName", review.getUserName());
     jgn.writeNumberField("rating", review.getRating());
     jgn.writeEndObject();
   }

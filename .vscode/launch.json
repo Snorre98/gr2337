@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "LoginPageApp",
+      "request": "launch",
+      "mainClass": "albumreview.ui/viewutil.LoginPageApp",
+      "projectName": "albumreview-ui"
+    },
+    {
+      "type": "java",
       "name": "LogginPageApp",
       "request": "launch",
       "mainClass": "albumreview.ui/viewutil.LogginPageApp",
