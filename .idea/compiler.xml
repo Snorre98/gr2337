@@ -11,9 +11,5 @@
         <module name="albumreview-springboot" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="springboot.restserver" target="17" />
-      <module name="TEST" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>
