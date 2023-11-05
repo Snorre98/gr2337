@@ -1,5 +1,5 @@
 <FindBugsFilter>
-  <Match>
+  <!-- <Match>
     <Bug pattern="SA_LOCAL_SELF_COMPARISON" />
   </Match>
   <Match>
@@ -7,7 +7,7 @@
   </Match>
   <Match>
     <Bug pattern="EI_EXPOSE_REP2" />
-  </Match>
+  </Match> -->
   <!-- <Match>
         <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
     </Match>
