@@ -3,6 +3,7 @@ package viewutil;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,6 +26,14 @@ public class LoginPageController {
   @FXML
   void userLogin(ActionEvent event) throws IOException {
     PageHandler pageHandler = new PageHandler();
+    String un = username.getText();
+    if (un.length() < 4 || un.length() > 20) {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Warning");
+      alert.setContentText("Username has to be between 4 and 20 characters");
+      alert.showAndWait();
+      throw new IllegalArgumentException("Username has to be between 4 and 20 characters");
+    }
     pageHandler.loadAlbumList(username.getText());
   }
 }
