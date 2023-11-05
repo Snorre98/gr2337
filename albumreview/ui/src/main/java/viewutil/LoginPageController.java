@@ -27,7 +27,7 @@ public class LoginPageController {
   void userLogin(ActionEvent event) throws IOException {
     PageHandler pageHandler = new PageHandler();
     String un = username.getText();
-    if (un.length() < 4 || un.length() > 20) {
+    if ((un.length() < 4) || (un.length() > 20)) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
       alert.setContentText("Username has to be between 4 and 20 characters");

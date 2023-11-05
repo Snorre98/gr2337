@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -28,7 +29,7 @@ public class AlbumListController implements Initializable {
 
   @FXML
   private ListView<Album> albumListView;
-    
+
   @FXML
   private Button openAlbum;
 
@@ -77,7 +78,7 @@ public class AlbumListController implements Initializable {
   }
 
   @FXML
-    void openAlbum(ActionEvent event) {
+  void openAlbum(ActionEvent event) {
     pageHandler.loadAlbum(realusername, selected);
     System.out.println(selected);
   }
@@ -99,7 +100,15 @@ public class AlbumListController implements Initializable {
   @FXML
   void newAlbum(ActionEvent event) {
     album = new Album(artistInput.getText(), albumInput.getText());
-    albumList.addAlbum(album);
+    try {
+      albumList.addAlbum(album);
+    } catch (IllegalStateException e) {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Warning");
+      alert.setContentText(e.getMessage());
+      alert.showAndWait();
+    }
+
     albumListView.getItems().setAll(albumList.getAlbums());
     albumInput.setText("");
     artistInput.setText("");
@@ -117,7 +126,7 @@ public class AlbumListController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    //System.out.println("Jacob er rar");
+    // System.out.println("Jacob er rar");
     try {
       initAlbumListView();
     } catch (IOException e) {

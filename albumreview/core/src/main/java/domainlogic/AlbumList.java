@@ -21,6 +21,13 @@ public class AlbumList {
    * @param album Album that gets added to list.
    */
   public void addAlbum(Album album) {
+    String albumName = album.getName();
+    String artistName = album.getArtist();
+    for (Album a : albums) {
+      if (a.getArtist().equals(artistName) && a.getName().equals(albumName)) {
+        throw new IllegalStateException("You can't add an album that has already been added");
+      }
+    }
     albums.add(album);
   }
 

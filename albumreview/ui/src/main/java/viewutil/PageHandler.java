@@ -12,7 +12,7 @@ public class PageHandler {
 
   AlbumController albumController;
   AlbumListController albumListController;
-  
+
   /**
    * Load the AlbumList.fxml and the controller
    * 
@@ -32,9 +32,11 @@ public class PageHandler {
       albumListController.setUsername(username);
       albumListController.setPageHandler(this);
     } catch (Exception e) {
+      e.printStackTrace();
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
   }
+
   /**
    * Loads the Album.fxml file and controller.
    * 
