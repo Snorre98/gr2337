@@ -32,7 +32,7 @@ public class LoginPageController {
       alert.setTitle("Warning");
       alert.setContentText("Username has to be between 4 and 20 characters");
       alert.showAndWait();
-      throw new IllegalArgumentException("Username has to be between 4 and 20 characters");
+      throw new IllegalArgumentException(alert.getContentText());
     }
     pageHandler.loadAlbumList(username.getText());
   }

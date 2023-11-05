@@ -75,7 +75,7 @@ public class AlbumController implements Initializable {
     } catch (IllegalArgumentException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
-      alert.setContentText("Rating has to be a number between 1 and 10");
+      alert.setContentText(e.getMessage());
       alert.showAndWait();
     }
 
@@ -92,7 +92,7 @@ public class AlbumController implements Initializable {
     } catch (IllegalStateException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
-      alert.setContentText("You can not reomove a review you did not make");
+      alert.setContentText("You can not remove a review you did not make");
       alert.showAndWait();
     }
   }
