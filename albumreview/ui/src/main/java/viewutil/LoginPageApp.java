@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * login page.
  */
 
-public class LogginPageApp extends Application {
+public class LoginPageApp extends Application {
   public static void main(String[] args) {
     Application.launch(args);
   }
@@ -22,7 +22,7 @@ public class LogginPageApp extends Application {
   public void start(Stage primaryStage) throws IOException {
     primaryStage.setTitle("Login-Page");
 
-    URL resourceUrl = getClass().getResource("/fxml/LogginPage.fxml");
+    URL resourceUrl = getClass().getResource("/fxml/LoginPage.fxml");
 
 
     Parent root = FXMLLoader.load(Objects.requireNonNull(resourceUrl));

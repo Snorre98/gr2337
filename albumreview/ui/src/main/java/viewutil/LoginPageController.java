@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
  * Loggin Page Controller.
  */
 
-public class LogginPageController {
+public class LoginPageController {
 
   @FXML
   private Button button;
