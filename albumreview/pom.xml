@@ -53,10 +53,40 @@
         <artifactId>jackson-databind</artifactId>
         <version>${jackson.version}</version>
       </dependency>
+
+      <!--log4j: used for logging, both in testing and runtime -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.21.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.21.1</version>
+      </dependency>
     </dependencies>
+
   </dependencyManagement>
 
   <build>
+
+    <resources>
+      <!--tries to help log4j find config-->
+      <resource>
+        <directory>config</directory>
+        <includes>
+          <include>log4j2.xml</include>
+          </includes>
+      </resource>
+      <resource>
+        <directory>logs</directory>
+        <includes>
+          <include>app.log</include>
+        </includes>
+      </resource>
+    </resources>
+
     <pluginManagement>
       <plugins>
         <plugin>
