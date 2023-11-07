@@ -3,6 +3,7 @@ package domainlogic;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manages list of Album objects.
@@ -67,5 +68,15 @@ public class AlbumList {
     Collections.sort(albums, new NewArtistComperator());
   }
 
-
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    AlbumList that = (AlbumList) o;
+    return Objects.equals(this.getAlbums(), that.getAlbums());
+  }
 }

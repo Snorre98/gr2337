@@ -13,11 +13,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import statepersistence.NewLoadFromFile;
+import statepersistence.NewWriteToFile;
 
 /**
  * Tests for loading from file.
  */
-public class LoadFileTest {
+public class LoadFromFileTest {
   private Path saveFilePath;
   private AlbumList albums;
 
