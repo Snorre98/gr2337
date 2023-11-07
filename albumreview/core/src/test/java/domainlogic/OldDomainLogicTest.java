@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Testing AlbumReview and AlmbunReviewList classes.
  */
-public class DomainLogicTest {
+public class OldDomainLogicTest {
   private AlbumReviewList albumList;
 
 
