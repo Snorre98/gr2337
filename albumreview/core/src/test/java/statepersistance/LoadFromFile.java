@@ -3,22 +3,23 @@ package statepersistance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import domainlogic.AlbumReview;
-import domainlogic.AlbumReviewList;
+import domainlogic.Album;
+import domainlogic.AlbumList;
+import domainlogic.Review;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
-import statepersistence.LoadFromFile;
+import statepersistence.NewLoadFromFile;
 
 /**
  * Tests for loading from file.
  */
 public class LoadFileTest {
   private Path saveFilePath;
-  private AlbumReviewList list;
+  private AlbumList albums;
 
   /**
    * Setup for tests.
@@ -40,16 +41,18 @@ public class LoadFileTest {
     setUp("invalid.json");
 
     Exception invalidJson = assertThrows(IllegalStateException.class, () -> {
-      LoadFromFile.loadFromFile(saveFilePath, false);
+      NewLoadFromFile.loadFromFile(saveFilePath, false);
     }, "TEST FAIL: JSON should be invalid, but was found not to be!");
   }
 
   @Test
   public void testLoadFile() throws IOException, URISyntaxException {
     setUp("fileTester.json");
-    list = new AlbumReviewList();
-    AlbumReview review = new AlbumReview("banana", 2);
-    list.addAlbumReview(review);
-    assertEquals(list, LoadFromFile.loadFromFile(saveFilePath, false));
+    albums = new AlbumList();
+    Album album = new Album("testArtist", "testAlbumName");
+    Review review = new Review("testUser", 1);
+    album.addReview(review);
+    albums.addAlbum(album);
+    assertEquals(albums, NewLoadFromFile.loadFromFile(saveFilePath, false));
   }
 }
