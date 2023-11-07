@@ -1,5 +1,7 @@
 package domainlogic;
 
+import java.util.Objects;
+
 /**
  * Core AlbumReview object class. Manages a list of Review objects.
  */
@@ -35,4 +37,15 @@ public class Review {
     return "Username: " + user + " Rating: " + rating;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Review that = (Review) o;
+    return Objects.equals(this.getUserName(), that.getUserName()) && this.rating == that.rating;
+  }
 }

@@ -2,6 +2,7 @@ package domainlogic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Core Album object class.
@@ -37,7 +38,7 @@ public class Album {
    * 
    * @param i int position of the review.
    */
-  public void removeReview(int i, String username)  {
+  public void removeReview(int i, String username) {
     if (username.equals(getReview(i).getUserName())) {
       reviews.remove(i);
     } else {
@@ -87,4 +88,17 @@ public class Album {
     return "Album: " + name + ", Artist: " + artist;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Album that = (Album) o;
+    return Objects.equals(this.getArtist(), that.getArtist())
+        && Objects.equals(this.getReviews(), that.getReviews())
+        && Objects.equals(this.getName(), that.getName());
+  }
 }
