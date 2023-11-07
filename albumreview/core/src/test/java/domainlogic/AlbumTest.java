@@ -21,9 +21,11 @@ public class AlbumTest {
   public void testAddReview() {
     Review review = new Review("username", 5);
     album.addReview(review);
+
     assertEquals(1, album.getReviews().size());
     assertEquals("username", album.getReview(0).getUserName());
     assertEquals(5, album.getReview(0).getRating());
+
   }
 
   @Test
@@ -33,6 +35,7 @@ public class AlbumTest {
     album.addReview(review1);
     album.addReview(review2);
 
+    //Test when the username match
     album.removeReview(0, "username1");
     assertEquals(1, album.getReviews().size());
     assertEquals("username2", album.getReview(0).getUserName());
