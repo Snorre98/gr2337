@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Testing AlbumList, Album and Review classes.
+ * Testing AlbumList and sorting classes.
  */
-public class DomainLogicTest {
+public class AlbumListTest {
   private AlbumList albumList;
 
   @BeforeEach
