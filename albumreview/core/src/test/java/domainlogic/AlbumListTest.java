@@ -1,7 +1,7 @@
 package domainlogic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +24,14 @@ public class AlbumListTest {
     assertEquals(1, albumList.getAlbums().size());
     assertEquals("testArtist", albumList.getAlbum(0).getArtist());
     assertEquals("testName", albumList.getAlbum(0).getName());
+    }
+
+  @Test
+  public void testAddSameAlbum() {
+    Album album = new Album("testArtist", "testName");
+    Album album2 = new Album("testArtist", "testName");
+    albumList.addAlbum(album);
+    assertThrows(IllegalStateException.class, () -> albumList.addAlbum(album2));
   }
 
   @Test

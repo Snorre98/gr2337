@@ -45,4 +45,9 @@ public class AlbumTest {
     assertThrows(IllegalStateException.class, () -> album.removeReview(0, "User1"));
     
   }
+
+  @Test
+  public void testTostring() {
+    assertEquals("Album: name, Artist: artist", album.toString());
+  }
 }
