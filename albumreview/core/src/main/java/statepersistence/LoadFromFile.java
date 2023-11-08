@@ -30,16 +30,26 @@ public class LoadFromFile {
     mapper.registerModule(new AlbumReviewModule());
 
     if (forceLoad) {
-      try {
-        if (!Files.exists(saveFilePath.getParent())) {
-          Files.createDirectories(saveFilePath.getParent());
+      if (saveFilePath != null) {
+        Path parentPath = saveFilePath.getParent();
+        if (parentPath != null) {
+          try {
+            if (!Files.exists(parentPath)) {
+              Files.createDirectories(parentPath);
+            }
+            if (!Files.exists(saveFilePath)) {
+              Files.createFile(saveFilePath);
+              System.out.println("File was generated at :" + saveFilePath);
+            }
+          } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("File was not generated!");
+          }
+        } else {
+          throw new IllegalArgumentException(
+              "saveFilePath.getParent() is null. File cannot be generated.");
         }
-        if (!Files.exists(saveFilePath)) {
-          Files.createFile(saveFilePath);
-        }
-        System.out.println("Fil was generated at :" + saveFilePath);
-      } catch (IllegalArgumentException e) {
-        throw new IllegalArgumentException("File was not generated!");
+      } else {
+        throw new IllegalArgumentException("saveFilePath is null. File cannot be generated.");
       }
     }
 
