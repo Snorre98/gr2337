@@ -48,4 +48,11 @@ public class Review {
     Review that = (Review) o;
     return Objects.equals(this.getUserName(), that.getUserName()) && this.rating == that.rating;
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getUserName(), rating);
+  }
+
 }
+

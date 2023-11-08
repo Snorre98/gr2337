@@ -104,6 +104,6 @@ public class Album {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getReviews());
+    return Objects.hash(getReviews(), getArtist(), getName());
   }
 }
