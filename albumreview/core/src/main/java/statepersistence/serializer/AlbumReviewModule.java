@@ -4,9 +4,11 @@ import com.fasterxml.jackson.core.util.VersionUtil;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import domainlogic.Album;
 import domainlogic.AlbumList;
+import domainlogic.AlbumListModel;
 import domainlogic.Review;
 import java.util.Set;
 import statepersistence.AlbumReviewPersistence;
+import statepersistence.AlbumReviewPersistence.AlbumReviewParts;
 
 
 /**
@@ -39,9 +41,16 @@ public class AlbumReviewModule extends SimpleModule {
     addSerializer(Album.class, new AlbumSerializer());
     addSerializer(AlbumList.class, new AlbumListSerializer());
 
+
+    addSerializer(AlbumListModel.class, new AlbumListModelSerializer());
+    addDeserializer(AlbumListModel.class, new AlbumListModelDeserializer());
+
+
     addDeserializer(Review.class, new ReviewDeserializer());
     addDeserializer(Album.class, new AlbumDeserializer());
     addDeserializer(AlbumList.class, new AlbumListDeserializer());
+
+
 
   }
 
