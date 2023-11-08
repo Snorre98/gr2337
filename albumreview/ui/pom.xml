@@ -132,8 +132,8 @@
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
 
-                    <!--<mainClass>albumreview.controller/ui.uicontrol.AlbumReviewApp</mainClass>-->
-                    <mainClass>albumreview.ui/viewutil.LoginPage</mainClass>
+                    <!--this must target the main application class. As of 11.8.23 this is LoginPageApp -->
+                    <mainClass>albumreview.ui/viewutil.LoginPageApp</mainClass>
                 </configuration>
             </plugin>
             <plugin>

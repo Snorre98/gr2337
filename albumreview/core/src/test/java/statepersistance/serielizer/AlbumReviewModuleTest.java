@@ -10,7 +10,7 @@ import domainlogic.AlbumList;
 import domainlogic.Review;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import statepersistence.serializer.NewAlbumReviewModule;
+import statepersistence.serializer.AlbumReviewModule;
 
 /**
  * Tests serialization.
@@ -21,7 +21,7 @@ public class AlbumReviewModuleTest {
   @BeforeAll
   public static void setUp() {
     mapper = new ObjectMapper();
-    mapper.registerModule(new NewAlbumReviewModule());
+    mapper.registerModule(new AlbumReviewModule());
   }
 
   @Test

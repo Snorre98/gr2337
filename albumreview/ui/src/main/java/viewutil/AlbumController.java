@@ -18,8 +18,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import statepersistence.NewLoadFromFile;
-import statepersistence.NewWriteToFile;
+import statepersistence.LoadFromFile;
+import statepersistence.WriteToFile;
 
 /**
  * Controller for the Album.fxml and Album classes.
@@ -98,11 +98,11 @@ public class AlbumController implements Initializable {
   }
 
   void handleSave() {
-    NewWriteToFile.writeToFile(albumList, saveFilePath);
+    WriteToFile.writeToFile(albumList, saveFilePath);
   }
 
   void initReviewListView() throws IOException {
-    albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
+    albumList = LoadFromFile.loadFromFile(saveFilePath, true);
     Album album = albumList.getAlbum(selected);
     reviews.getItems().setAll(album.getReviews());
   }

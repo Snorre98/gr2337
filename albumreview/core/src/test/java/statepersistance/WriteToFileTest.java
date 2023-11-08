@@ -13,8 +13,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import statepersistence.NewLoadFromFile;
-import statepersistence.NewWriteToFile;
+import statepersistence.LoadFromFile;
+import statepersistence.WriteToFile;
 
 
 /**
@@ -45,8 +45,8 @@ public class WriteToFileTest {
     Review review = new Review("testUser", 1);
     album.addReview(review);
     albums.addAlbum(album);
-    NewWriteToFile.writeToFile(albums, saveFilePath);
+    WriteToFile.writeToFile(albums, saveFilePath);
 
-    assertEquals(albums, NewLoadFromFile.loadFromFile(saveFilePath, false));
+    assertEquals(albums, LoadFromFile.loadFromFile(saveFilePath, false));
   }
 }

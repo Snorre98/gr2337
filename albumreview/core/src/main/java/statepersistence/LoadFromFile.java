@@ -9,13 +9,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import statepersistence.serializer.NewAlbumReviewModule;
+import statepersistence.serializer.AlbumReviewModule;
 
 
 /**
  * Loads data from Json file.
  */
-public class NewLoadFromFile {
+public class LoadFromFile {
 
   /**
    * Loads AlbumList object from saveFilePath.
@@ -27,7 +27,7 @@ public class NewLoadFromFile {
    */
   public static AlbumList loadFromFile(Path saveFilePath, Boolean forceLoad) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new NewAlbumReviewModule());
+    mapper.registerModule(new AlbumReviewModule());
 
     if (forceLoad) {
       try {

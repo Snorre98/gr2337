@@ -9,14 +9,14 @@ import domainlogic.Review;
 /**
  * Module for persistance in AlbumReview.
  */
-public class NewAlbumReviewModule extends SimpleModule {
+public class AlbumReviewModule extends SimpleModule {
   private static final String NAME = "CustomIntervalModule";
   private static final VersionUtil VERSION_UTIL = new VersionUtil() {};
 
   /**
    * AlbumReviewModule serializer.
    */
-  public NewAlbumReviewModule() {
+  public AlbumReviewModule() {
     super(NAME, VERSION_UTIL.version());
     addSerializer(Review.class, new ReviewSerializer());
     addSerializer(Album.class, new AlbumSerializer());

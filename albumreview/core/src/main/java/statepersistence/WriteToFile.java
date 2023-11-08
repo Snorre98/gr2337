@@ -8,12 +8,12 @@ import domainlogic.AlbumList;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import statepersistence.serializer.NewAlbumReviewModule;
+import statepersistence.serializer.AlbumReviewModule;
 
 /**
  * Writes data to json file.
  */
-public class NewWriteToFile {
+public class WriteToFile {
 
   /**
    * Writes AlbumList to saveFilePath.
@@ -23,7 +23,7 @@ public class NewWriteToFile {
    */
   public static void writeToFile(AlbumList albums, Path saveFilePath) {
     ObjectMapper mapper = new ObjectMapper();
-    mapper.registerModule(new NewAlbumReviewModule());
+    mapper.registerModule(new AlbumReviewModule());
 
     File file = saveFilePath.toFile();
 

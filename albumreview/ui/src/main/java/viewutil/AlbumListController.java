@@ -19,8 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import statepersistence.NewLoadFromFile;
-import statepersistence.NewWriteToFile;
+import statepersistence.LoadFromFile;
+import statepersistence.WriteToFile;
 
 /**
  * Controller for AlbumList.
@@ -70,7 +70,7 @@ public class AlbumListController implements Initializable {
   }
 
   void initAlbumListView() throws IOException {
-    albumList = NewLoadFromFile.loadFromFile(saveFilePath, true);
+    albumList = LoadFromFile.loadFromFile(saveFilePath, true);
     // System.out.println(albumList);
     ObservableList<Album> observableAlbums;
     observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
@@ -120,7 +120,7 @@ public class AlbumListController implements Initializable {
    */
 
   void handleSave() {
-    NewWriteToFile.writeToFile(albumList, saveFilePath);
+    WriteToFile.writeToFile(albumList, saveFilePath);
   }
 
 
