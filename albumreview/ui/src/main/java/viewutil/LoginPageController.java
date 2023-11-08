@@ -1,6 +1,8 @@
 package viewutil;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -23,6 +25,9 @@ public class LoginPageController {
   @FXML
   private PasswordField password;
 
+  private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
   @FXML
   void userLogin(ActionEvent event) throws IOException {
     PageHandler pageHandler = new PageHandler();
@@ -34,6 +39,10 @@ public class LoginPageController {
       alert.showAndWait();
       throw new IllegalArgumentException(alert.getContentText());
     }
-    pageHandler.loadAlbumList(username.getText());
+    pageHandler.loadAlbumList(username.getText(), saveFilePath);
+  }
+
+  public void setSaveFilePath(Path saveFile) {
+    this.saveFilePath = saveFile;
   }
 }

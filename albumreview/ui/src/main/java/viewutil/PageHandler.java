@@ -1,5 +1,7 @@
 package viewutil;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,6 +14,12 @@ public class PageHandler {
 
   AlbumController albumController;
   AlbumListController albumListController;
+  private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
+  public void setSaveFilePath(Path saveFile) {
+    this.saveFilePath = saveFile;
+  }
 
   /**
    * Load the AlbumList.fxml and the controller
@@ -19,7 +27,7 @@ public class PageHandler {
    * @param username the username that is signed in with.
    * 
    */
-  public void loadAlbumList(String username) {
+  public void loadAlbumList(String username, Path saveFilePath) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/AlbumList.fxml"));
@@ -31,6 +39,8 @@ public class PageHandler {
       albumListController = loader.getController();
       albumListController.setUsername(username);
       albumListController.setPageHandler(this);
+      albumListController.setSaveFilePath(saveFilePath);
+      albumListController.initAlbumListView();
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
