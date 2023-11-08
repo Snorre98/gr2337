@@ -71,8 +71,11 @@
 
   <build>
 
-    <resources>
-      <!--tries to help log4j find config-->
+
+    <!-- this breaks the maven project: -->
+<!--
+ <resources>
+
       <resource>
         <directory>config</directory>
         <includes>
@@ -86,7 +89,7 @@
         </includes>
       </resource>
     </resources>
-
+-->
     <pluginManagement>
       <plugins>
         <plugin>

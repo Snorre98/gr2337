@@ -5,8 +5,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import domainlogic.AlbumReview;
-import domainlogic.AlbumReviewList;
+import domainlogic.Album;
+import domainlogic.AlbumList;
+import domainlogic.Review;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import statepersistence.serializer.AlbumReviewModule;
@@ -25,17 +26,18 @@ public class AlbumReviewModuleTest {
 
   @Test
   public void testSerializers() {
-    AlbumReviewList list = new AlbumReviewList();
-    AlbumReview review1 = new AlbumReview("Bov Jobi", 6);
-    AlbumReview review2 = new AlbumReview("BAD", 10);
-    list.addAlbumReview(review1);
-    list.addAlbumReview(review2);
+    AlbumList albums = new AlbumList();
+    Album album = new Album("testArtist", "testAlbumName");
+    Review review = new Review("testUser", 1);
+    album.addReview(review);
+    albums.addAlbum(album);
     try {
       assertEquals(
-          "{\"albums\":[{\"name\":\"Bov Jobi\",\"rating\":6},{\"name\":\"BAD\",\"rating\":10}]}",
-          mapper.writeValueAsString(list));
+          "{\"albums\":[{\"name\":\"testAlbumName\",\"artist\":\"testArtist\",\"reviews\":[{\"userName\":\"testUser\",\"rating\":1}]}]}",
+          mapper.writeValueAsString(albums));
     } catch (JsonProcessingException e) {
       fail();
     }
   }
 }
+

@@ -2,8 +2,9 @@ package statepersistance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import domainlogic.AlbumReview;
-import domainlogic.AlbumReviewList;
+import domainlogic.Album;
+import domainlogic.AlbumList;
+import domainlogic.Review;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -39,12 +40,13 @@ public class WriteToFileTest {
 
   @Test
   public void testWriteToFile() throws IOException {
-    AlbumReviewList albums = new AlbumReviewList();
-    AlbumReview review = new AlbumReview("fly", 6);
-    albums.addAlbumReview(review);
+    AlbumList albums = new AlbumList();
+    Album album = new Album("testArtist", "testAlbumName");
+    Review review = new Review("testUser", 1);
+    album.addReview(review);
+    albums.addAlbum(album);
     WriteToFile.writeToFile(albums, saveFilePath);
 
-    assertEquals(albums.getAlbumReview(0).toString(),
-        LoadFromFile.loadFromFile(saveFilePath, false).getAlbumReview(0).toString());
+    assertEquals(albums, LoadFromFile.loadFromFile(saveFilePath, false));
   }
 }
