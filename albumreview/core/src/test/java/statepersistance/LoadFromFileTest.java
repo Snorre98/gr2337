@@ -12,8 +12,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
-import statepersistence.NewLoadFromFile;
-import statepersistence.NewWriteToFile;
+import statepersistence.LoadFromFile;
 
 /**
  * Tests for loading from file.
@@ -42,7 +41,7 @@ public class LoadFromFileTest {
     setUp("invalid.json");
 
     Exception invalidJson = assertThrows(IllegalStateException.class, () -> {
-      NewLoadFromFile.loadFromFile(saveFilePath, false);
+      LoadFromFile.loadFromFile(saveFilePath, false);
     }, "TEST FAIL: JSON should be invalid, but was found not to be!");
   }
 
@@ -54,6 +53,6 @@ public class LoadFromFileTest {
     Review review = new Review("testUser", 1);
     album.addReview(review);
     albums.addAlbum(album);
-    assertEquals(albums, NewLoadFromFile.loadFromFile(saveFilePath, false));
+    assertEquals(albums, LoadFromFile.loadFromFile(saveFilePath, false));
   }
 }

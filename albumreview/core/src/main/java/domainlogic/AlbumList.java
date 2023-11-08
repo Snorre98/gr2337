@@ -61,11 +61,11 @@ public class AlbumList {
   }
 
   public void sortAlbum() {
-    Collections.sort(albums, new NewAlbumComperator());
+    Collections.sort(albums, new AlbumComperator());
   }
 
   public void sortArtist() {
-    Collections.sort(albums, new NewArtistComperator());
+    Collections.sort(albums, new ArtistComperator());
   }
 
   @Override
