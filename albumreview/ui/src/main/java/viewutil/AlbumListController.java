@@ -65,8 +65,17 @@ public class AlbumListController implements Initializable {
     this.pageHandler = pageHandler;
   }
 
+  /**
+   * Returns a copy of the AlbumList.
+   * 
+   * @return AlbumList copy
+   */
   public AlbumList getAlbumList() {
-    return albumList;
+    AlbumList copy = new AlbumList();
+    for (Album album : albumList.getAlbums()) {
+      copy.addAlbum(album); // Create a copy of the album and add it to the new AlbumList
+    }
+    return copy;
   }
 
   void initAlbumListView() throws IOException {
