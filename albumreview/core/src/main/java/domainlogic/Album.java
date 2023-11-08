@@ -101,4 +101,9 @@ public class Album {
         && Objects.equals(this.getReviews(), that.getReviews())
         && Objects.equals(this.getName(), that.getName());
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getReviews());
+  }
 }
