@@ -33,7 +33,7 @@ public class AlbumReviewModule extends SimpleModule {
   /**
    * Used in {@link AlbumReviewPersistence}.
    * */
-  public NewAlbumReviewModule(Set<AlbumReviewPersistence.AlbumReviewParts> parts) {
+  public AlbumReviewModule(Set<AlbumReviewPersistence.AlbumReviewParts> parts) {
     super(NAME, VERSION_UTIL.version());
     addSerializer(Review.class, new ReviewSerializer());
     addSerializer(Album.class, new AlbumSerializer());

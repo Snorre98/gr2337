@@ -3,8 +3,7 @@ package statepersistence;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import domainlogic.AlbumListModel;
-import statepersistence.serializer.NewAlbumReviewModule;
-
+import statepersistence.serializer.AlbumReviewModule;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,9 +27,9 @@ public class AlbumReviewPersistence {
     mapper = createObjectMapper();
   }
 
-  //TODO: fix "new"
+
   public static SimpleModule createJacksonModule(Set<AlbumReviewParts> parts) {
-    return new NewAlbumReviewModule(parts);
+    return new AlbumReviewModule(parts);
   }
 
  public static ObjectMapper createObjectMapper(Set<AlbumReviewParts> parts) {

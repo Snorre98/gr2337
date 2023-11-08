@@ -59,14 +59,14 @@ public class AlbumListModel implements Iterable<Album> {
    * Sorts albums by album name.
    */
   public void sortAlbumByName() {
-    albums.sort(new NewAlbumComperator());
+    albums.sort(new AlbumComperator());
   }
 
   /**
    * Sorts albums by artist name.
    */
   public void sortAlbumByArtist() {
-    albums.sort(new NewArtistComperator());
+    albums.sort(new ArtistComperator());
   }
 
   /**
