@@ -197,5 +197,6 @@
     <module>core</module>
     <module>ui</module>
     <module>springboot</module>
+    <module>REST</module>
   </modules>
 </project>

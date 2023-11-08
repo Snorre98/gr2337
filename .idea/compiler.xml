@@ -9,6 +9,7 @@
         <module name="albumreview-core" />
         <module name="albumreview-ui" />
         <module name="albumreview-springboot" />
+        <module name="REST-API" />
       </profile>
     </annotationProcessing>
   </component>
