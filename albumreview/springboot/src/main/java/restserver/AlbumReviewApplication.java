@@ -1,13 +1,13 @@
-package RESTserver;
+package restserver;
 
 import com.fasterxml.jackson.databind.Module;
+import java.util.EnumSet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import statepersistence.AlbumReviewPersistence;
 import statepersistence.AlbumReviewPersistence.AlbumReviewParts;
 
-import java.util.EnumSet;
 
 /**
  * SpringBoot application.
