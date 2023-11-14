@@ -1,0 +1,14 @@
+{
+  "albums": [
+    {
+      "name": "testAlbumName",
+      "artist": "testArtist",
+      "reviews": [
+        {
+          "userName": "testUser",
+          "rating": 1
+        }
+      ]
+    }
+  ]
+}
