@@ -134,6 +134,38 @@
 
                     <!--this must target the main application class. As of 11.8.23 this is LoginPageApp -->
                     <mainClass>albumreview.ui/viewutil.LoginPageApp</mainClass>
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>albumreviewfx</launcher>
+                    <jlinkImageName>albumreviewfx</jlinkImageName>
+                    <jlinkZipName>albumreviewfx</jlinkZipName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>albumreviewfx</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>albumreview.ui/viewutil.LoginPageApp</module>
+                    <runtimeImage>target/albumreviewfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>albumreviewfx</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>albumreviewfx</winMenuGroup>
                 </configuration>
             </plugin>
             <plugin>

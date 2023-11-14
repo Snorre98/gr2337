@@ -79,4 +79,9 @@ public class AlbumList {
     AlbumList that = (AlbumList) o;
     return Objects.equals(this.getAlbums(), that.getAlbums());
   }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getAlbums());
+  }
 }
