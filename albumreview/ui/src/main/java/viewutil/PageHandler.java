@@ -5,6 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.UUID;
+
 /**
  * A class to open new javafx scenes and keep track of the controllers.
  */
@@ -41,11 +43,10 @@ public class PageHandler {
    * Loads the Album.fxml file and controller.
    * 
    * @param username the username that is used to login with.
-   * @param selected where in the AlbumList the selected album is
+   * @param selectedAlbumId where in the AlbumList the selected album is
    * 
    */
-
-  public void loadAlbum(String username, int selected) {
+  public void loadAlbum(String username, UUID selectedAlbumId) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -56,7 +57,7 @@ public class PageHandler {
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);
-      albumController.setSelected(selected);
+      albumController.setSelected(selectedAlbumId);
       albumController.setAlbumAndArtist(albumListController);
       albumController.initReviewListView();
     } catch (Exception e) {
