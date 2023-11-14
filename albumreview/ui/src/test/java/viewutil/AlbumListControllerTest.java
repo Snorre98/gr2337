@@ -1,8 +1,13 @@
 package viewutil;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import domainlogic.Album;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -10,13 +15,18 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.testfx.framework.junit5.ApplicationTest;
 
 
@@ -58,6 +68,8 @@ public class AlbumListControllerTest extends ApplicationTest {
     saveFilePath = Paths.get(resourceUrl.toURI());
     file = new File(resourceUrl.toURI());
     lpc.setSaveFilePath(saveFilePath);
+    String filePath = file.getAbsolutePath();
+    cleanJsonFile(filePath);
     // pageHandler = new PageHandler();
   }
 
@@ -80,7 +92,7 @@ public class AlbumListControllerTest extends ApplicationTest {
    */
   public void albumStartUp(int i) {
     if (i == 1) {
-      clickOn("#albumInput").write("Kid A");
+      clickOn("#albumInput").write("Kid F");
       clickOn("#artistInput").write("Radiohead");
       clickOn("#newAlbum");
     } else {
@@ -103,8 +115,6 @@ public class AlbumListControllerTest extends ApplicationTest {
   public void testAddAlbum() {
     albumStartUp(1);
     assertNotNull("#albumList");
-    String filePath = file.getAbsolutePath();
-    cleanJsonFile(filePath);
   }
 
   /**
@@ -115,8 +125,20 @@ public class AlbumListControllerTest extends ApplicationTest {
     albumStartUp(2);
     clickOn("#sortAlbum");
 
-    String filePath = file.getAbsolutePath();
-    cleanJsonFile(filePath);
+    ArrayList<String> expextedOut = new ArrayList<>();
+    expextedOut.add("Kid A");
+    expextedOut.add("Sprengkulde");
+    expextedOut.add("The Stone Roses");
+
+    ListView<Album> albumListView = lookup("#albumListView").query();
+    ObservableList<Album> alb = albumListView.getItems();
+
+    ArrayList<String> actualOut = new ArrayList<>();
+    for (Album a : alb) {
+      actualOut.add(a.getName());
+    }
+
+    assertEquals(expextedOut, actualOut);
   }
 
   /**
@@ -127,12 +149,43 @@ public class AlbumListControllerTest extends ApplicationTest {
     albumStartUp(2);
     clickOn("#sortArtist");
 
-    String filePath = file.getAbsolutePath();
-    cleanJsonFile(filePath);
+    ArrayList<String> expextedOut = new ArrayList<>();
+    expextedOut.add("Cezinando");
+    expextedOut.add("Radiohead");
+    expextedOut.add("The Stone Roses");
+
+    ListView<Album> albumListView = lookup("#albumListView").query();
+    ObservableList<Album> alb = albumListView.getItems();
+
+    ArrayList<String> actualOut = new ArrayList<>();
+    for (Album a : alb) {
+      actualOut.add(a.getArtist());
+    }
+
+    assertEquals(expextedOut, actualOut);
   }
 
   /**
-   * clean json file so we start on a blank sheet every test.
+   * Test to se that user cannot add duplicate albums.
+   */
+  @Test
+  public void testAddDuplicateAlbum() {
+    albumStartUp(1);
+    albumStartUp(1);
+    assertTrue(lookup(".alert").queryAll().size() > 0);
+  }
+
+  /**
+   * Called after each test so the json file is clean.
+   */
+  // @AfterEach
+  // public void tearDown() {
+  // String filePath = file.getAbsolutePath();
+  // cleanJsonFile(filePath);
+  // }
+
+  /**
+   * function for cleaning json file.
    */
   public static void cleanJsonFile(String filePath) {
     try {
