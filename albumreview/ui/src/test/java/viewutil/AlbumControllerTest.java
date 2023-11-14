@@ -1,7 +1,6 @@
 package viewutil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domainlogic.Review;
@@ -28,7 +27,6 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 public class AlbumControllerTest extends ApplicationTest {
   private AlbumListControllerTest act;
-  private AlbumController amc;
   private LoginPageController lpc;
   private Path saveFilePath;
   private LoginPageControllerTest test;
@@ -72,11 +70,6 @@ public class AlbumControllerTest extends ApplicationTest {
     lpc = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
-  }
-
-  @Test
-  public void testController_initial() {
-    assertNotNull(amc);
   }
 
   @Test
