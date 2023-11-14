@@ -1,7 +1,6 @@
 package restserver;
 
 import domainlogic.Album;
-import java.util.List;
 
 import domainlogic.AlbumList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * */
 @RestController
 @RequestMapping("/api/albumlist")
-public class AlbumListController {
+public class AlbumListApiController {
 
 
   @Autowired
@@ -23,9 +22,9 @@ public class AlbumListController {
   /**
    * empty constructor.
    * */
-  public AlbumListController() {}
+  public AlbumListApiController() {}
 
-  public AlbumListController(AlbumListService albumListService) {
+  public AlbumListApiController(AlbumListService albumListService) {
     this.albumListService = albumListService;
   }
 
@@ -35,12 +34,12 @@ public class AlbumListController {
   }
 
   @GetMapping("/getAlbum/{index}")
-  public Album getAlbum(@PathVariable(value = "index") int index) {
+  public Album getAlbum(@PathVariable int index) {
     return this.albumListService.getAlbum(index);
   }
 
   @PostMapping(value = "/addAlbum/{artist}/{name}")
-  @ResponseStatus(code = HttpStatus.CREATED)
+  //@ResponseStatus(code = HttpStatus.CREATED)
   public String addAlbum(@PathVariable String artist, @PathVariable String name) {
     return albumListService.addAlbum(artist, name);
   }

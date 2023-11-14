@@ -1,25 +1,22 @@
 package restserver;
 
-import domainlogic.Album;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 /**
  * API controller where all comes together.
  * */
 @RestController
 @RequestMapping("/api/albumreview")
-public class AlbumReviewController {
+public class AlbumReviewApiController {
   //TODO: make everything come together here???
 
   @Autowired
   private AlbumListService albumListService;
 
-  public AlbumReviewController() {}
+  public AlbumReviewApiController() {}
 
-  public AlbumReviewController(AlbumListService albumListService) {
+  public AlbumReviewApiController(AlbumListService albumListService) {
     this.albumListService = albumListService;
   }
 

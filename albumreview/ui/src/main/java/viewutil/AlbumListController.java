@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,7 +49,8 @@ public class AlbumListController implements Initializable {
 
   PageHandler pageHandler;
 
-  private int selected;
+  //private int selected;
+  private UUID selectedAlbumId;
 
   private String realusername;
 
@@ -88,8 +90,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void openAlbum(ActionEvent event) {
-    pageHandler.loadAlbum(realusername, selected);
-    System.out.println(selected);
+    pageHandler.loadAlbum(realusername, selectedAlbumId);
+    System.out.println(selectedAlbumId);
   }
 
   @FXML
@@ -142,11 +144,21 @@ public class AlbumListController implements Initializable {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        selected = albumListView.getSelectionModel().getSelectedIndex();
-        System.out.println(selected);
+        //selected = albumListView.getSelectionModel().getSelectedIndex();
+        //albumList.getAlbum(selected);
+        //System.out.println(selected);
+
+        Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
+        if (selectedAlbum != null) {
+          UUID selectedAlbumId = selectedAlbum.getId();
+          albumList.getAlbumById(selectedAlbumId);
+          System.out.println("Selected Album ID: " + selectedAlbumId);
+          // You can now use selectedAlbumId for further processing or actions
+        }
       }
     });
   }
