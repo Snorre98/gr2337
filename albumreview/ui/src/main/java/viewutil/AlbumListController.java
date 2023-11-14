@@ -52,9 +52,13 @@ public class AlbumListController implements Initializable {
 
   private String realusername;
 
-  private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
+  private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
 
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
+
+  public void setSaveFilePath(Path saveFile) {
+    this.saveFilePath = saveFile;
+  }
 
   public void setUsername(String username) {
     this.realusername = username;
@@ -88,7 +92,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void openAlbum(ActionEvent event) {
-    pageHandler.loadAlbum(realusername, selected);
+
+    pageHandler.loadAlbum(realusername, selected, saveFilePath);
     System.out.println(selected);
   }
 
@@ -136,12 +141,12 @@ public class AlbumListController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     // System.out.println("Jacob er rar");
-    try {
-      initAlbumListView();
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+    // try {
+    // initAlbumListView();
+    // } catch (IOException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {

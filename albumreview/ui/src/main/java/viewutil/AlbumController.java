@@ -37,6 +37,10 @@ public class AlbumController implements Initializable {
   private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 
+  public void setSaveFilePath(Path saveFile) {
+    this.saveFilePath = saveFile;
+  }
+
   @FXML
   private Button openReview;
 
