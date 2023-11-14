@@ -1,7 +1,6 @@
 package viewutil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,21 +9,17 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import domainlogic.Album;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -40,10 +35,6 @@ public class AlbumListControllerTest extends ApplicationTest {
   private LoginPageControllerTest test;
   private File file;
 
-  // @BeforeAll
-  // public static void setupHeadless() {
-  // LoginPageApp.supportHeadless();
-  // }
 
   /**
    * Since we now are testing the AlbumList controller we start by user login befor each test.
@@ -70,7 +61,6 @@ public class AlbumListControllerTest extends ApplicationTest {
     lpc.setSaveFilePath(saveFilePath);
     String filePath = file.getAbsolutePath();
     cleanJsonFile(filePath);
-    // pageHandler = new PageHandler();
   }
 
   @Override
@@ -176,30 +166,18 @@ public class AlbumListControllerTest extends ApplicationTest {
   }
 
   /**
-   * Called after each test so the json file is clean.
-   */
-  // @AfterEach
-  // public void tearDown() {
-  // String filePath = file.getAbsolutePath();
-  // cleanJsonFile(filePath);
-  // }
-
-  /**
    * function for cleaning json file.
    */
   public static void cleanJsonFile(String filePath) {
     try {
-      // Read the existing JSON file
       ObjectMapper objectMapper = new ObjectMapper();
       ObjectNode rootNode = objectMapper.createObjectNode();
-      // Write the empty JSON object back to the file
+      
       objectMapper.writeValue(new File(filePath), rootNode);
 
       System.out.println("JSON file cleaned successfully.");
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
-
 }

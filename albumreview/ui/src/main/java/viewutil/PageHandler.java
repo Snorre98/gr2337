@@ -55,7 +55,7 @@ public class PageHandler {
    * 
    */
 
-  public void loadAlbum(String username, int selected) {
+  public void loadAlbum(String username, int selected, Path saveFilePath) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -68,12 +68,10 @@ public class PageHandler {
       albumController.setUsername(username);
       albumController.setSelected(selected);
       albumController.setAlbumAndArtist(albumListController);
+      albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();
     } catch (Exception e) {
       System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
     }
   }
-
-
-
 }

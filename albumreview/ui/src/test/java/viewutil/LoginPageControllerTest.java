@@ -1,13 +1,17 @@
 package viewutil;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +37,6 @@ public class LoginPageControllerTest extends ApplicationTest {
     }
     saveFilePath = Paths.get(resourceUrl.toURI());
     lpc.setSaveFilePath(saveFilePath);
-    // pageHandler = new PageHandler();
   }
 
   @Override
@@ -49,6 +52,13 @@ public class LoginPageControllerTest extends ApplicationTest {
   public void testUserLogin() {
     clickOn("#username").write("TestUser");
     clickOn("#button");
+    ArrayList<String> expectedOut = new ArrayList<>();
+    expectedOut.add("TestUser");
+    
+    Label userName = lookup("#username").query();
+    String userN = userName.getText();
+    ArrayList<String> actualOut = new ArrayList<>();
+    actualOut.add(userN);
+    assertEquals(expectedOut, actualOut);
   }
-
 }

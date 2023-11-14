@@ -1,27 +1,51 @@
 package viewutil;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import domainlogic.Review;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.junit.jupiter.api.BeforeEach;
-import org.testfx.framework.junit5.ApplicationTest;
+import java.util.ArrayList;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
 
 /**
  * Album Controller Test.
  */
 
 public class AlbumControllerTest extends ApplicationTest {
-  private AlbumListController alc;
+  private AlbumListControllerTest act;
+  private AlbumController amc;
   private LoginPageController lpc;
   private Path saveFilePath;
   private LoginPageControllerTest test;
+  private File file;
+
+  /**
+   * Before Each.
+   */
+  @BeforeEach
+  public void userLoginAndAddAlbum() {
+    test = new LoginPageControllerTest();
+    test.testUserLogin();
+    act = new AlbumListControllerTest();
+    act.testAddAlbum();
+    clickOn("#openAlbum");
+  }
+
 
   /**
    * Before Each.
@@ -37,7 +61,8 @@ public class AlbumControllerTest extends ApplicationTest {
     saveFilePath = Paths.get(resourceUrl.toURI());
     file = new File(resourceUrl.toURI());
     lpc.setSaveFilePath(saveFilePath);
-    // pageHandler = new PageHandler();
+    String filePath = file.getAbsolutePath();
+    AlbumListControllerTest.cleanJsonFile(filePath);
   }
 
   @Override
@@ -47,5 +72,50 @@ public class AlbumControllerTest extends ApplicationTest {
     lpc = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
+  }
+
+  @Test
+  public void testController_initial() {
+    assertNotNull(amc);
+  }
+
+  @Test
+  public void testAddRating() {
+    clickOn("#rating").write("5");
+    clickOn("#newReview");
+    ArrayList<Integer> expextedOut = new ArrayList<>();
+    expextedOut.add(5);
+
+    ListView<Review> reviewsListView = lookup("#reviews").query();
+    ObservableList<Review> rlv = reviewsListView.getItems();
+
+    ArrayList<Integer> actualOut = new ArrayList<>();
+    for (Review r : rlv) {
+      actualOut.add(r.getRating());
+    }
+
+    assertEquals(expextedOut, actualOut);
+  }
+
+  @Test
+  public void testAddRatingWithoutInt() {
+    clickOn("#rating").write("This aint no int");
+    clickOn("#newReview");
+    assertTrue(lookup(".alert").queryAll().size() > 0);
+  }
+
+  @Test
+  public void testAddRatingWithoutInputs() {
+    clickOn("#newReview");
+    assertTrue(lookup(".alert").queryAll().size() > 0);
+  }
+
+  @Test
+  public void testRemoveRating() {
+    testAddRating();
+    clickOn("#removeReview");
+    ListView<Review> reviewsListView = lookup("#reviews").query();
+    ObservableList<Review> rlv = reviewsListView.getItems();
+    assertTrue(rlv.isEmpty());
   }
 }

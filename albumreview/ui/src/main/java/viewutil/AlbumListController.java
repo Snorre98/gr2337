@@ -83,7 +83,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void openAlbum(ActionEvent event) {
-    pageHandler.loadAlbum(realusername, selected);
+
+    pageHandler.loadAlbum(realusername, selected, saveFilePath);
     System.out.println(selected);
   }
 
