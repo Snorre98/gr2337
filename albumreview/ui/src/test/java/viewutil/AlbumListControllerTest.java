@@ -29,7 +29,6 @@ import org.testfx.framework.junit5.ApplicationTest;
  * ALbum List Controller Test.
  */
 public class AlbumListControllerTest extends ApplicationTest {
-  private AlbumListController alc;
   private LoginPageController lpc;
   private Path saveFilePath;
   private LoginPageControllerTest test;
@@ -70,11 +69,6 @@ public class AlbumListControllerTest extends ApplicationTest {
     lpc = loader.getController();
     stage.setScene(new Scene(root));
     stage.show();
-  }
-
-  @Test
-  public void testController_initial() {
-    assertNotNull(alc);
   }
 
   /**

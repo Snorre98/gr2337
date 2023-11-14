@@ -29,19 +29,4 @@ public class LoginPageApp extends Application {
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
   }
-
-  /**
-   * Support headless.
-   */
-
-  public static void supportHeadless() {
-    if (Boolean.getBoolean("headless")) {
-      System.setProperty("testfx.robot", "glass");
-      System.setProperty("testfx.headless", "true");
-      System.setProperty("prism.order", "sw");
-      System.setProperty("prism.text", "t2k");
-      System.setProperty("java.awt.headless", "true");
-    }
-  }
-
 }
