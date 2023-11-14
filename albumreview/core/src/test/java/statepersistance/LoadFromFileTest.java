@@ -2,13 +2,15 @@ package statepersistance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import domainlogic.Album;
 import domainlogic.AlbumList;
 import domainlogic.Review;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
@@ -43,6 +45,16 @@ public class LoadFromFileTest {
     Exception invalidJson = assertThrows(IllegalStateException.class, () -> {
       LoadFromFile.loadFromFile(saveFilePath, false);
     }, "TEST FAIL: JSON should be invalid, but was found not to be!");
+  }
+
+  @Test
+  public void createFile() throws IOException, URISyntaxException {
+    String s = "src/test/resources/testFile.json";
+    Path resourcePath = Paths.get(s);
+
+    LoadFromFile.loadFromFile(resourcePath, true);
+    assertTrue(Files.exists(resourcePath));
+    Files.deleteIfExists(resourcePath);
   }
 
   @Test
