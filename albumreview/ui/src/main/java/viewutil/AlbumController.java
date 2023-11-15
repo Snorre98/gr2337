@@ -29,11 +29,9 @@ import statepersistence.WriteToFile;
 public class AlbumController implements Initializable {
 
   private String username;
-  private UUID selectedAlbumId;
 
   private int selectedReview;
   private Album album;
-  private String artist;
 
   private AlbumList albumList;
 
@@ -69,10 +67,6 @@ public class AlbumController implements Initializable {
   public void setUsername(String username) {
     this.username = username;
     usernameLabel.setText(username);
-  }
-
-  public void setSelected(UUID selectedAlbumId) {
-    this.selectedAlbumId = selectedAlbumId;
   }
 
   @FXML

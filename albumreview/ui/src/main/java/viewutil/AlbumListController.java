@@ -45,13 +45,10 @@ public class AlbumListController implements Initializable {
 
   private Album selectedAlbum;
 
-  Album album;
-
   AlbumList albumList;
 
   PageHandler pageHandler;
 
-  //private int selected;
   private UUID selectedAlbumId;
 
   private String realusername;
@@ -97,7 +94,7 @@ public class AlbumListController implements Initializable {
   @FXML
   void openAlbum(ActionEvent event) {
     pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
-    System.out.println(selectedAlbumId);
+    //System.out.println(selectedAlbumId);
   }
 
   @FXML
@@ -116,8 +113,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void newAlbum(ActionEvent event) {
-    album = new Album(artistInput.getText(), albumInput.getText());
-    System.out.println(artistInput.getText());
+    Album album = new Album(artistInput.getText(), albumInput.getText());
+
     try {
       albumList.addAlbum(album);
     } catch (IllegalStateException e) {
@@ -136,22 +133,29 @@ public class AlbumListController implements Initializable {
   /**
    * Writes albumList to file.
    */
-
   void handleSave() {
     WriteToFile.writeToFile(albumList, saveFilePath);
   }
 
+  /**
+   * sets album selected to be used in albumController
+   * @param selectedAlbum is album selected by user
+   * */
+  public void setSelectedAlbum(Album selectedAlbum) {
+    this.selectedAlbum = selectedAlbum;
+    //TODO: find better solution to this??
+    if (selectedAlbum != null) {
+      UUID selectedAlbumId = selectedAlbum.getId();
+      albumList.getAlbumById(selectedAlbumId);
+    }
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
       @Override
       public void handle(MouseEvent mouseEvent) {
-        if (selectedAlbum != null) {
-          UUID selectedAlbumId = selectedAlbum.getId();
-          albumList.getAlbumById(selectedAlbumId);
-        }
+        setSelectedAlbum(albumListView.getSelectionModel().getSelectedItem());
       }
     });
   }

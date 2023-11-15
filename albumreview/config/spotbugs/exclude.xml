@@ -1,21 +1,6 @@
 <FindBugsFilter>
-  <!-- <Match>
-    <Bug pattern="SA_LOCAL_SELF_COMPARISON" />
-  </Match>
+<!--TODO: ADD REASON FOR EXLUDING-->
   <Match>
-    <Bug pattern="EI_EXPOSE_REP" />
+    <Bug pattern = "EI_EXPOSE_REP2"/>
   </Match>
-  <Match>
-    <Bug pattern="EI_EXPOSE_REP2" />
-  </Match> -->
-  <!-- <Match>
-        <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
-    </Match>
-    <Match>
-        <Bug pattern="DM_DEFAULT_ENCODING" />
-    </Match>
-
-    <Match>
-        <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
-    </Match> -->
 </FindBugsFilter>
