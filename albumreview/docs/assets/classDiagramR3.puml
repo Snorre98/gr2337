@@ -1,0 +1,84 @@
+@startuml Class Diagram R3
+
+skin rose
+
+title Classes - Class Diagram
+
+  
+class PageHandler {
+  +AlbumController albumController
+  +AlbumListController albumListController
+  +loadAlbumList(String, Path)
+  +loadAlbum(String, UUID, Path, Album)
+  }
+  
+class AlbumListController{
+  +ListView<Album> albumListView
+  +Button openAlbum
+  +Label username
+  +TextField albumInput
+  +TextField artistInput
+  +Album selectedAlbum
+  +AlbumList albumList  
+  +PageHandler pageHandler
+  +UUID selectedAlbumId
+  +String realusername
+  +String saveFile
+  +Path saveFilePath  
+  +setSaveFilePath(Path)
+  +setUsername(String)
+  +setPageHandler(PageHandler)
+  +getAlbumList() : AlbumList
+  +initAlbumListView()
+  +openAlbum(ActionEvent)
+  +sortAlbum(ActionEvent)
+  +sortArtist(ActionEvent)
+  +newAlbum(ActionEvent)
+  +handleSave()
+  +setSelectedAlbum(Album)
+  }
+  
+class AlbumController{
+  +String username
+  +int selectedReview
+  +Album album
+  +AlbumList albumList
+  +String saveFile  
+  +Path saveFilePath
+  +Button openReview
+  +Button removeReview
+  +Label albumLabel
+  +Label artistLabel
+  +TextField rating
+  +ListView<Review> reviews
+  +Label usernameLabel
+  +setSaveFilePath(Path)
+  +setUsername(String)
+  +newReview(ActionEvent)
+  +removeReview(ActionEvent)
+  +handleSave()
+  +initReviewListView()
+  +setAlbum(Album)
+  }
+  
+class LoginPageController {
+  +Button button
+  +TextField username 
+  +String saveFile
+  +Path saveFilePath  
+  +userLogin(ActionEvent)
+  +setSaveFilePath(Path)
+  }
+  
+LoginPageController -> PageHandler
+PageHandler <-> AlbumListController
+
+PageHandler <-> AlbumController
+
+
+
+  
+
+
+
+@enduml
