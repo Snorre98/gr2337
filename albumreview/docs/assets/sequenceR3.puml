@@ -1,0 +1,13 @@
+@startuml Sequence diagram release 3 See other reviews
+
+actor User
+User -> UI : open app
+UI -> LoginController : loadView(FXMLLoader)
+LoginController -> PageHandler : userLogin()
+PageHandler -> AlbumListController : load(FXMLLoader)
+AlbumListController -> PageHandler : openAlbum()
+PageHandler -> AlbumController : Load(FXMLLoader)
+AlbumController -> AlbumController : openAlbum()
+
+
+@enduml
