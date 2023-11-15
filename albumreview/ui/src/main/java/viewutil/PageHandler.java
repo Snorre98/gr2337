@@ -16,12 +16,6 @@ public class PageHandler {
 
   AlbumController albumController;
   AlbumListController albumListController;
-  private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
-  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
-
-  public void setSaveFilePath(Path saveFile) {
-    this.saveFilePath = saveFile;
-  }
 
   /**
    * Load the AlbumList.fxml and the controller
@@ -67,7 +61,7 @@ public class PageHandler {
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);
-      //albumController.setSelected(selectedAlbumId);
+      // albumController.setSelected(selectedAlbumId);
       albumController.setAlbum(album);
       albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();

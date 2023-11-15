@@ -94,7 +94,7 @@ public class AlbumListController implements Initializable {
   @FXML
   void openAlbum(ActionEvent event) {
     pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
-    //System.out.println(selectedAlbumId);
+    // System.out.println(selectedAlbumId);
   }
 
   @FXML
@@ -138,14 +138,15 @@ public class AlbumListController implements Initializable {
   }
 
   /**
-   * sets album selected to be used in albumController
+   * sets album selected to be used in albumController.
+   * 
    * @param selectedAlbum is album selected by user
-   * */
+   */
   public void setSelectedAlbum(Album selectedAlbum) {
     this.selectedAlbum = selectedAlbum;
-    //TODO: find better solution to this??
+    // TODO: find better solution to this??
     if (selectedAlbum != null) {
-      UUID selectedAlbumId = selectedAlbum.getId();
+      selectedAlbumId = selectedAlbum.getId();
       albumList.getAlbumById(selectedAlbumId);
     }
   }
