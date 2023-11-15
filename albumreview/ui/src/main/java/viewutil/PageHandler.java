@@ -1,13 +1,13 @@
 package viewutil;
 
+import domainlogic.Album;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.UUID;
 
 /**
  * A class to open new javafx scenes and keep track of the controllers.
@@ -56,7 +56,7 @@ public class PageHandler {
    * @param selectedAlbumId where in the AlbumList the selected album is
    * 
    */
-  public void loadAlbum(String username, UUID selectedAlbumId, Path saveFilePath) {
+  public void loadAlbum(String username, UUID selectedAlbumId, Path saveFilePath, Album album) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -68,7 +68,7 @@ public class PageHandler {
       albumController = loader.getController();
       albumController.setUsername(username);
       albumController.setSelected(selectedAlbumId);
-      albumController.setAlbumAndArtist(albumListController);
+      albumController.setAlbum(album);
       albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();
     } catch (Exception e) {

@@ -30,6 +30,23 @@ public class AlbumList {
   }
 
   /**
+   * gets specific album object from album list.
+   *
+   * @param album to be gotten from list.
+   * {@return album from list}.
+   * */
+  public Album getAlbum(Album album) {
+    System.out.println(album);
+    for (Album al : albums) {
+      System.out.println(al);
+      if (al.getName().equals(album.getName()) && al.getArtist().equals(album.getArtist())) {
+        return album;
+      }
+    }
+    throw new IllegalStateException("This album doesnt exist in list: " + album);
+  }
+
+  /**
    * Removes specific album from albums list.
    *
    * @param i int position of Album object.

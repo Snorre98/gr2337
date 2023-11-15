@@ -43,6 +43,8 @@ public class AlbumListController implements Initializable {
   @FXML
   private TextField artistInput;
 
+  private Album selectedAlbum;
+
   Album album;
 
   AlbumList albumList;
@@ -94,7 +96,7 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void openAlbum(ActionEvent event) {
-    pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath);
+    pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
     System.out.println(selectedAlbumId);
   }
 
@@ -115,6 +117,7 @@ public class AlbumListController implements Initializable {
   @FXML
   void newAlbum(ActionEvent event) {
     album = new Album(artistInput.getText(), albumInput.getText());
+    System.out.println(artistInput.getText());
     try {
       albumList.addAlbum(album);
     } catch (IllegalStateException e) {
@@ -141,26 +144,13 @@ public class AlbumListController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    // System.out.println("Jacob er rar");
-    // try {
-    // initAlbumListView();
-    // } catch (IOException e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
       @Override
       public void handle(MouseEvent mouseEvent) {
-        //selected = albumListView.getSelectionModel().getSelectedIndex();
-        //albumList.getAlbum(selected);
-        //System.out.println(selected);
-
-        Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
         if (selectedAlbum != null) {
           UUID selectedAlbumId = selectedAlbum.getId();
           albumList.getAlbumById(selectedAlbumId);
-          System.out.println("Selected Album ID: " + selectedAlbumId);
-          // You can now use selectedAlbumId for further processing or actions
         }
       }
     });
