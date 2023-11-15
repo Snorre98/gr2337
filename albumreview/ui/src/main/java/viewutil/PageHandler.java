@@ -34,7 +34,10 @@ public class PageHandler {
       Parent root = (Parent) loader.load();
       Stage stage = new Stage();
       stage.setTitle("The Albums");
-      stage.setScene(new Scene(root));
+      Scene scene = new Scene(root);
+      String css = this.getClass().getResource("/style.css").toExternalForm();
+      scene.getStylesheets().add(css);
+      stage.setScene(scene);
       stage.show();
       albumListController = loader.getController();
       albumListController.setUsername(username);
@@ -62,7 +65,10 @@ public class PageHandler {
       Parent root = (Parent) loader.load();
       Stage stage = new Stage();
       stage.setTitle("The Album");
-      stage.setScene(new Scene(root));
+      Scene scene = new Scene(root);
+      String css = this.getClass().getResource("/style.css").toExternalForm();
+      scene.getStylesheets().add(css);
+      stage.setScene(scene);
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);

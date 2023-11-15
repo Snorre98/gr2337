@@ -23,10 +23,11 @@ public class LoginPageApp extends Application {
     primaryStage.setTitle("Login-Page");
 
     URL resourceUrl = getClass().getResource("/fxml/LoginPage.fxml");
-
-
     Parent root = FXMLLoader.load(Objects.requireNonNull(resourceUrl));
-    primaryStage.setScene(new Scene(root));
+    Scene scene = new Scene(root);
+    String css = this.getClass().getResource("/style.css").toExternalForm();
+    scene.getStylesheets().add(css);
+    primaryStage.setScene(scene);
     primaryStage.show();
   }
 }
