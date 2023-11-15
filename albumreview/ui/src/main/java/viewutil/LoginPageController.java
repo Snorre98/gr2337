@@ -22,9 +22,6 @@ public class LoginPageController {
   @FXML
   private TextField username;
 
-  @FXML
-  private PasswordField password;
-
   private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 

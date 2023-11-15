@@ -3,6 +3,7 @@ package viewutil;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import domainlogic.Album;
 import domainlogic.Review;
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +12,11 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
@@ -41,9 +45,18 @@ public class AlbumControllerTest extends ApplicationTest {
     test.testUserLogin();
     act = new AlbumListControllerTest();
     act.testAddAlbum();
+
+    ListView<Album> listView = lookup("#albumListView").query();
+    listView.scrollTo(0);
+    Set<Node> cells = listView.lookupAll(".list-cell");
+    Node firstItemNode = cells.stream().findFirst().orElse(null);
+
+    if (firstItemNode != null) {
+      clickOn(firstItemNode);
+    }
+
     clickOn("#openAlbum");
   }
-
 
   /**
    * Before Each.
@@ -78,15 +91,12 @@ public class AlbumControllerTest extends ApplicationTest {
     clickOn("#newReview");
     ArrayList<Integer> expextedOut = new ArrayList<>();
     expextedOut.add(5);
-
     ListView<Review> reviewsListView = lookup("#reviews").query();
     ObservableList<Review> rlv = reviewsListView.getItems();
-
     ArrayList<Integer> actualOut = new ArrayList<>();
     for (Review r : rlv) {
       actualOut.add(r.getRating());
     }
-
     assertEquals(expextedOut, actualOut);
   }
 

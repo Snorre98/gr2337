@@ -59,11 +59,18 @@ public class LoadFromFileTest {
   @Test
   public void testLoadFile() throws IOException, URISyntaxException {
     setUp("fileTester.json");
+    AlbumList jsonAlbumList = LoadFromFile.loadFromFile(saveFilePath, false);
+    assertEquals(jsonAlbumList.getAlbumByIndex(0).getArtist(), "testArtist");
+    assertEquals(jsonAlbumList.getAlbumByIndex(0).getName(), "testAlbumName");
+    assertEquals(jsonAlbumList.getAlbumByIndex(0).getReview(0).getUserName(), "testUser");
+    assertEquals(jsonAlbumList.getAlbumByIndex(0).getReview(0).getRating(), 1);
+
+    /*
     albums = new AlbumList();
     Album album = new Album("testArtist", "testAlbumName");
     Review review = new Review("testUser", 1);
     album.addReview(review);
     albums.addAlbum(album);
-    assertEquals(albums, LoadFromFile.loadFromFile(saveFilePath, false));
+    assertEquals(albums, LoadFromFile.loadFromFile(saveFilePath, false));*/
   }
 }

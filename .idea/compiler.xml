@@ -11,5 +11,8 @@
         <module name="albumreview-springboot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="REST-API" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,9 +1,6 @@
 package domainlogic;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Manages list of Album objects.
@@ -18,7 +15,7 @@ public class AlbumList {
 
   /**
    * adds Album object to albums list.
-   * 
+   *
    * @param album Album that gets added to list.
    */
   public void addAlbum(Album album) {
@@ -33,8 +30,25 @@ public class AlbumList {
   }
 
   /**
+   * gets specific album object from album list.
+   *
+   * @param album to be gotten from list.
+   * {@return album from list}.
+   * */
+  public Album getAlbum(Album album) {
+    System.out.println(album);
+    for (Album al : albums) {
+      System.out.println(al);
+      if (al.getName().equals(album.getName()) && al.getArtist().equals(album.getArtist())) {
+        return album;
+      }
+    }
+    throw new IllegalStateException("This album doesnt exist in list: " + album);
+  }
+
+  /**
    * Removes specific album from albums list.
-   * 
+   *
    * @param i int position of Album object.
    */
   public void removeAlbum(int i) {
@@ -43,12 +57,26 @@ public class AlbumList {
 
   /**
    * Gets specific Album objevt from albums list.
-   * 
+   *
    * @param i int position of the Album object.
    * @return Album at specified position i.
    */
-  public Album getAlbum(int i) {
+  public Album getAlbumByIndex(int i) {
     return albums.get(i);
+  }
+
+  /**
+   * gets Album by unique id.
+   * @param id unique
+   * @return album object
+   * */
+  public Album getAlbumById(UUID id) {
+    for (Album album : albums) {
+      if (album.getId() == id) {
+        return album;
+      }
+    }
+    throw new IllegalArgumentException("No album with this ID");
   }
 
   /**

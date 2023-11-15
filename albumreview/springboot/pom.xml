@@ -24,6 +24,7 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
  -->
         <dependency>
@@ -96,6 +97,15 @@
             <artifactId>log4j-core</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -138,6 +148,14 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>3.1.5</version>
+                <configuration>
+                    <jvmArguments>
+                        --add-opens albumreview.springboot/restserver=ALL-UNNAMED
+                        --add-reads albumreview.springboot=ALL-UNNAMED
+                    </jvmArguments>
+                </configuration>
+
+
             </plugin>
         </plugins>
     </build>

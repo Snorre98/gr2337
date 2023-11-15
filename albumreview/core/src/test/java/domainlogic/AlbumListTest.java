@@ -22,8 +22,8 @@ public class AlbumListTest {
     Album album = new Album("testArtist", "testName");
     albumList.addAlbum(album);
     assertEquals(1, albumList.getAlbums().size());
-    assertEquals("testArtist", albumList.getAlbum(0).getArtist());
-    assertEquals("testName", albumList.getAlbum(0).getName());
+    assertEquals("testArtist", albumList.getAlbumByIndex(0).getArtist());
+    assertEquals("testName", albumList.getAlbumByIndex(0).getName());
     }
 
   @Test
@@ -43,8 +43,8 @@ public class AlbumListTest {
 
     albumList.removeAlbum(0);
     assertEquals(1, albumList.getAlbums().size());
-    assertEquals("artist2", albumList.getAlbum(0).getArtist());
-    assertEquals("name2", albumList.getAlbum(0).getName());
+    assertEquals("artist2", albumList.getAlbumByIndex(0).getArtist());
+    assertEquals("name2", albumList.getAlbumByIndex(0).getName());
   }
 
   @Test
@@ -59,9 +59,9 @@ public class AlbumListTest {
 
     albumList.sortAlbum();
 
-    assertEquals("A", albumList.getAlbum(0).getName());
-    assertEquals("B", albumList.getAlbum(1).getName());
-    assertEquals("C", albumList.getAlbum(2).getName());
+    assertEquals("A", albumList.getAlbumByIndex(0).getName());
+    assertEquals("B", albumList.getAlbumByIndex(1).getName());
+    assertEquals("C", albumList.getAlbumByIndex(2).getName());
   }
 
   @Test
@@ -76,8 +76,8 @@ public class AlbumListTest {
 
     albumList.sortArtist();
 
-    assertEquals("A", albumList.getAlbum(0).getArtist());
-    assertEquals("B", albumList.getAlbum(1).getArtist());
-    assertEquals("C", albumList.getAlbum(2).getArtist());
+    assertEquals("A", albumList.getAlbumByIndex(0).getArtist());
+    assertEquals("B", albumList.getAlbumByIndex(1).getArtist());
+    assertEquals("C", albumList.getAlbumByIndex(2).getArtist());
   }
 }

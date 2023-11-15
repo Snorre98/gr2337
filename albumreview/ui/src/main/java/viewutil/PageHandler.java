@@ -1,7 +1,9 @@
 package viewutil;
 
+import domainlogic.Album;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,12 +16,6 @@ public class PageHandler {
 
   AlbumController albumController;
   AlbumListController albumListController;
-  private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
-  Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
-
-  public void setSaveFilePath(Path saveFile) {
-    this.saveFilePath = saveFile;
-  }
 
   /**
    * Load the AlbumList.fxml and the controller
@@ -51,11 +47,10 @@ public class PageHandler {
    * Loads the Album.fxml file and controller.
    * 
    * @param username the username that is used to login with.
-   * @param selected where in the AlbumList the selected album is
+   * @param selectedAlbumId where in the AlbumList the selected album is
    * 
    */
-
-  public void loadAlbum(String username, int selected, Path saveFilePath) {
+  public void loadAlbum(String username, UUID selectedAlbumId, Path saveFilePath, Album album) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
@@ -66,8 +61,8 @@ public class PageHandler {
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);
-      albumController.setSelected(selected);
-      albumController.setAlbumAndArtist(albumListController);
+      // albumController.setSelected(selectedAlbumId);
+      albumController.setAlbum(album);
       albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();
     } catch (Exception e) {
