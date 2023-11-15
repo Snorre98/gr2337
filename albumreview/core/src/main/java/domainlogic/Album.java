@@ -3,6 +3,7 @@ package domainlogic;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Core Album object class.
@@ -11,6 +12,8 @@ public class Album {
   private List<Review> reviews;
   private String artist;
   private String name;
+
+  private UUID id;
 
   /**
    * Constructor for Album object class.
@@ -22,6 +25,7 @@ public class Album {
     reviews = new ArrayList<>();
     this.artist = artist;
     this.name = name;
+    this.id = UUID.randomUUID();
   }
 
   /**
@@ -83,6 +87,14 @@ public class Album {
     return name;
   }
 
+  /**
+   * Gets unique id.
+   * @return unique id
+   * */
+  public UUID getId() {
+    return id;
+  }
+
   @Override
   public String toString() {
     return "Album: " + name + ", Artist: " + artist;
@@ -99,7 +111,8 @@ public class Album {
     Album that = (Album) o;
     return Objects.equals(this.getArtist(), that.getArtist())
         && Objects.equals(this.getReviews(), that.getReviews())
-        && Objects.equals(this.getName(), that.getName());
+        && Objects.equals(this.getName(), that.getName())
+        && Objects.equals(this.getId(), that.getId());
   }
 
   @Override

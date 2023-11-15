@@ -8,6 +8,8 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.UUID;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -27,10 +29,9 @@ import statepersistence.WriteToFile;
 public class AlbumController implements Initializable {
 
   private String username;
-  private int selected;
+
   private int selectedReview;
-  private String album;
-  private String artist;
+  private Album album;
 
   private AlbumList albumList;
 
@@ -62,28 +63,24 @@ public class AlbumController implements Initializable {
   @FXML
   private Label usernameLabel;
 
+
   public void setUsername(String username) {
     this.username = username;
     usernameLabel.setText(username);
-  }
-
-  public void setSelected(int selected) {
-    this.selected = selected;
   }
 
   @FXML
   void newReview(ActionEvent event) {
     try {
       Review review = new Review(username, Integer.parseInt(rating.getText()));
-      albumList.getAlbum(selected).addReview(review);
+      albumList.getAlbum(album).addReview(review);
     } catch (IllegalArgumentException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
       alert.setContentText(e.getMessage());
       alert.showAndWait();
     }
-
-    reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
+    reviews.getItems().setAll(albumList.getAlbum(album).getReviews());
     rating.setText("");
     handleSave();
   }
@@ -91,8 +88,8 @@ public class AlbumController implements Initializable {
   @FXML
   void removeReview(ActionEvent event) {
     try {
-      albumList.getAlbum(selected).removeReview(selectedReview, username);
-      reviews.getItems().setAll(albumList.getAlbum(selected).getReviews());
+      albumList.getAlbum(album).removeReview(selectedReview, username);
+      reviews.getItems().setAll(albumList.getAlbum(album).getReviews());
     } catch (IllegalStateException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
@@ -107,23 +104,18 @@ public class AlbumController implements Initializable {
 
   void initReviewListView() throws IOException {
     albumList = LoadFromFile.loadFromFile(saveFilePath, true);
-    Album album = albumList.getAlbum(selected);
     reviews.getItems().setAll(album.getReviews());
   }
 
   /**
    * This sets the Album name and Artist at the top of the scene.
    * 
-   * @param albumListController The albumlistController, need this to get the album info.
+   * @param album The album, to set in controller.
    */
-  public void setAlbumAndArtist(AlbumListController albumListController) {
-    albumList = albumListController.getAlbumList();
-    this.album = albumList.getAlbum(selected).getName();
-    System.out.println(album + "album");
-    this.artist = albumList.getAlbum(selected).getArtist();
-    artistLabel.setText(artist);
-    albumLabel.setText(album);
-
+  public void setAlbum(Album album) {
+    this.album = album;
+    artistLabel.setText(album.getArtist());
+    albumLabel.setText(album.getName());
   }
 
   @Override
@@ -132,11 +124,7 @@ public class AlbumController implements Initializable {
       @Override
       public void handle(MouseEvent mouseEvent) {
         selectedReview = reviews.getSelectionModel().getSelectedIndex();
-        System.out.println(selected);
-        System.out.println(selectedReview);
-
       }
     });
-
   }
 }

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,13 +43,13 @@ public class AlbumListController implements Initializable {
   @FXML
   private TextField artistInput;
 
-  Album album;
+  private Album selectedAlbum;
 
   AlbumList albumList;
 
   PageHandler pageHandler;
 
-  private int selected;
+  private UUID selectedAlbumId;
 
   private String realusername;
 
@@ -92,9 +93,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void openAlbum(ActionEvent event) {
-
-    pageHandler.loadAlbum(realusername, selected, saveFilePath);
-    System.out.println(selected);
+    pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
+    // System.out.println(selectedAlbumId);
   }
 
   @FXML
@@ -113,7 +113,8 @@ public class AlbumListController implements Initializable {
 
   @FXML
   void newAlbum(ActionEvent event) {
-    album = new Album(artistInput.getText(), albumInput.getText());
+    Album album = new Album(artistInput.getText(), albumInput.getText());
+
     try {
       albumList.addAlbum(album);
     } catch (IllegalStateException e) {
@@ -132,26 +133,30 @@ public class AlbumListController implements Initializable {
   /**
    * Writes albumList to file.
    */
-
   void handleSave() {
     WriteToFile.writeToFile(albumList, saveFilePath);
   }
 
+  /**
+   * sets album selected to be used in albumController.
+   * 
+   * @param selectedAlbum is album selected by user
+   */
+  public void setSelectedAlbum(Album selectedAlbum) {
+    this.selectedAlbum = selectedAlbum;
+    // TODO: find better solution to this??
+    if (selectedAlbum != null) {
+      selectedAlbumId = selectedAlbum.getId();
+      albumList.getAlbumById(selectedAlbumId);
+    }
+  }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    // System.out.println("Jacob er rar");
-    // try {
-    // initAlbumListView();
-    // } catch (IOException e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        selected = albumListView.getSelectionModel().getSelectedIndex();
-        System.out.println(selected);
+        setSelectedAlbum(albumListView.getSelectionModel().getSelectedItem());
       }
     });
   }
