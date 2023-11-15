@@ -1,0 +1,44 @@
+@startuml Package Diagram R3
+
+skin rose
+
+component core {
+  package albumreview.core
+  package albumreview.json
+}
+
+component jackson {
+}
+
+component viewutil {
+  package albumreview.viewutil
+}
+
+albumreview.viewutil ..> albumreview.core
+albumreview.viewutil ..> albumreview.json
+
+component javafx {
+  component fxml {
+  }
+}
+
+viewutil ..> javafx
+viewutil ..> fxml
+
+
+component restapi {
+  package albumreview.restapi
+}
+
+albumreview.restapi ..> albumreview.core
+albumreview.restapi ..> albumreview.json
+albumreview.json ..> jackson
+
+component restserver {
+  package albumreview.restserver
+}
+
+albumreview.restserver ..> albumreview.core
+albumreview.restserver ..> albumreview.restapi
+
+@enduml

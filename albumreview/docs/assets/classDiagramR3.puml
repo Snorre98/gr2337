@@ -2,9 +2,6 @@
 
 skin rose
 
-title Classes - Class Diagram
-
-  
 class PageHandler {
   +AlbumController albumController
   +AlbumListController albumListController
@@ -71,14 +68,7 @@ class LoginPageController {
   }
   
 LoginPageController -> PageHandler
-PageHandler <-> AlbumListController
-
-PageHandler <-> AlbumController
-
-
-
-  
-
-
+PageHandler <--> AlbumListController
+PageHandler <--> AlbumController
 
 @enduml
