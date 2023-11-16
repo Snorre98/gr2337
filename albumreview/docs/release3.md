@@ -27,6 +27,8 @@ We also made changes to WriteToFile and LoadToFile to take in and return an Albu
 
 Firstly, we have made a login page where you can enter a username. Then the user enters the album page where the different albums and their respective artist. You can also add a new album, but only if it is a new one. You can also sort the list by artist or album name. If you select an album and then press “Open album”, the app will take you to a page where you can see all the reviews for the selected album. Here you see a list of ratings and the username of the reviewer. You can also add a new review and delete a review, if you have the same username. All of this is connected to the new domain logic.
 
+We decided to tyle the UI with css, making it much nicer to look at and interact with.
+
 ## REST-API
 
 We used spring-boot to implement REST-API. The server is set up using spring in the new rest server module. This module is dependent on core and handles requests from a new client module. This makes ui and core independent, and the data between them are handled by the client module (Data access layer) and the restserver (Service layer).
