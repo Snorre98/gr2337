@@ -3,4 +3,13 @@
   <Match>
     <Bug pattern = "EI_EXPOSE_REP2"/>
   </Match>
+  <Match>
+    <Bug pattern = "UUF_UNUSED_FIELD"/>
+  </Match>
+  <Match>
+    <Bug pattern = "REC_CATCH_EXCEPTION"/>
+  </Match>
+  <Match>
+    <Bug pattern = "SS_SHOULD_BE_STATIC"/>
+  </Match>
 </FindBugsFilter>

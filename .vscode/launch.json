@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "AlbumReviewApplication",
+      "request": "launch",
+      "mainClass": "albumreview.springboot/restserver.AlbumReviewApplication",
+      "projectName": "albumreview-springboot"
+    },
+    {
+      "type": "java",
       "name": "LoginPageApp",
       "request": "launch",
       "mainClass": "albumreview.ui/viewutil.LoginPageApp",

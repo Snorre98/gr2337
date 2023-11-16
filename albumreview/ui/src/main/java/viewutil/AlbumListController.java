@@ -54,8 +54,6 @@ public class AlbumListController implements Initializable {
 
   PageHandler pageHandler;
 
-  private UUID selectedAlbumId;
-
   private String realusername;
 
   private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
@@ -69,7 +67,7 @@ public class AlbumListController implements Initializable {
   }
 
   public void setUsername(String username) {
-    //TODO: do this with API??
+    // TODO: do this with API??
     this.realusername = username;
     this.username.setText(realusername);
   }
@@ -80,15 +78,15 @@ public class AlbumListController implements Initializable {
 
 
   void initAlbumListView() throws IOException, InterruptedException {
-    //TODO: request loadAlbumList here
+    // TODO: request loadAlbumList here
     updateAlbumListView(getAlbumList());
   }
 
 
   @FXML
   void openAlbum(ActionEvent event) {
-    //TODO: open album with data through API
-    //pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
+    // TODO: open album with data through API
+    // pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
     pageHandler.loadAlbum(realusername, saveFilePath, selectedAlbum);
   }
 
@@ -114,36 +112,37 @@ public class AlbumListController implements Initializable {
     }
   }
 
- @FXML
+  @FXML
   public void newAlbum(ActionEvent event) {
-   try {
+    try {
       Album album = new Album(artistInput.getText(), albumInput.getText());
       restModel.addAlbum(album.getName(), album.getArtist());
       updateAlbumListView(getAlbumList());
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
-   }
- }
+    }
+  }
 
 
- /**
-  * helper function.
-  * */
- public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
+  /**
+   * helper function.
+   */
+  public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
     ObjectMapper ob = new ObjectMapper();
     ob.registerModule(new AlbumReviewModule());
     return ob.readValue(responseBody, AlbumList.class);
- }
+  }
 
   public void updateAlbumListView(AlbumList albumList) throws IOException, InterruptedException {
-    ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
+    ObservableList<Album> observableAlbums =
+        FXCollections.observableArrayList(albumList.getAlbums());
     this.albumListView.getItems().setAll(observableAlbums);
   }
 
   public AlbumList getAlbumList() throws IOException, InterruptedException {
     String getAlbumListRequest = restModel.getAlbumList();
     return albumListObjectMapper(getAlbumListRequest);
- }
+  }
 
   /**
    * sets album selected to be used in albumController.
@@ -152,10 +151,10 @@ public class AlbumListController implements Initializable {
    */
   public void setSelectedAlbum(Album selectedAlbum) {
     this.selectedAlbum = selectedAlbum;
-    if (selectedAlbum != null) {
-      selectedAlbumId = selectedAlbum.getId();
-      albumList.getAlbumById(selectedAlbumId);
-    }
+    // if (selectedAlbum != null) {
+    // selectedAlbumId = selectedAlbum.getId();
+    // albumList.getAlbumById(selectedAlbumId);
+    // }
 
   }
 
@@ -168,7 +167,8 @@ public class AlbumListController implements Initializable {
           Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
           List<Album> albumList = getAlbumList().getAlbums();
           for (Album album : albumList) {
-            if (album.getArtist().equals(selectedAlbum.getArtist()) && album.getName().equals(selectedAlbum.getName())) {
+            if (album.getArtist().equals(selectedAlbum.getArtist())
+                && album.getName().equals(selectedAlbum.getName())) {
               setSelectedAlbum(album);
             }
           }
@@ -179,5 +179,5 @@ public class AlbumListController implements Initializable {
       }
     });
   }
- }
+}
 
