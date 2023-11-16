@@ -13,6 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,45 +76,61 @@ public class AlbumController implements Initializable {
 
 
   public void setUsername(String username) {
-    //TODO API controll
+    //TODO API controll??
     this.username = username;
     usernameLabel.setText(username);
   }
-
 
   @FXML
   public void newReview(ActionEvent event) {
     try {
       Review review = new Review(username, Integer.parseInt(rating.getText()));
       restModel.addReview(album, review.getUserName(), review.getRating());
-      updateAlbumListView(getAlbumList());
+      //updateReviewListView(getReviewList());
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
   }
+
   public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
     ObjectMapper ob = new ObjectMapper();
     ob.registerModule(new AlbumReviewModule());
     return ob.readValue(responseBody, AlbumList.class);
   }
 
-  public void updateAlbumListView(Album albumList) throws IOException, InterruptedException {
+  public void updateReviewListView(Album album) throws IOException, InterruptedException {
+    ObservableList<Review> observableAlbums = FXCollections.observableArrayList(album.getReviews());
+    this.reviewListView.getItems().setAll(observableAlbums);
+  }
+
+
+  /*
+  public void getAlbum(Album album) {
+    try {
+      Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
+      List<Album> albumList = getAlbumList().getAlbums();
+      for (Album album : albumList) {
+        if (album.getArtist().equals(selectedAlbum.getArtist()) && album.getName().equals(selectedAlbum.getName())) {
+          setSelectedAlbum(album);
+        }
+      }
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+  }*/
+
+  /*
+  public void updateAlbumListView(AlbumList albumList) throws IOException, InterruptedException {
     ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
     this.albumListView.getItems().setAll(observableAlbums);
   }
+  */
 
-  public AlbumList getAlbumList() throws IOException, InterruptedException {
-    String getAlbumListRequest = restModel.getAlbumList();
+  /*
+  public List<Review> getReviewList() throws IOException, InterruptedException {
+    String getAlbumListRequest = restModel.getReviewList();
     return albumListObjectMapper(getAlbumListRequest);
-  }
-
-
-
-  /**
-   * updates reviewList with JSON through API call.
-   *
-   * @param httpResponse is response for getAlbumList()
-   */
+  }*/
   /*
   public void updateReviewList(HttpResponse<String> httpResponse) throws JsonProcessingException {
 
@@ -152,10 +169,6 @@ public class AlbumController implements Initializable {
     }
   }
   */
-
-  public void getReviewList() {
-
-  }
   @FXML
   public void removeReview(ActionEvent event) {
     //TODO: API controll
