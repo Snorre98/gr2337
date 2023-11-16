@@ -48,7 +48,6 @@ public class PageHandler {
    * Loads the Album.fxml file and controller.
    * 
    * @param username the username that is used to login with.
-   * @param selectedAlbumId where in the AlbumList the selected album is
    * 
    */
   public void loadAlbum(String username, Path saveFilePath, Album album) {

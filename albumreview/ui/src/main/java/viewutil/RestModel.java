@@ -34,7 +34,6 @@ public class RestModel {
   }
 
 
-//  /addAlbum/{artist}/{name}
   public String addAlbum(String artistInput, String albumInput) throws IOException, InterruptedException {
     String endpoint = "/api/albumlist/addAlbum/";
     String postBody = "";
@@ -84,39 +83,27 @@ public class RestModel {
     }
   }
 
-  /**
-   * updates reviewList with JSON through API call.
-   *
-   * @param httpResponse is response for getAlbumList()
-   */
-  public void updateReviewList(HttpResponse<String> httpResponse) throws IOException, InterruptedException {
+  public String addReview(Album album, String username, int rating) throws InterruptedException {
 
-    //TODO: remove httpResponse parameter
-    /*
-    AlbumList albumList = getAlbumListObject();
-    if (listResponse.statusCode() == 200) {
-      updateAlbumListView(listResponse);
-    } else {
-      System.out.println("Failed to fetch updated album list");
-    }*/
-  }
+    String endpoint = "/api/albumlist/album/addReview/";
+    String postBody = "";
+    System.out.println(backendBaseUrl + endpoint + username + "/" + rating);
+    try {
+      HttpRequest request = HttpRequest.newBuilder()
+          .uri(URI.create(backendBaseUrl + endpoint + "/" + album + username + "/" + rating))
+          .POST(HttpRequest.BodyPublishers.ofString(postBody))
+          .build();
 
-    /*
-public void fetchSelectedAlbum(UUID albumId) throws IOException, InterruptedException {
-  HttpRequest request = HttpRequest.newBuilder().uri(URI.create(backendBaseUrl + "/api/albumlist/getAlbum/" + albumId)).GET().build();
-  HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-  if (response.statusCode() == 200) {
-    String updatedAlbumList = response.body();
-    ObjectMapper ob = new ObjectMapper();
-    ob.registerModule(new AlbumReviewModule());
-    Album album = ob.readValue(updatedAlbumList, Album.class);
-    System.out.println("");
-    this.selectedAlbum = album;
-  } else {
-    System.out.println("Failed to fetch album");
+      final HttpResponse<String> response =
+          httpClient.send(
+              request,
+              HttpResponse.BodyHandlers.ofString()
+          );
+      return response.body();
+    } catch (Exception e) {
+      throw new InterruptedException("Could not add Album: " + e);
+    }
 
   }
-}*/
-
 
 }

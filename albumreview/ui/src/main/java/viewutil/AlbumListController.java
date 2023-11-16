@@ -118,7 +118,7 @@ public class AlbumListController implements Initializable {
   public void newAlbum(ActionEvent event) {
    try {
       Album album = new Album(artistInput.getText(), albumInput.getText());
-      String addAlbumRequest = restModel.addAlbum(album.getName(), album.getArtist());
+      restModel.addAlbum(album.getName(), album.getArtist());
       updateAlbumListView(getAlbumList());
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
@@ -144,7 +144,6 @@ public class AlbumListController implements Initializable {
     String getAlbumListRequest = restModel.getAlbumList();
     return albumListObjectMapper(getAlbumListRequest);
  }
-
 
   /**
    * sets album selected to be used in albumController.
