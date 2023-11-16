@@ -11,7 +11,16 @@ How to run the app with maven:
 4. run `mvn clean compile`
 5. To open the app run: `mvn javafx:run -f ui/pom.xml`
 
+## Server and app
+How to start the server (from /albumreview/):
+**When running the app the server must be running as well!!**
+1. cd springboot
+2. run `mvn spring-boot:run`
 
+### Issues with the REST API and the app:
+Because of time-constraints we where not able to implement the REST API for the whole app. 
+The first screen after inputing the username is using the REST API, but the rest of the app is still using the controller logic in ui. 
+This is of course not what we wanted to accomplish, but to be able to deliver a product on time this is what we had to do.
 
 ### Tests and checks
 To run tests use: `mvn test`, this has to be done after compile. 
@@ -20,6 +29,8 @@ Jacoco test-coverage report is generated in: <modulename>/target/site/index.html
 When you run `mvn test` it will run both tests and checks.
 
 If you want to run Checkstyle and SpotBugs without running tests use `mvn verify`
+### About test coverage: 
+When we converte to using the REST API most of the tests in ui broke, because of time constraints we were not able to fix all of this. 
 
 ## Eclipse Che:
 After opening the link above for Eclipse Che it will create a workspace git our project. 
@@ -35,6 +46,15 @@ under Endpoints in the Eclipse Che VScode editor or you can edit and go to this 
 the workspace is up:
 
 `http://<ntnuUser>-stud-ntnu-no-<workspaceName>-6080-tcp-desktop-ui.che.stud.ntnu.no/`
+
+## JLink to greate shippable product
+To generate shippable product run these commands (if you are in folder /gr2337/):
+1. `cd albumreview`
+2. `mvn javafx:jlink -f ui/pom.xml`
+3. `mvn jpackage:jpackage -f ui/pom.xml`
+
+If the app does not run automaticly, try this from /albumreview/: (in Windows):
+`.\target\image\bin\albumreviewfx.exe`
 
 ## Versions, Dependencies and Pluggins
 The versions we are using:
@@ -109,8 +129,20 @@ The ui folder contains logic for controlling the app (viewutil) and the fxml fil
             - resources `#contains resources used for testing `
     - pom.xml (albumreview.ui)
 
+## springboot folder
+- springboot (albumreview.springboot)
+        - src
+            - main
+                - java
+                    - restserver(springboot.restserver) `#contains REST API and server controllers and services`
+                    - module-info.java
+                - resources
+                    - fxml `#contains fxml files for ui`
+
+
 ## Docs
 In the Docs folder we have all the release notes and documentation for the different releases. 
 - docs
     - release1
     - release2
+    - release3

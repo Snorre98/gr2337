@@ -39,17 +39,20 @@ We have chosen to use Spring because Spring is widely used by other java develop
 Maintaining a high level of code quality is essential to our development. We have used several tools to ensure this, more on these tools below. Furthermore, by creating thorough tests with high coverage, we can provide a safe and secure code.
 
 ### Testing and Jacoco
-
+We were not able to achive the testcoverage we wanted. When we implemented the REST-API in the UI code, all tests that previously ran, were now malfunctioning. This is why we chose to comment out the UI-tests to help the project be run in maven. Despite this, all our functionality has been proven to work, from just running the app.
 Maintaining a test coverage of over 80% is important for ensuring the reliability and stability of our codebase. Test coverage quantifies the percentage of code that is exercised by automated tests, offering a measure of the thoroughness of our testing strategy. A high test coverage provides confidence that most paths through the code have been validated, reducing the likelihood of undetected bugs and regressions. It serves as a safety net during development, catching issues early in the development process and allowing for timely corrections. In essence, a test coverage of 80 % not only enhances the overall quality of our software but also improves the development process by fostering a more reliable and maintainable codebase.
 
+####
+Issues reagarding testing. Because of implementing the REST API most of the test in ui broke. The only way we could hae fixed this would be by implementing the API alot earlier. 
 ### Spotbugs
 
 In the last release we had trouble using spotbugs, but in this release we have used it throughout the release. Read release2.md for more information about what we use spotbugs for. We did however exclude "EI_EXPOSE_REP2". This is because it is warning us that one of the controllers could change the state of something in the core. We decided to exclude it because we felt that we had other more pressing issues, and we saw that resolving this bug would take a lot of time.
-
+As of 15.11.2023 we did not have any errors regarding SpotBugs, but because of the changes in the API we got some errors we did not have time to solve, and therefor used the SpotBugs filter to be able to run the app.
 ### Checkstyle
 
 We have continued to use checkstyle in this release as in the last. Read release2.md for more information about checkstyle.
 However, we have improved our usages of javadocs by using parameters and better descriptions. We also had to remove one rule in the configuration because it was not working. It gave an error message about needing line spacing on the parameters, even though it was correct. This is not a major problem so we decided to remove it.
+Because of time constraints there are alot of checkstyle issues we were not able to solve. Most of these are related to indentation. This could also be caused by different settings in VScode for the team members. 
 
 ## Shippable product
 
@@ -78,3 +81,4 @@ The group worked well together, focusing on sharing progress, knowledge and info
 Using spotbugs and checkstyle, we are able to deliver a product that is easier to read and understand. Something which has improved our own understanding of other members' code in the project.
 
 Same as last time, we underestimated how much time this project would take. We spent a lot of time on the UI and domain logic, so when we got to the REST-API, we did not have a lot left.
+Because of this the REST API is only partially used, and there is a lot of unused services, as well as commented code found in ui controllers and springboot controllers.
