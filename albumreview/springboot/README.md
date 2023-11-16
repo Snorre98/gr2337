@@ -1,4 +1,4 @@
-# This module (restapi) handles the service layer of the application. The module gives access to several classes and transfer data to and from the service layer. The classes are:
+# This module (restapi) handles the service layer of the application. The module gives access to several classes and transfer data to and from the service layer. The classes are
 
 - AlbumReviewApplication
 
@@ -11,12 +11,11 @@
 - ReviewApiController
 - ReviewService
 
-
 ## AlbumListApiApplication
 
 Spring boot application class. Starts the server.
 
-### Methods
+### Methods in AlbumListApiApplication
 
 main(String...) Main method for starting the application.
 
@@ -25,7 +24,7 @@ main(String...) Main method for starting the application.
 
 Controller for handeling get and post, and consist of AlbumListService. Contain all the endpoints for the request. When a request with correct endpoint comes in, the controller runs the service to perform the action.
 
-### Methods
+### Methods in AlbumListApiController
 
 The methods are divided into get and post. The tags are simplified and not completly equal to the tags in the code.
 
@@ -47,7 +46,7 @@ The methods are divided into get and post. The tags are simplified and not compl
 
 Controller for handeling get, post and remove requests, and consist of AlbumService. Also contain all the endpoints for the requests.
 
-### Methods
+### Methods in AlbumApiController
 
 @Get
 
@@ -55,10 +54,21 @@ Controller for handeling get, post and remove requests, and consist of AlbumServ
 
 @Post
 
-- 
+<!-- her må post funksjonene skrives-->
 
+## ReviewApiController
+
+Controller for handeling get requests, and consist of ReviewService. Also contain all the endpoints for the requests.
+
+### Methods in ReviewApiController
+
+@Get
+
+- getUsername(int) -> "/getUsername/{albumId}/{index}" int: Returns a String of the username by sending in the index of the desired Album.
+
+- getRating(int) -> "/getRating/{albumId}/{index}" int: Returns a Integer of the username by sending in the index of the desired Album.
 
 ## AlbumListService, AlbumService and ReviewService
 
-- Gives the AlbumListApiController server access to the mothods from core.
+  Gives the AlbumListApiController server access to the mothods from core.
   
