@@ -8,19 +8,24 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewutil.LoginPageController">
-   <left>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </left>
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="503.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="52.0" layoutY="114.0" text="Username">
+            <Label layoutX="135.0" layoutY="256.0" text="Userrname:">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="username" layoutX="25.0" layoutY="157.0" promptText="Username" />
-            <Button fx:id="button" layoutX="60.0" layoutY="200.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="38.0" prefWidth="78.0" text="Log in" />
+            <TextField fx:id="username" layoutX="220.0" layoutY="253.0" promptText="Username" />
+            <Button fx:id="button" layoutX="261.0" layoutY="297.0" mnemonicParsing="false" onAction="#userLogin" prefHeight="38.0" prefWidth="78.0" text="Log in">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Label layoutX="162.0" layoutY="122.0" text="ALBUMREVIEWER">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>
