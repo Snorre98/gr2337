@@ -48,13 +48,7 @@ The methods are divided into get and post. These tags are simplified and not com
 Controller for handeling get, post and remove requests, and consist of AlbumService. Also contain all the endpoints for the requests.
 
 ### Methods in AlbumApiController
-
-@Get
-
-<!-- TODO mangler getArtist() og getName og getAlbumReview og getReiewList, DISSE brukte UUID men da jeg skrev dette vet vi ikke om vi skl bruke det -->
-
-@Post
-
+Most of these are not used in the current app. But the preform GET and POST requests as well as a DELETE request. 
 
 
 ## ReviewApiController
