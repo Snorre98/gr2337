@@ -67,7 +67,6 @@ public class PageHandler {
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);
-      // albumController.setSelected(selectedAlbumId);
       albumController.setAlbum(album);
       albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();

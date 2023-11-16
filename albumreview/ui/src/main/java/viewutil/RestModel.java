@@ -82,18 +82,17 @@ public class RestModel {
       throw new IllegalStateException("COULD NOT RETRIVE ALBUMLIST");
     }
   }
-
+/*
   public String addReview(Album album, String username, int rating) throws InterruptedException {
 
     String endpoint = "/api/albumlist/album/addReview/";
     String postBody = "";
-    System.out.println(backendBaseUrl + endpoint + username + "/" + rating);
+    System.out.println(backendBaseUrl + endpoint + album + username + "/" + rating);
     try {
       HttpRequest request = HttpRequest.newBuilder()
           .uri(URI.create(backendBaseUrl + endpoint + "/" + album + username + "/" + rating))
           .POST(HttpRequest.BodyPublishers.ofString(postBody))
           .build();
-
       final HttpResponse<String> response =
           httpClient.send(
               request,
@@ -101,9 +100,7 @@ public class RestModel {
           );
       return response.body();
     } catch (Exception e) {
-      throw new InterruptedException("Could not add Album: " + e);
+      throw new InterruptedException("Could not add review: " + e);
     }
-
-  }
-
+  }*/
 }

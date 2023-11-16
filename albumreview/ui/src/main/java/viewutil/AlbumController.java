@@ -71,7 +71,8 @@ public class AlbumController implements Initializable {
   @FXML
   private Label usernameLabel;
 
-  RestModel restModel = new RestModel();
+  private final HttpClient httpClient = HttpClient.newHttpClient();
+  private final String backendBaseUrl = "http://localhost:8080";
 
 
   public void setUsername(String username) {
@@ -83,28 +84,19 @@ public class AlbumController implements Initializable {
 
   @FXML
   public void newReview(ActionEvent event) {
+    //TODO: API controller
     try {
       Review review = new Review(username, Integer.parseInt(rating.getText()));
-      restModel.addReview(album, review.getUserName(), review.getRating());
-      updateAlbumListView(getAlbumList());
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
+      albumList.getAlbum(album).addReview(review); //add review, then saves to "DB"
+    } catch (IllegalArgumentException e) {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("Warning");
+      alert.setContentText(e.getMessage());
+      alert.showAndWait();
     }
-  }
-  public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
-    ObjectMapper ob = new ObjectMapper();
-    ob.registerModule(new AlbumReviewModule());
-    return ob.readValue(responseBody, AlbumList.class);
-  }
-
-  public void updateAlbumListView(Album albumList) throws IOException, InterruptedException {
-    ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
-    this.albumListView.getItems().setAll(observableAlbums);
-  }
-
-  public AlbumList getAlbumList() throws IOException, InterruptedException {
-    String getAlbumListRequest = restModel.getAlbumList();
-    return albumListObjectMapper(getAlbumListRequest);
+    reviewListView.getItems().setAll(albumList.getAlbum(album).getReviews());
+    rating.setText("");
+    handleSave();
   }
 
 
@@ -182,7 +174,7 @@ public class AlbumController implements Initializable {
 
   /**
    * This sets the Album name and Artist at the top of the scene.
-   * 
+   *
    * @param album The album, to set in controller.
    */
   public void setAlbum(Album album) {

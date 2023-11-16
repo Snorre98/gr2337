@@ -152,6 +152,11 @@ public class AlbumListController implements Initializable {
    */
   public void setSelectedAlbum(Album selectedAlbum) {
     this.selectedAlbum = selectedAlbum;
+    if (selectedAlbum != null) {
+      selectedAlbumId = selectedAlbum.getId();
+      albumList.getAlbumById(selectedAlbumId);
+    }
+
   }
 
   @Override

@@ -1,5 +1,6 @@
 package restserver;
 
+import domainlogic.Album;
 import domainlogic.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,11 @@ public class AlbumApiController {
     return albumService.getName(albumId);
   }
 
-  @PostMapping("/addReview/{albumId}/{username}/{rating}")
-  public String addReview(@PathVariable UUID albumId,
+  @PostMapping("/addReview/{album}/{username}/{rating}")
+  public String addReview(@PathVariable Album album,
                           @PathVariable String username,
                           @PathVariable int rating) {
-    return albumService.addReview(albumId, username, rating);
+    return albumService.addReview(album, username, rating);
   }
 
   @DeleteMapping("/deleteReview/{albumId}/{index}/{username}")
