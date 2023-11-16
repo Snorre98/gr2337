@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="459.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewutil.AlbumController">
  <children>
-  <ListView fx:id="reviews" layoutX="78.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
+  <ListView fx:id="reviewListView" layoutX="78.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
   <Label fx:id="usernameLabel" layoutX="108.0" layoutY="38.0" text="Username" />
   <Label fx:id="albumLabel" layoutX="272.0" layoutY="38.0" text="Album" />
   <Label fx:id="artistLabel" layoutX="426.0" layoutY="38.0" text="Artist" />

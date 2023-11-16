@@ -1,11 +1,17 @@
 package viewutil;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import domainlogic.Album;
 import domainlogic.AlbumList;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
 import javafx.collections.FXCollections;
@@ -14,14 +20,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import statepersistence.LoadFromFile;
 import statepersistence.WriteToFile;
+import statepersistence.serializer.AlbumReviewModule;
+
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 /**
  * Controller for AlbumList.
@@ -57,11 +62,14 @@ public class AlbumListController implements Initializable {
 
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
 
+  private RestModel restModel = new RestModel();
+
   public void setSaveFilePath(Path saveFile) {
     this.saveFilePath = saveFile;
   }
 
   public void setUsername(String username) {
+    //TODO: do this with API??
     this.realusername = username;
     this.username.setText(realusername);
   }
@@ -70,72 +78,72 @@ public class AlbumListController implements Initializable {
     this.pageHandler = pageHandler;
   }
 
-  /**
-   * Returns a copy of the AlbumList.
-   * 
-   * @return AlbumList copy
-   */
-  public AlbumList getAlbumList() {
-    AlbumList copy = new AlbumList();
-    for (Album album : albumList.getAlbums()) {
-      copy.addAlbum(album); // Create a copy of the album and add it to the new AlbumList
-    }
-    return copy;
+
+  void initAlbumListView() throws IOException, InterruptedException {
+    //TODO: request loadAlbumList here
+    updateAlbumListView(getAlbumList());
   }
 
-  void initAlbumListView() throws IOException {
-    albumList = LoadFromFile.loadFromFile(saveFilePath, true);
-    // System.out.println(albumList);
-    ObservableList<Album> observableAlbums;
-    observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
-    albumListView.getItems().setAll(observableAlbums);
-  }
 
   @FXML
   void openAlbum(ActionEvent event) {
-    pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
-    // System.out.println(selectedAlbumId);
+    //TODO: open album with data through API
+    //pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
+    pageHandler.loadAlbum(realusername, saveFilePath, selectedAlbum);
   }
 
   @FXML
-  void sortAlbum(ActionEvent event) {
-    albumList.sortAlbum();
-    albumListView.getItems().setAll(albumList.getAlbums());
-    handleSave();
-  }
-
-  @FXML
-  void sortArtist(ActionEvent event) {
-    albumList.sortArtist();
-    albumListView.getItems().setAll(albumList.getAlbums());
-    handleSave();
-  }
-
-  @FXML
-  void newAlbum(ActionEvent event) {
-    Album album = new Album(artistInput.getText(), albumInput.getText());
-
+  public void sortAlbum(ActionEvent event) {
     try {
-      albumList.addAlbum(album);
-    } catch (IllegalStateException e) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Warning");
-      alert.setContentText(e.getMessage());
-      alert.showAndWait();
+      String sortAlbumRequest = restModel.sortAlbum();
+      AlbumList sortedAlbumList = albumListObjectMapper(sortAlbumRequest);
+      updateAlbumListView(sortedAlbumList);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
     }
-
-    albumListView.getItems().setAll(albumList.getAlbums());
-    albumInput.setText("");
-    artistInput.setText("");
-    handleSave();
   }
 
-  /**
-   * Writes albumList to file.
-   */
-  void handleSave() {
-    WriteToFile.writeToFile(albumList, saveFilePath);
+  @FXML
+  public void sortArtist(ActionEvent event) {
+    try {
+      String sortArtistRequest = restModel.sortArtist();
+      AlbumList sortedAlbumList = albumListObjectMapper(sortArtistRequest);
+      updateAlbumListView(sortedAlbumList);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+    }
   }
+
+ @FXML
+  public void newAlbum(ActionEvent event) {
+   try {
+      Album album = new Album(artistInput.getText(), albumInput.getText());
+      restModel.addAlbum(album.getName(), album.getArtist());
+      updateAlbumListView(getAlbumList());
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+   }
+ }
+
+
+ /**
+  * helper function.
+  * */
+ public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
+    ObjectMapper ob = new ObjectMapper();
+    ob.registerModule(new AlbumReviewModule());
+    return ob.readValue(responseBody, AlbumList.class);
+ }
+
+  public void updateAlbumListView(AlbumList albumList) throws IOException, InterruptedException {
+    ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
+    this.albumListView.getItems().setAll(observableAlbums);
+  }
+
+  public AlbumList getAlbumList() throws IOException, InterruptedException {
+    String getAlbumListRequest = restModel.getAlbumList();
+    return albumListObjectMapper(getAlbumListRequest);
+ }
 
   /**
    * sets album selected to be used in albumController.
@@ -144,11 +152,6 @@ public class AlbumListController implements Initializable {
    */
   public void setSelectedAlbum(Album selectedAlbum) {
     this.selectedAlbum = selectedAlbum;
-    // TODO: find better solution to this??
-    if (selectedAlbum != null) {
-      selectedAlbumId = selectedAlbum.getId();
-      albumList.getAlbumById(selectedAlbumId);
-    }
   }
 
   @Override
@@ -156,8 +159,20 @@ public class AlbumListController implements Initializable {
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        setSelectedAlbum(albumListView.getSelectionModel().getSelectedItem());
+        try {
+          Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
+          List<Album> albumList = getAlbumList().getAlbums();
+          for (Album album : albumList) {
+            if (album.getArtist().equals(selectedAlbum.getArtist()) && album.getName().equals(selectedAlbum.getName())) {
+              setSelectedAlbum(album);
+            }
+          }
+        } catch (IOException | InterruptedException e) {
+          throw new RuntimeException(e);
+        }
+        System.out.println("Was clicked!!!!");
       }
     });
   }
-}
+ }
+
