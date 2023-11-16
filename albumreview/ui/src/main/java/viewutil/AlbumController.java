@@ -71,8 +71,8 @@ public class AlbumController implements Initializable {
   @FXML
   private Label usernameLabel;
 
-  private final HttpClient httpClient = HttpClient.newHttpClient();
-  private final String backendBaseUrl = "http://localhost:8080";
+  // private final HttpClient httpClient = HttpClient.newHttpClient();
+  // private final String backendBaseUrl = "http://localhost:8080";
 
 
   public void setUsername(String username) {
