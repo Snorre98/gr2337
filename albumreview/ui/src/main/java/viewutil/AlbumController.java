@@ -1,15 +1,21 @@
 package viewutil;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import domainlogic.Album;
 import domainlogic.AlbumList;
 import domainlogic.Review;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
-import java.util.UUID;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import statepersistence.LoadFromFile;
 import statepersistence.WriteToFile;
+import statepersistence.serializer.AlbumReviewModule;
+import viewutil.AlbumListController;
 
 /**
  * Controller for the Album.fxml and Album classes.
@@ -58,38 +66,94 @@ public class AlbumController implements Initializable {
   private TextField rating;
 
   @FXML
-  private ListView<Review> reviews;
+  private ListView<Review> reviewListView;
 
   @FXML
   private Label usernameLabel;
 
+  private final HttpClient httpClient = HttpClient.newHttpClient();
+  private final String backendBaseUrl = "http://localhost:8080";
+
 
   public void setUsername(String username) {
+    //TODO API controll
     this.username = username;
     usernameLabel.setText(username);
   }
 
+
   @FXML
-  void newReview(ActionEvent event) {
+  public void newReview(ActionEvent event) {
+    //TODO: API controller
     try {
       Review review = new Review(username, Integer.parseInt(rating.getText()));
-      albumList.getAlbum(album).addReview(review);
+      albumList.getAlbum(album).addReview(review); //add review, then saves to "DB"
     } catch (IllegalArgumentException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
       alert.setContentText(e.getMessage());
       alert.showAndWait();
     }
-    reviews.getItems().setAll(albumList.getAlbum(album).getReviews());
+    reviewListView.getItems().setAll(albumList.getAlbum(album).getReviews());
     rating.setText("");
     handleSave();
   }
 
+
+
+  /**
+   * updates reviewList with JSON through API call.
+   *
+   * @param httpResponse is response for getAlbumList()
+   */
+  /*
+  public void updateReviewList(HttpResponse<String> httpResponse) throws JsonProcessingException {
+
+    //TODO: remove httpResponse parameter
+    //String albumListResponse = httpResponse.body();
+
+    AlbumList albumList = getAlbumListObject();
+    if (listResponse.statusCode() == 200) {
+      updateAlbumListView(listResponse);
+    } else {
+      System.out.println("Failed to fetch updated album list");
+    }
+  }
+
+    ObjectMapper ob = new ObjectMapper();
+    ob.registerModule(new AlbumReviewModule());
+
+    albumList = ob.readValue(albumListResponse, AlbumList.class);
+
+    //ObservableList<Album> observableAlbums = FXCollections.observableArrayList(reviewList.getReviews());
+
+    reviewListView.getItems().setAll(albumList.getAlbum(album).getReviews());
+  }*/
+
+  /*
+  public void getAlbumList() throws IOException, InterruptedException {
+    HttpRequest listRequest = HttpRequest.newBuilder()
+        .uri(URI.create(backendBaseUrl + "/api/albumlist/getAlbumList"))
+        .GET()
+        .build();
+    HttpResponse<String> listResponse = httpClient.send(listRequest, HttpResponse.BodyHandlers.ofString());
+    if (listResponse.statusCode() == 200) {
+      updateAlbumListView(listResponse);
+    } else {
+      System.out.println("Failed to fetch updated album list");
+    }
+  }
+  */
+
+  public void getReviewList() {
+
+  }
   @FXML
-  void removeReview(ActionEvent event) {
+  public void removeReview(ActionEvent event) {
+    //TODO: API controll
     try {
       albumList.getAlbum(album).removeReview(selectedReview, username);
-      reviews.getItems().setAll(albumList.getAlbum(album).getReviews());
+      reviewListView.getItems().setAll(albumList.getAlbum(album).getReviews());
     } catch (IllegalStateException e) {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("Warning");
@@ -103,8 +167,9 @@ public class AlbumController implements Initializable {
   }
 
   void initReviewListView() throws IOException {
+    //TODO: API controll
     albumList = LoadFromFile.loadFromFile(saveFilePath, true);
-    reviews.getItems().setAll(album.getReviews());
+    reviewListView.getItems().setAll(album.getReviews());
   }
 
   /**
@@ -113,6 +178,8 @@ public class AlbumController implements Initializable {
    * @param album The album, to set in controller.
    */
   public void setAlbum(Album album) {
+
+    //TODO: remove??
     this.album = album;
     artistLabel.setText(album.getArtist());
     albumLabel.setText(album.getName());
@@ -120,10 +187,11 @@ public class AlbumController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    reviews.setOnMouseClicked(new EventHandler<MouseEvent>() {
+    reviewListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        selectedReview = reviews.getSelectionModel().getSelectedIndex();
+        //TODO: do this with API
+        selectedReview = reviewListView.getSelectionModel().getSelectedIndex();
       }
     });
   }

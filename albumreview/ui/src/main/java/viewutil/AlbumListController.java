@@ -10,6 +10,7 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -19,13 +20,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import statepersistence.LoadFromFile;
 import statepersistence.WriteToFile;
 import statepersistence.serializer.AlbumReviewModule;
 
@@ -65,20 +61,15 @@ public class AlbumListController implements Initializable {
   private String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
 
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
-  private final HttpClient httpClient = HttpClient.newHttpClient();
-  private final String backendBaseUrl = "http://localhost:8080";
 
+  private RestModel restModel = new RestModel();
 
-
-  /*
-  /addAlbum/{artist}/{name}
-   */
   public void setSaveFilePath(Path saveFile) {
     this.saveFilePath = saveFile;
   }
 
   public void setUsername(String username) {
-    //TODO: do this with API
+    //TODO: do this with API??
     this.realusername = username;
     this.username.setText(realusername);
   }
@@ -87,173 +78,72 @@ public class AlbumListController implements Initializable {
     this.pageHandler = pageHandler;
   }
 
-  /*
+
   void initAlbumListView() throws IOException, InterruptedException {
     //TODO: request loadAlbumList here
-    albumList = LoadFromFile.loadFromFile(saveFilePath, true);
-    ObservableList<Album> observableAlbums;
-    observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
-    albumListView.getItems().setAll(observableAlbums);
-  }*/
-
-  public void initAlbumListView() throws IOException, InterruptedException {
-    getAlbumList();
+    updateAlbumListView(getAlbumList());
   }
-
 
 
   @FXML
   void openAlbum(ActionEvent event) {
     //TODO: open album with data through API
-    pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
-    // System.out.println(selectedAlbumId);
+    //pageHandler.loadAlbum(realusername, selectedAlbumId, saveFilePath, selectedAlbum);
+    pageHandler.loadAlbum(realusername, saveFilePath, selectedAlbum);
   }
 
-
-  /*
   @FXML
-  void sortAlbum(ActionEvent event) {
-    albumList.sortAlbum();
-    albumListView.getItems().setAll(albumList.getAlbums());
-    handleSave();
-  }*/
-
-  public void sortAlbum(ActionEvent event) throws IOException, InterruptedException {
-    HttpRequest listRequest = HttpRequest.newBuilder()
-        .uri(URI.create(backendBaseUrl + "/api/albumlist/sortAlbumsByName"))
-        .GET()
-        .build();
-    HttpResponse<String> listResponse = httpClient.send(listRequest, HttpResponse.BodyHandlers.ofString());
-    if (listResponse.statusCode() == 200) {
-      System.out.println("Jacob er rar");
-      updateListView(listResponse);
-    } else {
-      System.out.println("Failed to fetch updated album list");
-    }
-  }
-
-  /*
-  @FXML
-  void sortArtist(ActionEvent event) {
-    albumList.sortArtist();
-    albumListView.getItems().setAll(albumList.getAlbums());
-    handleSave();
-  }*/
-  @FXML
-  public  void sortArtist(ActionEvent event) throws IOException, InterruptedException {
-    HttpRequest listRequest = HttpRequest.newBuilder()
-        .uri(URI.create(backendBaseUrl + "/api/albumlist/sortAlbumsByArtist"))
-        .GET()
-        .build();
-    HttpResponse<String> listResponse = httpClient.send(listRequest, HttpResponse.BodyHandlers.ofString());
-    if (listResponse.statusCode() == 200) {
-      System.out.println("Jacob er rar");
-      updateListView(listResponse);
-    } else {
-      System.out.println("Failed to fetch updated album list");
-    }
-  }
-
-/*  @FXML
-  void newAlbum(ActionEvent event) {
-    Album album = new Album(artistInput.getText(), albumInput.getText());
+  public void sortAlbum(ActionEvent event) {
     try {
-      albumList.addAlbum(album);
-    } catch (IllegalStateException e) {
-      Alert alert = new Alert(Alert.AlertType.INFORMATION);
-      alert.setTitle("Warning");
-      alert.setContentText(e.getMessage());
-      alert.showAndWait();
+      String sortAlbumRequest = restModel.sortAlbum();
+      AlbumList sortedAlbumList = albumListObjectMapper(sortAlbumRequest);
+      updateAlbumListView(sortedAlbumList);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
     }
-
-    albumListView.getItems().setAll(albumList.getAlbums());
-    albumInput.setText("");
-    artistInput.setText("");
-    handleSave();
   }
-  */
 
-
-  /**
-   * Returns a copy of the AlbumList.
-   *
-   * @return AlbumList copy
-   */
-
-  /*
-  public AlbumList getAlbumList() {
-    AlbumList copy = new AlbumList();
-    for (Album album : albumList.getAlbums()) {
-      copy.addAlbum(album); // Create a copy of the album and add it to the new AlbumList
+  @FXML
+  public void sortArtist(ActionEvent event) {
+    try {
+      String sortArtistRequest = restModel.sortArtist();
+      AlbumList sortedAlbumList = albumListObjectMapper(sortArtistRequest);
+      updateAlbumListView(sortedAlbumList);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
     }
-    return copy;
-  }*/
+  }
 
-  public void updateListView(HttpResponse<String> listResponse) throws JsonProcessingException {
-    String updatedAlbumList = listResponse.body();
+ @FXML
+  public void newAlbum(ActionEvent event) {
+   try {
+      Album album = new Album(artistInput.getText(), albumInput.getText());
+      String addAlbumRequest = restModel.addAlbum(album.getName(), album.getArtist());
+      updateAlbumListView(getAlbumList());
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
+   }
+ }
+
+
+ /**
+  * helper function.
+  * */
+ public AlbumList albumListObjectMapper(String responseBody) throws JsonProcessingException {
     ObjectMapper ob = new ObjectMapper();
     ob.registerModule(new AlbumReviewModule());
-    albumList = ob.readValue(updatedAlbumList, AlbumList.class);
+    return ob.readValue(responseBody, AlbumList.class);
+ }
+
+  public void updateAlbumListView(AlbumList albumList) throws IOException, InterruptedException {
     ObservableList<Album> observableAlbums = FXCollections.observableArrayList(albumList.getAlbums());
-    albumListView.getItems().setAll(observableAlbums);
+    this.albumListView.getItems().setAll(observableAlbums);
   }
 
-  public void getAlbumList() throws IOException, InterruptedException {
-    HttpRequest listRequest = HttpRequest.newBuilder()
-        .uri(URI.create(backendBaseUrl + "/api/albumlist/getAlbumList"))
-        .GET()
-        .build();
-    HttpResponse<String> listResponse = httpClient.send(listRequest, HttpResponse.BodyHandlers.ofString());
-
-    if (listResponse.statusCode() == 200) {
-      updateListView(listResponse);
-    } else {
-      System.out.println("Failed to fetch updated album list");
-    }
-  }
-
-  public AlbumList getAlbumListObject () throws IOException, InterruptedException {
-    HttpRequest listRequest = HttpRequest.newBuilder()
-        .uri(URI.create(backendBaseUrl + "/api/albumlist/getAlbumList"))
-        .GET()
-        .build();
-    HttpResponse<String> response = httpClient.send(listRequest, HttpResponse.BodyHandlers.ofString());
-    if (response.statusCode() == 200) {
-      System.out.println("Great success!");
-      String albumListResponse = response.body();
-      ObjectMapper ob = new ObjectMapper();
-      ob.registerModule(new AlbumReviewModule());
-      albumList = ob.readValue(albumListResponse, AlbumList.class);
-      return albumList;
-    } else {
-      throw new IllegalStateException("Worng");
-    }
-  }
-
-
-
-  @FXML
-  public void newAlbum(ActionEvent event) throws IOException, InterruptedException {
-    //Album album = new Album(artistInput.getText(), albumInput.getText());
-    String endpoint = "/api/albumlist/addAlbum/";
-    HttpRequest request = HttpRequest.newBuilder().uri(URI.create(backendBaseUrl + endpoint + artistInput.getText() + "/" + albumInput.getText())).POST(HttpRequest.BodyPublishers.noBody()).build();
-    HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-    if (response.statusCode() == 200) {
-      getAlbumList();
-      System.out.println("Great success!");
-    } else {
-      System.out.println("BAD, no success!");
-      }
-  }
-
-  /**
-   * Writes albumList to file.
-   */
-  void handleSave() {
-    WriteToFile.writeToFile(albumList, saveFilePath);
-  }
-
- // public void fetchAlbumDetails(UUU)
+  public AlbumList getAlbumList() throws IOException, InterruptedException {
+    String getAlbumListRequest = restModel.getAlbumList();
+    return albumListObjectMapper(getAlbumListRequest);
+ }
 
 
   /**
@@ -261,44 +151,18 @@ public class AlbumListController implements Initializable {
    * 
    * @param selectedAlbum is album selected by user
    */
-
   public void setSelectedAlbum(Album selectedAlbum) {
     this.selectedAlbum = selectedAlbum;
-    // TODO: find better solution to this??
-    if (selectedAlbum != null) {
-      selectedAlbumId = selectedAlbum.getId();
-      albumList.getAlbumById(selectedAlbumId);
-    }
   }
-
-
-  /*
-public void fetchSelectedAlbum(UUID albumId) throws IOException, InterruptedException {
-  HttpRequest request = HttpRequest.newBuilder().uri(URI.create(backendBaseUrl + "/api/albumlist/getAlbum/" + albumId)).GET().build();
-  HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-  if (response.statusCode() == 200) {
-    String updatedAlbumList = response.body();
-    ObjectMapper ob = new ObjectMapper();
-    ob.registerModule(new AlbumReviewModule());
-    Album album = ob.readValue(updatedAlbumList, Album.class);
-    System.out.println("");
-    this.selectedAlbum = album;
-  } else {
-    System.out.println("Failed to fetch album");
-
-  }
-}*/
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     albumListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
       @Override
       public void handle(MouseEvent mouseEvent) {
-        //setSelectedAlbum(albumListView.getSelectionModel().getSelectedItem());
-
         try {
           Album selectedAlbum = albumListView.getSelectionModel().getSelectedItem();
-          List<Album> albumList = getAlbumListObject().getAlbums();
+          List<Album> albumList = getAlbumList().getAlbums();
           for (Album album : albumList) {
             if (album.getArtist().equals(selectedAlbum.getArtist()) && album.getName().equals(selectedAlbum.getName())) {
               setSelectedAlbum(album);
@@ -307,10 +171,9 @@ public void fetchSelectedAlbum(UUID albumId) throws IOException, InterruptedExce
         } catch (IOException | InterruptedException e) {
           throw new RuntimeException(e);
         }
-        //albumList = albumList.getAlbums();
-
         System.out.println("Was clicked!!!!");
       }
     });
   }
-}
+ }
+
