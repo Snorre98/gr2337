@@ -9,15 +9,13 @@ import statepersistence.WriteToFile;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 /**
  * AlbumList API service.
  * */
 @Service
 public class AlbumListService {
-
-  //TODO: find out if loading from file to make stateless is "safe"/ok
-  //private AlbumList albumList;
 
   private static final String saveFile = "IT1901gr2337/AlbumReviewApp/albumreviews.json";
   Path saveFilePath = Paths.get(System.getProperty("user.home"), saveFile);
@@ -46,7 +44,22 @@ public class AlbumListService {
       return "200_OK";
     } catch (Exception e) {
       throw new UnsupportedOperationException(e + "could not add album");
-      //return "BAD_REQUEST";
+    }
+  }
+
+  /**
+   * Service for adding album.
+   * @param newAlbum artist name
+   * @return HTTP response status
+   * */
+  public String addAlbumObject(Album newAlbum) {
+    try {
+      AlbumList albumList = loadAlbumList();
+      albumList.addAlbum(newAlbum);
+      WriteToFile.writeToFile(albumList, saveFilePath);
+      return "200_OK";
+    } catch (Exception e) {
+      throw new UnsupportedOperationException(e + "could not add album");
     }
   }
 
@@ -94,9 +107,21 @@ public class AlbumListService {
     }
   }
 
+  public Album getAlbumById(UUID albumId) {
+    try {
+      AlbumList albumList = loadAlbumList();
+      return albumList.getAlbumById(albumId);
+      //200_OK
+    } catch (Exception e) {
+      throw new UnsupportedOperationException(e + "could not get album at {index}");
+      //BAD_REQUEST
+    }
+  }
+
   /**
    * Service for sorting albums by album name.
    * */
+  /*
   public String sortAlbumsByName() {
     try {
       AlbumList albumList = loadAlbumList();
@@ -105,16 +130,25 @@ public class AlbumListService {
     } catch (Exception e) {
       throw new UnsupportedOperationException(e + "could not sort album by name");
     }
+  }*/
+  public AlbumList sortAlbumsByName() {
+    try {
+      AlbumList albumList = loadAlbumList();
+      albumList.sortAlbum();
+      return albumList;
+    } catch (Exception e) {
+      throw new UnsupportedOperationException("BAD_REQUEST");
+    }
   }
 
   /**
    * Service for sorting albums by artist.
    * */
-  public String sortAlbumsByArtist() {
+  public AlbumList sortAlbumsByArtist() {
     try {
       AlbumList albumList = loadAlbumList();
       albumList.sortArtist();
-      return "200_OK";
+      return albumList;
     } catch (Exception e) {
       throw new UnsupportedOperationException(e + "could not sort album by artist");
     }

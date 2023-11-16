@@ -8,13 +8,16 @@
 
 <AnchorPane prefHeight="459.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewutil.AlbumController">
  <children>
-  <ListView fx:id="reviews" layoutX="78.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
+  <ListView fx:id="reviewListView" layoutX="78.0" layoutY="130.0" prefHeight="200.0" prefWidth="200.0" />
   <Label fx:id="usernameLabel" layoutX="108.0" layoutY="38.0" text="Username" />
   <Label fx:id="albumLabel" layoutX="272.0" layoutY="38.0" text="Album" />
   <Label fx:id="artistLabel" layoutX="426.0" layoutY="38.0" text="Artist" />
-  <Button fx:id="newReview" layoutX="346.0" layoutY="204.0" mnemonicParsing="false" onAction="#newReview" text="Add new review" />
+  <Button fx:id="newReview" layoutX="374.0" layoutY="205.0" mnemonicParsing="false" onAction="#newReview" text="Add new review" />
   <Label layoutX="297.0" layoutY="174.0" text="Rating (1-10):" />
   <TextField fx:id="rating" layoutX="371.0" layoutY="170.0" prefHeight="25.0" prefWidth="110.0" />
-      <Button fx:id="removeReview" layoutX="128.0" layoutY="345.0" mnemonicParsing="false" onAction="#removeReview" text="Remove Review" />
+      <Button fx:id="removeReview" layoutX="126.0" layoutY="345.0" mnemonicParsing="false" onAction="#removeReview" text="Remove Review" />
+      <Label layoutX="43.0" layoutY="38.0" text="Username:" />
+      <Label layoutX="227.0" layoutY="38.0" text="Album:" />
+      <Label layoutX="383.0" layoutY="38.0" text="Artist:" />
   </children>
 </AnchorPane>

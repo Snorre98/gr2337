@@ -6,6 +6,7 @@ import domainlogic.AlbumList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import java.util.UUID;
 
 
 /**
@@ -51,13 +52,18 @@ public class AlbumListApiController {
   }
 
   @GetMapping("/sortAlbumsByName")
-  public String sortAlbumByName() {
+  public AlbumList sortAlbumsByName() {
     return albumListService.sortAlbumsByName();
   }
 
+
   @GetMapping("/sortAlbumsByArtist")
-  public String sortAlbumsByArtist() {
+  public AlbumList sortAlbumsByArtist() {
     return albumListService.sortAlbumsByArtist();
   }
 
+  @GetMapping("/getAlbumById/{albumId}")
+  public Album getAlbumById(@PathVariable UUID albumId) {
+    return albumListService.getAlbumById(albumId);
+  }
 }

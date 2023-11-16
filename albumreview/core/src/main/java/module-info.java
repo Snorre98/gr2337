@@ -3,4 +3,7 @@ module albumreview.core {
 
   exports domainlogic;
   exports statepersistence;
+
+  opens domainlogic to com.fasterxml.jackson.databind;
+  exports statepersistence.serializer;
 }

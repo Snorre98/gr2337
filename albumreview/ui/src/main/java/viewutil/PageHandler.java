@@ -24,13 +24,17 @@ public class PageHandler {
    * 
    */
   public void loadAlbumList(String username, Path saveFilePath) {
+    //TODO: possibly not beeing used
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/AlbumList.fxml"));
       Parent root = (Parent) loader.load();
       Stage stage = new Stage();
       stage.setTitle("The Albums");
-      stage.setScene(new Scene(root));
+      Scene scene = new Scene(root);
+      String css = this.getClass().getResource("/style.css").toExternalForm();
+      scene.getStylesheets().add(css);
+      stage.setScene(scene);
       stage.show();
       albumListController = loader.getController();
       albumListController.setUsername(username);
@@ -39,7 +43,7 @@ public class PageHandler {
       albumListController.initAlbumListView();
     } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
+      System.out.println("HER GIKK NOE FEIL I loadAlbumLIST" + e);
     }
   }
 
@@ -47,17 +51,19 @@ public class PageHandler {
    * Loads the Album.fxml file and controller.
    * 
    * @param username the username that is used to login with.
-   * @param selectedAlbumId where in the AlbumList the selected album is
    * 
    */
-  public void loadAlbum(String username, UUID selectedAlbumId, Path saveFilePath, Album album) {
+  public void loadAlbum(String username, Path saveFilePath, Album album) {
     try {
       FXMLLoader loader;
       loader = new FXMLLoader(getClass().getResource("/fxml/Album.fxml"));
       Parent root = (Parent) loader.load();
       Stage stage = new Stage();
       stage.setTitle("The Album");
-      stage.setScene(new Scene(root));
+      Scene scene = new Scene(root);
+      String css = this.getClass().getResource("/style.css").toExternalForm();
+      scene.getStylesheets().add(css);
+      stage.setScene(scene);
       stage.show();
       albumController = loader.getController();
       albumController.setUsername(username);
@@ -66,7 +72,7 @@ public class PageHandler {
       albumController.setSaveFilePath(saveFilePath);
       albumController.initReviewListView();
     } catch (Exception e) {
-      System.out.println("HER GIKK NOE FEIL, men knappen kjører funksjonen");
+      System.out.println("HER GIKK NOE FEIL i loadAlbum" + e);
     }
   }
 }

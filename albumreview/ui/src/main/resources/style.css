@@ -1,0 +1,27 @@
+Button {
+  -fx-background-color: #05386B;
+  background-color: #05386B;
+  -fx-text-fill: EDF5E1;
+
+}
+
+AnchorPane {
+  -fx-background-color: #5CDB95;
+  background-color: #5CDB95;
+}
+
+Label {
+  -fx-text-fill: #05386B;
+}
+
+TextField {
+  -fx-background-color: #EDF5E1;
+  background-color: #EDF5E1;
+  -fx-border-color: #05386B;
+  border-color: #05386B;
+  -fx-border-width: 2;
+  border-width: 2;
+  -fx-border-radius: 30px;
+  border-radius: 30px;
+  -fx-background-radius: 30px;
+}

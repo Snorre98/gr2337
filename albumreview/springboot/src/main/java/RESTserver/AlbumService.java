@@ -88,15 +88,15 @@ public class AlbumService {
    * @param rating of album
    * {@return http response}
    * */
-  public String addReview(UUID albumId, String username, int rating) {
+  public String addReview(Album album, String username, int rating) {
     //TODO: void methode, for all "returning" string???
     try {
       AlbumList albumList = loadAlbumListObject();
-      Album album = loadAlbumObject(albumId);
+      //Album album = loadAlbumObject(album);
       Review review = new Review(username, rating);
       album.addReview(review);
       WriteToFile.writeToFile(albumList, saveFilePath);
-      return "200_OK";
+      return "200 OK";
     } catch (Exception e) {
       throw new UnsupportedOperationException(e + "could not add album");
       //BAD_REQUEST
