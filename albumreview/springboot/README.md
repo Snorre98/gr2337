@@ -1,5 +1,7 @@
 # This module (restapi) handles the service layer of the application. The module gives access to several classes and transfer data to and from the service layer. The classes are
 
+Some of the services a controllers are not used. They were created before passing HTTP requests in ui controllers. 
+Some of them where also written to support future functionality we were not able to finish. 
 - AlbumReviewApplication
 
 - AlbumListApiController
@@ -7,7 +9,7 @@
   
 - AlbumService
 - AlbumApiController
-  
+
 - ReviewApiController
 - ReviewService
 
@@ -19,14 +21,13 @@ Spring boot application class. Starts the server.
 
 main(String...) Main method for starting the application.
 
-<!--- objectMapper() funksjonen?-->
 ## AlbumListApiController
 
 Controller for handeling get and post, and consist of AlbumListService. Contain all the endpoints for the request. When a request with correct endpoint comes in, the controller runs the service to perform the action.
 
 ### Methods in AlbumListApiController
 
-The methods are divided into get and post. The tags are simplified and not completly equal to the tags in the code.
+The methods are divided into get and post. These tags are simplified and not completly equal to the tags in the code.
 
 @Get
 
@@ -54,7 +55,7 @@ Controller for handeling get, post and remove requests, and consist of AlbumServ
 
 @Post
 
-<!-- her må post funksjonene skrives-->
+
 
 ## ReviewApiController
 
