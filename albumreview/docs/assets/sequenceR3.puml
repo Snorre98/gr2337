@@ -1,0 +1,19 @@
+@startuml Sequence diagram release 3 See other reviews
+
+actor User
+User -> LoginPageApp : open app
+LoginPageApp -> LoginController : loadView(FXMLLoader)
+LoginController -> PageHandler : userLogin()
+
+PageHandler -> AlbumListController : loadAlbumList()
+AlbumListController -> RestModel : initAlbumListView()
+RestModel --> RestController : getAlbumList(GET HTTP Request)
+RestController -> RestService : loadAlbumList(Album)
+
+AlbumListController -> PageHandler : loadAlbum(Album)
+PageHandler -> AlbumController : loadAlbum(Album)
+AlbumController -> RestModel : initReviewListView()
+RestModel --> RestController : getAlbum(GET HTTP Request)
+RestController -> RestService : getAlbum(Album) 
+
+@enduml
