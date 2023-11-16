@@ -67,25 +67,22 @@ public class AlbumListApiControllerTest {
   /**
    * Exception.
    */
-  @BeforeEach
+ 
   public void addTestAlbum() throws Exception {
     Album testAlbum = new Album("TestAlbum", "TestArtist");
     mockMvc
-        .perform(post("/api/albumlist/addAlbum")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(testAlbum))
-        .accept(MediaType.APPLICATION_JSON))
+        .perform(post("/api/albumlist/addAlbum").contentType(MediaType.APPLICATION_JSON)
+            .content(objectMapper.writeValueAsString(testAlbum)).accept(MediaType.APPLICATION_JSON))
         .andReturn();
   }
 
   @Test
   public void testGetAlbumList() throws Exception {
-
+    
     MvcResult result = mockMvc
         .perform(MockMvcRequestBuilders.get("/api/albumlist/getAlbumList")
-        .accept(MediaType.APPLICATION_JSON))
-        .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
 
     String response = result.getResponse().getContentAsString();
@@ -96,16 +93,22 @@ public class AlbumListApiControllerTest {
 
   @Test
   public void testGetAlbum() throws Exception {
-    mockMvc
-        .perform(MockMvcRequestBuilders.get("/api/albumlist/getAlbum/{index}", 0))
+    addTestAlbum();
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/albumlist/getAlbum"))
         .andDo(print()).andExpect(MockMvcResultMatchers.status().isOk()).andReturn();
+    String responseBody = result.getResponse().getContentAsString();
+    Album returnedAlbum = objectMapper.readValue(responseBody, Album.class);
+
+    assertEquals(returnedAlbum.getArtist(), "TestArtist");
+    assertEquals(returnedAlbum.getName(), "TestAlbum");
   }
 
   @Test
   public void testAddAlbum() throws Exception {
+    Album testAlbum = new Album("Radiohead", "In Rainbows");
     mockMvc
-        .perform(MockMvcRequestBuilders.post("/api/albumlist/addAlbum/Drake/For all the dogs")
-            .contentType(MediaType.APPLICATION_JSON))
+        .perform(MockMvcRequestBuilders.post("/api/albumlist/addAlbum")
+            .content(objectMapper.writeValueAsString(testAlbum)).accept(MediaType.APPLICATION_JSON))
         .andExpect(MockMvcResultMatchers.status().isOk());
   }
 
@@ -114,13 +117,12 @@ public class AlbumListApiControllerTest {
     MvcResult result = mockMvc
         .perform(MockMvcRequestBuilders.get("/api/albumlist/sortAlbumsByName")
             .contentType(MediaType.APPLICATION_JSON))
-          .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
     String response = result.getResponse().getContentAsString();
-    List<Album> sortedAlbums = objectMapper
-        .readValue(response, new TypeReference<List<Album>>() {});
-    
+    List<Album> sortedAlbums =
+        objectMapper.readValue(response, new TypeReference<List<Album>>() {});
+
     assertEquals(sortedAlbums, result);
   }
 
@@ -129,13 +131,12 @@ public class AlbumListApiControllerTest {
     MvcResult result = mockMvc
         .perform(MockMvcRequestBuilders.get("/api/albumlist/sortAlbumsByArtist")
             .contentType(MediaType.APPLICATION_JSON))
-          .andExpect(status().isOk())
-        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
         .andReturn();
     String response = result.getResponse().getContentAsString();
-    List<Album> sortedAlbumsByArtist = objectMapper
-        .readValue(response, new TypeReference<List<Album>>() {});
-    
+    List<Album> sortedAlbumsByArtist =
+        objectMapper.readValue(response, new TypeReference<List<Album>>() {});
+
     assertEquals(sortedAlbumsByArtist, result);
   }
 }
