@@ -8,9 +8,9 @@ For this release, we have expanded the app. We developed the functionality based
 
 These are the UML diagrams that we made, showcasing the project.
 
-- ![Package diagram](<./assets/PackageDiagram.png>)
-- ![Sequence Diagram](<./assets/SequenceR3.png>)
-- ![Class Diagram](<./assets/ClassDiagram.png>)
+- ![Package diagram](<./assets/PackageDiagramR3.png>)
+- ![Sequence Diagram](<./assets/SequenceDiagramR3.png>)
+- ![Class Diagram](<./assets/ClassDiagramR3.png>)
 
 ### Domain Logic
 
