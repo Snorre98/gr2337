@@ -1,4 +1,5 @@
 # Challenges in our project
+The "restserver" package in the SpringBoot module has the wrong name (RESTserver) in the master branch in GitLab. Rename the package folder to "restserver" to fix this. We tried to fix this, but either Git or GitLab is handelig folder-names weird.
 
 ## Challenge 1
 
