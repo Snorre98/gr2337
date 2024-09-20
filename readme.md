@@ -1,5 +1,27 @@
-[Our Eclipse Che workspace](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2337/gr2337?new)
+# Project context (added september 2024)
+
+This project was part of the course [IT1901 - Informatics, Project I ](https://www.ntnu.edu/studies/courses/IT1901#tab=omEmnet) at NTNU. It was completed by Snorre Sæther, Jacob Alveberg, Sebastian Kemp and Brendan Kennedy. The project was completed in the automn of 2023.
+
+IT1901 is a course which introduces many students to developing software with a client-server architecture. Because of this I (Snorre) think there is a lot of bad code in this project. I belive most students taking this course feel that they have to spend way to much time setting up a Java project, with POM file configurations for all modules of the project.
+
+This takes away from time that could be spent learning about how to write code in the context of client-server architecture. If I could do the project again I would focus on learning Spring Boot and how to write REST APIs.
+
+REST was an important part of the IT1901 course, but there was almost no time learning what it is and how to develope with REST in mind. Luckily I have learned a lot since this project was completed.
+
+
+The course gives knowledge and skills in agile application development in teams. The application will use a client server architecture, structured in modules and configured with a build system. The groups will use a system for issue tracking, source code management and code review. The focus is more on code quality and testing, than on functionality.
+
+
+We created a simple Java app, with testing, logging, code checking, a user interface and basic API.
+
+
+We also set up the project to run remote on an Eclipse Che service. As of September 2024 it is not running, so any reference to this can be ignored.
+
+
+AlbumReview is an app where you can log in with your username. From here you can either add a new album to the list of albums, or open an already existing album. When you have opened an album you can give it a review on a scale from 1-10. You can also see the previous reviews of different users.
+
 # How to Navigate and Run our App
+[Our Eclipse Che workspace](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2337/gr2337?new)
 Our app 'Album-Review lets useres, rate and save music. 
 This Readme shows our folder structure, and where to finde the different classes. How to run the app. And what versions and dependecys we use.
 
